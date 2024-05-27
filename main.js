@@ -45,6 +45,7 @@ const decodeVin = async (vin) => {
                 Transmission: findValue(results, 'Transmission Style'),
                 ExteriorColor: findValue(results, 'Exterior Color'),
                 InteriorColor: findValue(results, 'Interior Color'),
+                EngineBrake: findValue(results, 'Engine Brake (hp) From'),
                 Weight: findValue(results, 'Gross Vehicle Weight Rating From'),
                 Engine: findValue(results, 'Engine Model'),
                 Doors: findValue(results, 'Doors'),
