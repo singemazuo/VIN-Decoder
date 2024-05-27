@@ -132,7 +132,12 @@ const VinForm = () => {
                         <p>{result.error}</p>
                     ) : (
                         <div>
-                            {logoUrl && <img src={logoUrl} alt={`${result.Make} logo`} className="car-logo" />}
+                            <div className="logo-and-details">
+                                {logoUrl && <img src={logoUrl} alt={`${result.Make} logo`} className="car-logo" />}
+                                <div className="details-text">
+                                      {result.Make} {result.Model} - {result.Year}
+                                </div>
+                            </div>
                             <div className="form-group">
                                 <label>Year:</label>
                                 <input 

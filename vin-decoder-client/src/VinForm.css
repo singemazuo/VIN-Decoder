@@ -72,3 +72,14 @@ button[type="submit"] {
     display: block;
     border-radius: 0.5rem;
 }
+
+.logo-and-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.details-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
