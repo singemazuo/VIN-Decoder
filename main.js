@@ -45,12 +45,25 @@ const decodeVin = async (vin) => {
                 Transmission: findValue(results, 'Transmission Style'),
                 ExteriorColor: findValue(results, 'Exterior Color'),
                 InteriorColor: findValue(results, 'Interior Color'),
+                Weight: findValue(results, 'Gross Vehicle Weight Rating From'),
                 Engine: findValue(results, 'Engine Model'),
                 Doors: findValue(results, 'Doors'),
                 StockNumber: findValue(results, 'Stock Number'),
                 Fuel: findValue(results, 'Primary Fuel Type'),
                 Title: findValue(results, 'Vehicle Type'),
-                VIN: vin
+                VIN: vin,
+                Airbags: {
+                    Front: findValue(results, 'Front Air Bag Locations'),
+                    Knee: findValue(results, 'Knee Air Bag Locations'),
+                    Side: findValue(results, 'Side Air Bag Locations'),
+                    Curtain: findValue(results, 'Curtain Air Bag Locations'),
+                    SeatCushion: findValue(results, 'Seat Cushion Air Bag Locations'),
+                    OtherRestraintInfo: findValue(results, 'Other Restraint System Info'),
+                },
+                PlantInfo: findValue(results, 'Plant Company Name') + ", " +
+                           findValue(results, 'Plant City') + ", " +
+                           findValue(results, 'Plant State') + ", " +
+                           findValue(results, 'Plant Country')
             };
             return mappedResult;
         }

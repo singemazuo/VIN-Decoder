@@ -1,0 +1,13 @@
+.vin-details {
+    list-style-type: none; /* Remove dots */
+    padding: 0;
+}
+
+.vin-details li {
+    margin: 5px 0;
+}
+
+.vin-details li strong {
+    display: inline-block;
+    width: 150px; /* Adjust as needed */
+}
