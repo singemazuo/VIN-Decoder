@@ -5,63 +5,70 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-  
-  code {
+}
+
+code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
-  }
-  
-  .container {
+}
+
+.container {
     width: 90%; 
     max-width: 1200px;
     margin: 0 auto;
     text-align: left;
-  }
-  
-  form, .vin-details, h3, h4, p {
+}
+
+form, .vin-details, h3, h4, p {
     text-align: center; 
     width: 100%;
-  }
-  
-  label {
-    display: inline-block;
-    width: 200px; 
-  }
-  
-  input[type="text"] {
-    width: 400px; 
+}
+
+.form-group {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+label {
+    width: 350px; 
+    text-align: right;
+    padding-right: 10px;
+}
+
+input[type="text"] {
+    width: 500px; 
     padding: 10px; 
     margin: 5px 0; 
     box-sizing: border-box; 
     font-size: 16px; 
-  }
-  
-  button[type="submit"] {
+}
+
+button[type="submit"] {
     padding: 10px 20px; 
     font-size: 16px;
     margin-top: 10px; 
-  }
-  
-  .vin-details {
+}
+
+.vin-details {
     list-style-type: none;
     padding: 0;
     text-align: left; 
-  }
-  
-  .vin-details li {
+}
+
+.vin-details li {
     margin: 10px 0; 
-  }
-  
-  .vin-details li strong {
+}
+
+.vin-details li strong {
     display: inline-block;
     width: 150px;
-  }
-  
-  .car-logo {
+}
+
+.car-logo {
     width: 100px; 
     margin-bottom: 20px;
     display: block;
     border-radius: 0.5rem;
-  }
-  
+}

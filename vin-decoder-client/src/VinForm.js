@@ -72,7 +72,7 @@ const VinForm = () => {
             setLogoUrl(logoResponse.config.url);
         } catch (error) {
             console.error('Error fetching logo for make:', make, error);
-            setLogoUrl('/path/to/placeholder/logo.png'); 
+            setLogoUrl('/path/to/placeholder/logo.png');
         }
     };
 
@@ -98,28 +98,87 @@ const VinForm = () => {
                     ) : (
                         <div>
                             {logoUrl && <img src={logoUrl} alt={`${result.Make} logo`} className="car-logo" />}
-                            <div className="vin-details">
-                                <label>Year: <input type="text" value={fields.Year}  /></label><br />
-                                <label>Make: <input type="text" value={fields.Make}  /></label><br />
-                                <label>Model: <input type="text" value={fields.Model}  /></label><br />
-                                <label>Transmission: <input type="text" value={fields.Transmission}  /></label><br />
-                                <label>Weight: <input type="text" value={fields.Weight}  /></label><br />
-                                <label>Exterior Color: <input type="text" value={fields.ExteriorColor}  /></label><br />
-                                <label>Interior Color: <input type="text" value={fields.InteriorColor}  /></label><br />
-                                <label>Engine Brake: <input type="text" value={fields.EngineBrake}  /></label><br />
-                                <label>Engine: <input type="text" value={fields.Engine}  /></label><br />
-                                <label>Doors: <input type="text" value={fields.Doors}  /></label><br />
-                                <label>Stock Number: <input type="text" value={fields.StockNumber}  /></label><br />
-                                <label>Fuel: <input type="text" value={fields.Fuel}  /></label><br />
-                                <label>Title: <input type="text" value={fields.Title}  /></label><br />
-                                <label>Front Airbags: <input type="text" value={fields.FrontAirbags}  /></label><br />
-                                <label>Knee Airbags: <input type="text" value={fields.KneeAirbags}  /></label><br />
-                                <label>Side Airbags: <input type="text" value={fields.SideAirbags}  /></label><br />
-                                <label>Curtain Airbags: <input type="text" value={fields.CurtainAirbags}  /></label><br />
-                                <label>Seat Cushion Airbags: <input type="text" value={fields.SeatCushionAirbags}  /></label><br />
-                                <label>Other Restraint Info: <input type="text" value={fields.OtherRestraintInfo}  /></label><br />
-                                <label>Plant Information: <input type="text" value={fields.PlantInfo}  /></label><br />
+                            <div className="form-group">
+                                <label>Year:</label>
+                                <input type="text" value={fields.Year} />
                             </div>
+                            <div className="form-group">
+                                <label>Make:</label>
+                                <input type="text" value={fields.Make} />
+                            </div>
+                            <div className="form-group">
+                                <label>Model:</label>
+                                <input type="text" value={fields.Model} />
+                            </div>
+                            <div className="form-group">
+                                <label>Transmission:</label>
+                                <input type="text" value={fields.Transmission} />
+                            </div>
+                            <div className="form-group">
+                                <label>Weight:</label>
+                                <input type="text" value={fields.Weight} />
+                            </div>
+                            <div className="form-group">
+                                <label>Exterior Color:</label>
+                                <input type="text" value={fields.ExteriorColor} />
+                            </div>
+                            <div className="form-group">
+                                <label>Interior Color:</label>
+                                <input type="text" value={fields.InteriorColor} />
+                            </div>
+                            <div className="form-group">
+                                <label>Engine Brake:</label>
+                                <input type="text" value={fields.EngineBrake} />
+                            </div>
+                            <div className="form-group">
+                                <label>Engine:</label>
+                                <input type="text" value={fields.Engine} />
+                            </div>
+                            <div className="form-group">
+                                <label>Doors:</label>
+                                <input type="text" value={fields.Doors} />
+                            </div>
+                            <div className="form-group">
+                                <label>Stock Number:</label>
+                                <input type="text" value={fields.StockNumber} />
+                            </div>
+                            <div className="form-group">
+                                <label>Fuel:</label>
+                                <input type="text" value={fields.Fuel} />
+                            </div>
+                            <div className="form-group">
+                                <label>Title:</label>
+                                <input type="text" value={fields.Title} />
+                            </div>
+                            <div className="form-group">
+                                <label>Front Airbags:</label>
+                                <input type="text" value={fields.FrontAirbags} />
+                            </div>
+                            <div className="form-group">
+                                <label>Knee Airbags:</label>
+                                <input type="text" value={fields.KneeAirbags} />
+                            </div>
+                            <div className="form-group">
+                                <label>Side Airbags:</label>
+                                <input type="text" value={fields.SideAirbags} />
+                            </div>
+                            <div className="form-group">
+                                <label>Curtain Airbags:</label>
+                                <input type="text" value={fields.CurtainAirbags} />
+                            </div>
+                            <div className="form-group">
+                                <label>Seat Cushion Airbags:</label>
+                                <input type="text" value={fields.SeatCushionAirbags} />
+                            </div>
+                            <div className="form-group">
+                                <label>Other Restraint Info:</label>
+                                <input type="text" value={fields.OtherRestraintInfo} />
+                            </div>
+                            <div className="form-group">
+                                <label>Plant Information:</label>
+                                <input type="text" value={fields.PlantInfo} />
+                            </div>
+
                         </div>
                     )}
                 </div>
