@@ -1,0 +1,42 @@
+.photo-upload-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#photo-upload {
+    margin: 10px 0;
+}
+
+.photo-preview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.photo-item {
+    position: relative;
+    margin: 5px;
+}
+
+.photo-item img {
+    width: auto;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.photo-item button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(224, 88, 88, 0.7);
+    border: none;
+    color: white;
+    padding: 2px 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.photo-item button:hover {
+    background: rgb(216, 27, 27);
+}

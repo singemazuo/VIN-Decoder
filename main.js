@@ -1,6 +1,8 @@
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 const app = express();
 app.use(cors());
@@ -26,6 +28,25 @@ app.post('/decode_vin_batch', async (req, res) => {
         res.json(result);
     } catch (error) {
         console.error('Error decoding VIN batch:', error);  
+        res.status(500).json({ error: error.toString() });
+    }
+});
+
+app.post('/submit_vehicle', upload.array('photos'), async (req, res) => {
+    const vin = req.body.vin;
+    const fields = JSON.parse(req.body.fields);
+    const photos = req.files;
+
+    try {
+        // Process the fields and photos as needed
+        console.log('VIN:', vin);
+        console.log('Fields:', fields);
+        console.log('Photos:', photos);
+        // Save the data to your database or perform other actions
+
+        res.json({ message: 'Vehicle data submitted successfully' });
+    } catch (error) {
+        console.error('Error submitting vehicle data:', error);
         res.status(500).json({ error: error.toString() });
     }
 });
@@ -79,8 +100,6 @@ const findValue = (results, variable) => {
     const result = results.find(item => item.Variable === variable);
     return result ? result.Value : 'N/A';
 };
-
-
 
 const decodeVinBatch = async (vins) => {
     const url = "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/";
