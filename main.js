@@ -3,10 +3,25 @@ const axios = require('axios');
 const cors = require('cors');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
+const { Pool } = require('pg');
+const bodyParser = require('body-parser');
+const fs = require('fs');
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../vehicle-backend/.env') });
 
 const app = express();
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+
+const pool = new Pool({
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+});
 
 app.post('/decode_vin', async (req, res) => {
     const vin = req.body.vin;

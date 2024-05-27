@@ -105,10 +105,8 @@ const VinForm = () => {
                 },
             });
             console.log('Submit Response:', response.data);
-            // Handle success response
         } catch (error) {
             console.error('Error submitting vehicle data:', error);
-            // Handle error response
         }
     };
 
