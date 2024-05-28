@@ -38,7 +38,7 @@ label {
 }
 
 input[type="text"] {
-    width: 500px; 
+    width: 45%; 
     padding: 10px; 
     margin: 5px 0; 
     box-sizing: border-box; 
@@ -129,4 +129,56 @@ button[type="submit"] {
   box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
   color: rgba(0, 0, 0, 0.65);
   transform: translateY(0);
+}
+
+.center-button {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.button-5 {
+    align-items: center;
+    z-index: 1000;
+    background-color: #FFFFFF;
+    border: 1.5px solid rgb(110, 109, 136);
+    border-radius: 3rem;
+    box-sizing: border-box;
+    color: rgb(93, 92, 116);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 16px;
+    font-weight: 200;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+}
+  
+.button-5:hover,
+.button-5:focus {
+    border-color: rgb(65, 86, 206);
+    color: rgb(50, 73, 204);
+}
+  
+.button-5:hover {
+    font-weight: 300;
+    font-size: 16px;
+}
+  
+.button-5:active {
+    background-color: #F0F0F1;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    color: rgba(0, 0, 0, 0.65);
+    transform: translateY(0);
 }

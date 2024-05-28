@@ -8,7 +8,7 @@ const NavigationBar = () => {
     return (
         <Navbar bg="light" variant="light" className='customNav'>
             <Container>
-                <Navbar.Brand href="/">Vehicle App</Navbar.Brand>
+                <Navbar.Brand href="/">Home</Navbar.Brand>
                 <Nav className="me-auto">
                     <Nav.Link href="/">Search</Nav.Link>
                     <Nav.Link href="/vin-form">Upload</Nav.Link>

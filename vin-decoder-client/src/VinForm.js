@@ -3,6 +3,8 @@ import axios from 'axios';
 import './VinForm.css';
 import NavigationBar from './NavigationBar';
 import PhotoUpload from './PhotoUpload';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 const VinForm = () => {
     const [vin, setVin] = useState('');
@@ -31,9 +33,40 @@ const VinForm = () => {
         OtherRestraintInfo: '',
         PlantInfo: ''
     });
+    const [showForm, setShowForm] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!vin.trim()) {
+            console.log('VIN is empty, clearing form fields');
+            setFields({
+                Year: '',
+                Make: '',
+                Model: '',
+                Transmission: '',
+                Weight: '',
+                ExteriorColor: '',
+                InteriorColor: '',
+                EngineBrake: '',
+                Engine: '',
+                Doors: '',
+                StockNumber: '',
+                Fuel: '',
+                Title: '',
+                FrontAirbags: '',
+                KneeAirbags: '',
+                SideAirbags: '',
+                CurtainAirbags: '',
+                SeatCushionAirbags: '',
+                OtherRestraintInfo: '',
+                PlantInfo: ''
+            });
+            setResult(null);
+            setLogoUrl('');
+            setShowForm(true); // Show form when VIN is empty
+            return;
+        }
+
         try {
             const response = await axios.post('http://localhost:5000/decode_vin', { vin });
             console.log('API Response:', response.data);
@@ -54,14 +87,15 @@ const VinForm = () => {
                 StockNumber: response.data.StockNumber || '',
                 Fuel: response.data.Fuel || '',
                 Title: response.data.Title || '',
-                FrontAirbags: response.data.Airbags.Front || '',
-                KneeAirbags: response.data.Airbags.Knee || '',
-                SideAirbags: response.data.Airbags.Side || '',
-                CurtainAirbags: response.data.Airbags.Curtain || '',
-                SeatCushionAirbags: response.data.Airbags.SeatCushion || '',
-                OtherRestraintInfo: response.data.Airbags.OtherRestraintInfo || '',
+                FrontAirbags: response.data.Airbags?.Front || '',
+                KneeAirbags: response.data.Airbags?.Knee || '',
+                SideAirbags: response.data.Airbags?.Side || '',
+                CurtainAirbags: response.data.Airbags?.Curtain || '',
+                SeatCushionAirbags: response.data.Airbags?.SeatCushion || '',
+                OtherRestraintInfo: response.data.Airbags?.OtherRestraintInfo || '',
                 PlantInfo: response.data.PlantInfo || ''
             });
+            setShowForm(true); // Show form when VIN is decoded successfully
         } catch (error) {
             console.error('Error decoding VIN:', error);
             setResult({ error: 'Error decoding VIN' });
@@ -70,6 +104,7 @@ const VinForm = () => {
 
     const fetchLogo = async (make) => {
         try {
+            console.log('Fetching logo for make:', make);
             const formattedMake = make.toLowerCase();
             const logoResponse = await axios.get(`https://logo.clearbit.com/${formattedMake}.com`);
             setLogoUrl(logoResponse.config.url);
@@ -131,6 +166,10 @@ const VinForm = () => {
         }
     };
 
+    const handleEnterManually = () => {
+        setShowForm(true);
+    };
+
     return (
         <div className="container">
             <NavigationBar />
@@ -140,189 +179,197 @@ const VinForm = () => {
                     type="text"
                     value={vin}
                     onChange={(e) => setVin(e.target.value)}
-                    required
                     placeholder='Enter VIN here'
                 />
                 <button type="submit" className='button-6'>Search VIN</button>
             </form>
-            {result && (
+            <hr />
+            <div className="center-button">
+                <button onClick={handleEnterManually} className='button-5'>Enter Manually&nbsp;<FontAwesomeIcon icon={faCaretDown} /></button>
+            </div>
+            {showForm && (
                 <div>
                     <hr />
-                    {result.error ? (
-                        <p>{result.error}</p>
-                    ) : (
-                        <div>
-                            <div className="logo-and-details">
-                                {logoUrl && <img src={logoUrl} alt={`${result.Make} logo`} className="car-logo" />}
-                                <div className="details-text">
-                                    {result.Make} {result.Model} - {result.Year}
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <label>Year:</label>
-                                <input
-                                    type="text"
-                                    value={fields.Year}
-                                    onChange={(e) => handleFieldChange('Year', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Make:</label>
-                                <input
-                                    type="text"
-                                    value={fields.Make}
-                                    onChange={(e) => handleFieldChange('Make', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Model:</label>
-                                <input
-                                    type="text"
-                                    value={fields.Model}
-                                    onChange={(e) => handleFieldChange('Model', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Transmission:</label>
-                                <input
-                                    type="text"
-                                    value={fields.Transmission}
-                                    onChange={(e) => handleFieldChange('Transmission', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Weight:</label>
-                                <input
-                                    type="text"
-                                    value={fields.Weight}
-                                    onChange={(e) => handleFieldChange('Weight', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Exterior Color:</label>
-                                <input
-                                    type="text"
-                                    value={fields.ExteriorColor}
-                                    onChange={(e) => handleFieldChange('ExteriorColor', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Interior Color:</label>
-                                <input
-                                    type="text"
-                                    value={fields.InteriorColor}
-                                    onChange={(e) => handleFieldChange('InteriorColor', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Engine Brake:</label>
-                                <input
-                                    type="text"
-                                    value={fields.EngineBrake}
-                                    onChange={(e) => handleFieldChange('EngineBrake', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Engine:</label>
-                                <input
-                                    type="text"
-                                    value={fields.Engine}
-                                    onChange={(e) => handleFieldChange('Engine', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Doors:</label>
-                                <input
-                                    type="text"
-                                    value={fields.Doors}
-                                    onChange={(e) => handleFieldChange('Doors', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Stock Number:</label>
-                                <input
-                                    type="text"
-                                    value={fields.StockNumber}
-                                    onChange={(e) => handleFieldChange('StockNumber', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Fuel:</label>
-                                <input
-                                    type="text"
-                                    value={fields.Fuel}
-                                    onChange={(e) => handleFieldChange('Fuel', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Title:</label>
-                                <input
-                                    type="text"
-                                    value={fields.Title}
-                                    onChange={(e) => handleFieldChange('Title', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Front Airbags:</label>
-                                <input
-                                    type="text"
-                                    value={fields.FrontAirbags}
-                                    onChange={(e) => handleFieldChange('FrontAirbags', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Knee Airbags:</label>
-                                <input
-                                    type="text"
-                                    value={fields.KneeAirbags}
-                                    onChange={(e) => handleFieldChange('KneeAirbags', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Side Airbags:</label>
-                                <input
-                                    type="text"
-                                    value={fields.SideAirbags}
-                                    onChange={(e) => handleFieldChange('SideAirbags', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Curtain Airbags:</label>
-                                <input
-                                    type="text"
-                                    value={fields.CurtainAirbags}
-                                    onChange={(e) => handleFieldChange('CurtainAirbags', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Seat Cushion Airbags:</label>
-                                <input
-                                    type="text"
-                                    value={fields.SeatCushionAirbags}
-                                    onChange={(e) => handleFieldChange('SeatCushionAirbags', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Other Restraint Info:</label>
-                                <input
-                                    type="text"
-                                    value={fields.OtherRestraintInfo}
-                                    onChange={(e) => handleFieldChange('OtherRestraintInfo', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Plant Information:</label>
-                                <input
-                                    type="text"
-                                    value={fields.PlantInfo}
-                                    onChange={(e) => handleFieldChange('PlantInfo', e.target.value)}
-                                />
-                            </div>
-                            <hr></hr>
-                            <PhotoUpload onPhotosChange={handlePhotosChange} />
-                            <button onClick={handleFormSubmit}>Submit Vehicle Data</button>
+                    <div className="logo-and-details">
+                        {logoUrl && <img src={logoUrl} alt={`${result?.Make} logo`} className="car-logo" />}
+                        <div className="details-text">
+                        {result?.Year} {result?.Make} {result?.Model} 
                         </div>
-                    )}
+                    </div>
+                    <form onSubmit={handleFormSubmit}>
+                        <div className="form-group">
+                            <label>Year:</label>
+                            <input
+                                type="text"
+                                value={fields.Year}
+                                onChange={(e) => handleFieldChange('Year', e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Make:</label>
+                            <input
+                                type="text"
+                                value={fields.Make}
+                                onChange={(e) => handleFieldChange('Make', e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Model:</label>
+                            <input
+                                type="text"
+                                value={fields.Model}
+                                onChange={(e) => handleFieldChange('Model', e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Transmission:</label>
+                            <input
+                                type="text"
+                                value={fields.Transmission}
+                                onChange={(e) => handleFieldChange('Transmission', e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Weight:</label>
+                            <input
+                                type="text"
+                                value={fields.Weight}
+                                onChange={(e) => handleFieldChange('Weight', e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Exterior Color:</label>
+                            <input
+                                type="text"
+                                value={fields.ExteriorColor}
+                                onChange={(e) => handleFieldChange('ExteriorColor', e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Interior Color:</label>
+                            <input
+                                type="text"
+                                value={fields.InteriorColor}
+                                onChange={(e) => handleFieldChange('InteriorColor', e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Engine Brake:</label>
+                            <input
+                                type="text"
+                                value={fields.EngineBrake}
+                                onChange={(e) => handleFieldChange('EngineBrake', e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Engine:</label>
+                            <input
+                                type="text"
+                                value={fields.Engine}
+                                onChange={(e) => handleFieldChange('Engine', e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Doors:</label>
+                            <input
+                                type="text"
+                                value={fields.Doors}
+                                onChange={(e) => handleFieldChange('Doors', e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Stock Number:</label>
+                            <input
+                                type="text"
+                                value={fields.StockNumber}
+                                onChange={(e) => handleFieldChange('StockNumber', e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Fuel:</label>
+                            <input
+                                type="text"
+                                value={fields.Fuel}
+                                onChange={(e) => handleFieldChange('Fuel', e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Title:</label>
+                            <input
+                                type="text"
+                                value={fields.Title}
+                                onChange={(e) => handleFieldChange('Title', e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Front Airbags:</label>
+                            <input
+                                type="text"
+                                value={fields.FrontAirbags}
+                                onChange={(e) => handleFieldChange('FrontAirbags', e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Knee Airbags:</label>
+                            <input
+                                type="text"
+                                value={fields.KneeAirbags}
+                                onChange={(e) => handleFieldChange('KneeAirbags', e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Side Airbags:</label>
+                            <input
+                                type="text"
+                                value={fields.SideAirbags}
+                                onChange={(e) => handleFieldChange('SideAirbags', e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Curtain Airbags:</label>
+                            <input
+                                type="text"
+                                value={fields.CurtainAirbags}
+                                onChange={(e) => handleFieldChange('CurtainAirbags', e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Seat Cushion Airbags:</label>
+                            <input
+                                type="text"
+                                value={fields.SeatCushionAirbags}
+                                onChange={(e) => handleFieldChange('SeatCushionAirbags', e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Other Restraint Info:</label>
+                            <input
+                                type="text"
+                                value={fields.OtherRestraintInfo}
+                                onChange={(e) => handleFieldChange('OtherRestraintInfo', e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Plant Information:</label>
+                            <input
+                                type="text"
+                                value={fields.PlantInfo}
+                                onChange={(e) => handleFieldChange('PlantInfo', e.target.value)}
+                            />
+                        </div>
+                        <hr />
+                        <PhotoUpload onPhotosChange={handlePhotosChange} />
+                        <button type="submit" className='button-6'>Submit Vehicle Data</button>
+                    </form>
+                </div>
+            )}
+            {result && result.error && (
+                <div>
+                    <p>{result.error}</p>
                 </div>
             )}
         </div>
