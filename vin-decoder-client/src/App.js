@@ -13,7 +13,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/vin-form" element={<VinForm />} />
-                    <Route path="/account" element={<div>Account Page</div>} /> {/* Placeholder for Account Page */}
+                    <Route path="/account" element={<div>Account Page</div>} /> {/* Placeholder */}
                 </Routes>
             </div>
         </Router>

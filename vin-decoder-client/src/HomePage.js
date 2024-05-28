@@ -44,10 +44,12 @@ const HomePage = () => {
                 <h1>Search Vehicles</h1>
                 <form onSubmit={handleSearch}>
                     <div className="search-container">
-                        <CarMakeDropdown make={make} setMake={setMake} model={model} setModel={setModel} />
+                        <CarMakeDropdown make={make} setMake={setMake} model={model} setModel={setModel} className='makemodel-dropdown' />
                         <YearDropdown year={year} setYear={setYear} className='year-dropdown' />
-                        <button type="submit" className='button-6'>{buttonText}</button>
                     </div>
+
+                    <button type="submit" className='button-6'>{buttonText}</button>
+
                 </form>
                 <div className="vehicle-list">
                     {vehicles.map((vehicle) => (

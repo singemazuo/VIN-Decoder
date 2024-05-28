@@ -209,5 +209,13 @@ app.delete('/vehicle/:id', async (req, res) => {
     }
 });
 
+// Register endpoint
+
+
+// Login endpoint
+
+
+// Middleware to protect routes
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -4,7 +4,7 @@ import { carData } from './carData';
 const CarMakeDropdown = ({ make, setMake, model, setModel }) => {
     const handleMakeChange = (e) => {
         setMake(e.target.value);
-        setModel(''); // Reset the model when the make changes
+        setModel(''); 
     };
 
     return (
