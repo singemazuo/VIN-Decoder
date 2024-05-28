@@ -26,6 +26,15 @@ const HomePage = () => {
         }
     };
 
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`http://localhost:5000/vehicle/${id}`);
+            setVehicles(vehicles.filter(vehicle => vehicle.id !== id));
+        } catch (error) {
+            console.error('Error deleting vehicle:', error);
+        }
+    };
+
     return (
 
         <div className='container'>
@@ -59,6 +68,7 @@ const HomePage = () => {
                 <div className="vehicle-list">
                     {vehicles.map((vehicle) => (
                         <div key={vehicle.id} className="vehicle-item">
+                            <button onClick={() => handleDelete(vehicle.id)} className='button-6'>Delete</button>
                             <h2>{vehicle.make} {vehicle.model} - {vehicle.year}</h2>
                             {vehicle.photo_url && (
                                 <img src={vehicle.photo_url} alt={`${vehicle.make} ${vehicle.model}`} className="vehicle-photo" />

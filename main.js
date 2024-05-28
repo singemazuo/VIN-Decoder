@@ -186,5 +186,28 @@ app.get('/search_vehicles', async (req, res) => {
     }
 });
 
+app.delete('/vehicle/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const client = await pool.connect();
+        try {
+            await client.query('BEGIN');
+            await client.query('DELETE FROM photos WHERE vehicle_id = $1', [id]);
+            await client.query('DELETE FROM vehicles WHERE id = $1', [id]);
+            await client.query('COMMIT');
+            res.json({ message: 'Vehicle deleted successfully' });
+        } catch (error) {
+            await client.query('ROLLBACK');
+            console.error('Error deleting vehicle:', error);
+            res.status(500).json({ error: error.message });
+        } finally {
+            client.release();
+        }
+    } catch (error) {
+        console.error('Error connecting to database:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
