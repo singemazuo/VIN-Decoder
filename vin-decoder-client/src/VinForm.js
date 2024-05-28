@@ -143,7 +143,7 @@ const VinForm = () => {
                     required
                     placeholder='Enter VIN here'
                 />
-                <button type="submit">Search VIN</button>
+                <button type="submit" className='button-6'>Search VIN</button>
             </form>
             {result && (
                 <div>
