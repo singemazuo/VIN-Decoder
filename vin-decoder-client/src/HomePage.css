@@ -1,5 +1,3 @@
-/*HomePage.css*/
-
 .home-page {
     text-align: center;
     padding: 20px;
@@ -39,81 +37,4 @@ button {
     height: auto;
     display: block;
     margin-bottom: 10px;
-}
-
-.remove-button {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.remove-button:hover {
-    background-color: darkred;
-}
-
-.search-input {
-    margin: 10px 10px 10px 0;
-    padding: 10px;
-    font-size: 16px;
-    width: 25%;
-}
-
-form input {
-    margin-right: 10px;
-}
-
-
-
-.button-6 {
-  align-items: center;
-  border-radius: 12px;
-  background-color: #fff;
-  border: 2px solid #000;
-  box-sizing: border-box;
-  color: #000;
-  cursor: pointer;
-  display: inline-flex;
-  fill: #000;
-  font-family: Inter,sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  height: 48px;
-  justify-content: center;
-  letter-spacing: -.8px;
-  line-height: 24px;
-  min-width: 140px;
-  outline: 0;
-  padding: 0 17px;
-  text-align: center;
-  text-decoration: none;
-  transition: all .3s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button-6:focus {
-  color: #171e29;
-}
-
-.button-6:hover {
-  border-radius: 0px;
-  border-color: #06f;
-  color: #06f;
-  fill: #06f;
-}
-
-.button-6:active {
-  border-color: rgb(0, 162, 255);
-  color: rgb(0, 162, 255);
-  fill: rgb(0, 162, 255);
-}
-
-@media (min-width: 768px) {
-  .button-6 {
-    min-width: 170px;
-  }
 }

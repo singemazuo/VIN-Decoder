@@ -134,19 +134,16 @@ const VinForm = () => {
     return (
         <div className="container">
             <NavigationBar />
-            <form onSubmit={handleSubmit} className="vin-form">
+            <form onSubmit={handleSubmit}>
                 <br />
-                <div className="input-button-container">
-                    <input
-                        type="text"
-                        value={vin}
-                        onChange={(e) => setVin(e.target.value)}
-                        required
-                        placeholder='Enter VIN here'
-                        className="vin-input"
-                    />
-                    <button type="submit" className='button-6'>Search VIN</button>
-                </div>
+                <input
+                    type="text"
+                    value={vin}
+                    onChange={(e) => setVin(e.target.value)}
+                    required
+                    placeholder='Enter VIN here'
+                />
+                <button type="submit">Search VIN</button>
             </form>
             {result && (
                 <div>

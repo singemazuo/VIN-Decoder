@@ -152,31 +152,6 @@ app.post('/submit_vehicle', upload.array('photos'), async (req, res) => {
     }
 });
 
-
-app.delete('/vehicles/:id', async (req, res) => {
-    const { id } = req.params;
-    try {
-        const client = await pool.connect();
-        try {
-            await client.query('BEGIN');
-            await client.query('DELETE FROM photos WHERE vehicle_id = $1', [id]);
-            await client.query('DELETE FROM vehicles WHERE id = $1', [id]);
-            await client.query('COMMIT');
-            res.json({ message: 'Vehicle removed successfully' });
-        } catch (error) {
-            await client.query('ROLLBACK');
-            console.error('Error removing vehicle:', error);
-            res.status(500).json({ error: error.message });
-        } finally {
-            client.release();
-        }
-    } catch (error) {
-        console.error('Error connecting to database:', error);
-        res.status(500).json({ error: error.message });
-    }
-});
-
-
 // Endpoint to list all vehicles
 app.get('/vehicles', async (req, res) => {
     try {
