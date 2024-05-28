@@ -1,85 +1,79 @@
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-}
-
-.container {
-    width: 90%; 
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: left;
-}
-
-form, .vin-details, h3, h4, p {
-    text-align: center; 
-    width: 100%;
-}
-
-.form-group {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-label {
-    width: 350px; 
-    text-align: right;
-    padding-right: 10px;
-}
-
-input[type="text"] {
-    width: 500px; 
-    padding: 10px; 
-    margin: 5px 0; 
-    box-sizing: border-box; 
-    font-size: 16px; 
-}
-
-button[type="submit"] {
-    padding: 10px 20px; 
+.body {
+    font-family: 'roboto', sans-serif;
     font-size: 16px;
-    margin-top: 10px; 
-}
-
-.vin-details {
-    list-style-type: none;
+    margin: 0;
     padding: 0;
-    text-align: left; 
 }
 
-.vin-details li {
-    margin: 10px 0; 
-}
-
-.vin-details li strong {
-    display: inline-block;
-    width: 150px;
-}
-
-.car-logo {
-    width: 100px; 
+.vin-form {
+    text-align: center;
     margin-bottom: 20px;
-    display: block;
-    border-radius: 0.5rem;
 }
 
-.logo-and-details {
+.input-button-container {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10px; 
 }
 
-.details-text {
-    font-size: 1.5rem;
-    font-weight: bold;
+.vin-input {
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    height: 48px; 
+    width: 50%;
+}
+
+.button-6 {
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    background-color: #fff;
+    border-radius: 0px;
+    border: 0.5px solid #969090;
+    box-sizing: border-box;
+    color: #6b6666;
+    cursor: pointer;
+    display: inline-flex;
+    fill: #706d6d;
+    font-size: 16px;
+    height: 48px;
+    font-weight: 200;
+    justify-content: center;
+    letter-spacing: -.8px;
+    line-height: 24px;
+    min-width: 140px;
+    outline: 0;
+    padding: 0 17px;
+    text-align: center;
+    text-decoration: none;
+    transition: all .3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-6:focus {
+    color: #5b5d61;
+}
+
+.button-6:hover {
+    border-radius: 0px;
+    border-color: #06f;
+    color: #06f;
+    fill: #06f;
+}
+
+.button-6:active {
+    border-color: rgb(0, 162, 255);
+    color: rgb(0, 162, 255);
+    fill: rgb(0, 162, 255);
+}
+
+@media (min-width: 768px) {
+    .button-6 {
+        min-width: 170px;
+    }
 }

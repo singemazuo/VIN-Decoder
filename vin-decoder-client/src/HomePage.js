@@ -21,8 +21,16 @@ const HomePage = () => {
         }
     };
 
-    return (
+    const handleRemove = async (id) => {
+        try {
+            await axios.delete(`http://localhost:5000/vehicles/${id}`);
+            setVehicles(vehicles.filter(vehicle => vehicle.id !== id));
+        } catch (error) {
+            console.error('Error removing vehicle:', error);
+        }
+    };
 
+    return (
         <div className='container'>
             <NavigationBar />
 
@@ -34,12 +42,15 @@ const HomePage = () => {
                         placeholder="Make"
                         value={make}
                         onChange={(e) => setMake(e.target.value)}
+                        className='search-input'
                     />
                     <input
                         type="text"
                         placeholder="Model"
                         value={model}
                         onChange={(e) => setModel(e.target.value)}
+                        className='search-input'
+
                     />
                     <input
                         type="number"
@@ -47,12 +58,15 @@ const HomePage = () => {
                         value={year}
                         onChange={(e) => setYear(e.target.value)}
                     />
-                    <button type="submit">Search</button>
+                    <button type="submit" class="button-6" >Search</button>
                 </form>
                 <div className="vehicle-list">
                     {vehicles.map((vehicle) => (
                         <div key={vehicle.id} className="vehicle-item">
-                            <h2>{vehicle.make} {vehicle.model} - {vehicle.year}</h2>
+                            <div className="vehicle-header">
+                                <h2>{vehicle.year} {vehicle.make} {vehicle.model}</h2>
+                                <button onClick={() => handleRemove(vehicle.id)} className="remove-button">Remove</button>
+                            </div>
                             {vehicle.photo_url && (
                                 <img src={vehicle.photo_url} alt={`${vehicle.make} ${vehicle.model}`} className="vehicle-photo" />
                             )}

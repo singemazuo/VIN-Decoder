@@ -1,0 +1,36 @@
+/* VehicleList.css */
+.vehicle-list-container {
+    padding: 20px;
+}
+
+.vehicle-item {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px 0;
+    position: relative;
+}
+
+.vehicle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vehicle-photo {
+    max-width: 100%;
+    height: auto;
+    margin: 10px 0;
+}
+
+.remove-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.remove-button:hover {
+    background-color: darkred;
+}

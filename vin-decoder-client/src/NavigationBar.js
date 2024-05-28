@@ -2,10 +2,11 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import './NavigationBar.css';
 
 const NavigationBar = () => {
     return (
-        <Navbar bg="light" variant="light">
+        <Navbar bg="light" variant="light" className='customNav'>
             <Container>
                 <Navbar.Brand href="/">Vehicle App</Navbar.Brand>
                 <Nav className="me-auto">
