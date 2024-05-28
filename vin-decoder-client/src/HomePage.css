@@ -18,8 +18,12 @@ select {
     padding: 10px;
     font-size: 16px;
     background-color: #ffffff;
-    width: 25%;
+    width: 23%;
     border-radius: 0.5rem;
+}
+
+.year-dropdown {
+    width: 12%; /* Ensure this class is applied */
 }
 
 button {
@@ -74,19 +78,18 @@ button {
     touch-action: manipulation;
     vertical-align: baseline;
     width: auto;
-  }
+}
   
-  .button-6:hover,
-  .button-6:focus {
+.button-6:hover,
+.button-6:focus {
     border-color: rgb(35, 60, 204);
     color: rgb(47, 72, 212);
-  }
+}
 
-  
-  .button-6:active {
+.button-6:active {
     background-color: #F0F0F1;
     border-color: rgba(0, 0, 0, 0.15);
     box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
     color: rgba(0, 0, 0, 0.65);
     transform: translateY(0);
-  }
+}

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './HomePage.css';
 import NavigationBar from './NavigationBar';
+import CarMakeDropdown from './CarMakeDropdown';
+import YearDropdown from './YearDropdown';
 
 const HomePage = () => {
     const [make, setMake] = useState('');
@@ -36,37 +38,17 @@ const HomePage = () => {
     };
 
     return (
-
         <div className='container'>
             <NavigationBar />
-
             <div className="home-page">
                 <h1>Search Vehicles</h1>
                 <form onSubmit={handleSearch}>
                     <div className="search-container">
-                    <select
-                        type="dropdown"
-                        placeholder="Make"
-                        value={make}
-                        onChange={(e) => setMake(e.target.value)}
-                    />
-                    <select
-                        type="text"
-                        placeholder="Model"
-                        value={model}
-                        onChange={(e) => setModel(e.target.value)}
-                    />
-                    <select
-                        type="number"
-                        placeholder="Year"
-                        value={year}
-                        onChange={(e) => setYear(e.target.value)}
-                    />
-                    <br></br>
-                    <button type="submit" className='button-6'>{buttonText}</button>
+                        <CarMakeDropdown make={make} setMake={setMake} model={model} setModel={setModel} />
+                        <YearDropdown year={year} setYear={setYear} className='year-dropdown' />
+                        <button type="submit" className='button-6'>{buttonText}</button>
                     </div>
                 </form>
-                <hr ></hr>
                 <div className="vehicle-list">
                     {vehicles.map((vehicle) => (
                         <div key={vehicle.id} className="vehicle-item">
