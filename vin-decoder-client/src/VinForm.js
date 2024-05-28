@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './VinForm.css';
+import NavigationBar from './NavigationBar';
 import PhotoUpload from './PhotoUpload';
 
 const VinForm = () => {
@@ -112,6 +113,8 @@ const VinForm = () => {
 
     return (
         <div className="container">
+                                <NavigationBar />
+
             <form onSubmit={handleSubmit}>
                 <br />
                 <input
