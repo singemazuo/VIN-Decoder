@@ -8,12 +8,17 @@ const HomePage = () => {
     const [model, setModel] = useState('');
     const [year, setYear] = useState('');
     const [vehicles, setVehicles] = useState([]);
+    const [buttonText, setButtonText] = useState('Search All');
 
     const handleSearch = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.get('http://localhost:5000/search_vehicles', {
-                params: { make, model, year }
+                params: {
+                    make: make || null,
+                    model: model || null,
+                    year: year || null
+                }
             });
             setVehicles(response.data);
         } catch (error) {
@@ -29,6 +34,7 @@ const HomePage = () => {
             <div className="home-page">
                 <h1>Search Vehicles</h1>
                 <form onSubmit={handleSearch}>
+                    <div className="search-container">
                     <input
                         type="text"
                         placeholder="Make"
@@ -47,7 +53,8 @@ const HomePage = () => {
                         value={year}
                         onChange={(e) => setYear(e.target.value)}
                     />
-                    <button type="submit">Search</button>
+                    <button type="submit" className='button-6'>{buttonText}</button>
+                    </div>
                 </form>
                 <div className="vehicle-list">
                     {vehicles.map((vehicle) => (

@@ -114,13 +114,13 @@ button[type="submit"] {
 
 .button-6:hover,
 .button-6:focus {
-  border-color: rgb(63, 80, 172);
-  box-shadow: rgba(63, 80, 172) 0 4px 12px;
-  color: rgba(63, 80, 172);
+  border-color: rgb(65, 86, 206);
+  color: rgb(50, 73, 204);
 }
 
 .button-6:hover {
-  transform: translateY(-1px);
+  font-weight: 300;
+  font-size: 16.5px;
 }
 
 .button-6:active {
