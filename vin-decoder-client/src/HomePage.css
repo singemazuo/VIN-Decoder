@@ -1,0 +1,40 @@
+.home-page {
+    text-align: center;
+    padding: 20px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input {
+    margin: 0 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.vehicle-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.vehicle-item {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    width: 300px;
+}
+
+.vehicle-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}

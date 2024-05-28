@@ -1,16 +1,23 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import HomePage from './HomePage';
 import VinForm from './VinForm';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
+
+const App = () => {
     return (
-        <div className="App">
-            <header className="App-header">
-                <h1>VIN Decoder</h1>
-                <VinForm />
-            </header>
-        </div>
+        <Router>
+            <div className="App">
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/vin-form" element={<VinForm />} />
+                    <Route path="/account" element={<div>Account Page</div>} /> {/* Placeholder for Account Page */}
+                </Routes>
+            </div>
+        </Router>
     );
-}
+};
 
 export default App;
