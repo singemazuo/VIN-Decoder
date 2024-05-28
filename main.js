@@ -6,7 +6,7 @@ const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '../vehicle-backend/.env') });
+require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 
 const app = express();
 app.use(cors());
