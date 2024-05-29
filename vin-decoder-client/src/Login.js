@@ -5,18 +5,24 @@ import styles from './Login.module.css';
 import NavigationBar from './NavigationBar';
 
 
+
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const { login } = useAuth();
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // You can add your authentication logic here
-        login();
-        navigate('/account');
+        try {
+            const email = username;
+            await login(username, password);
+            navigate('/account');
+        } catch (error) {
+            console.error('Error logging in:', error);
+        }
     };
+    
 
     const handleRegister = () => {
         navigate('/register');

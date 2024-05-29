@@ -1,10 +1,17 @@
 import React from 'react';
+import NavigationBar from './NavigationBar';
+import { useAuth } from './AuthContext';
 
 const Account = () => {
+    const { firstName } = useAuth();
+    console.log('First name in Account component:', firstName);  
     return (
-        <div>
-            <h1>Accounts</h1>
-        </div>
+        <>
+            <NavigationBar />
+            <div>
+                <h1>Welcome, {firstName}</h1>
+            </div>
+        </>
     );
 }
 

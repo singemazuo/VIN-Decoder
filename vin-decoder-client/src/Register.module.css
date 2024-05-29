@@ -1,85 +1,34 @@
 .registerContainer {
-
-    box-sizing: border-box; /* Ensure padding is included in the total width */
-    width: 20%; /* Ensure it takes full width available */
-    margin: 0 auto; /* Center the container */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    box-sizing: border-box; 
+    width: 80%; 
+    max-width: 600px; 
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+    padding: 2rem;
 }
 
 h1 {
+    text-align: center; 
     padding-bottom: 1rem;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-label {
-    margin-top: 0.5rem;
-}
-
-.registerButtons {
-    display: flex;
-    padding-top: 1rem;
+    display: grid;
     gap: 0.5rem;
 }
 
-/* Media query to handle small screen sizes */
-@media (max-width: 1400px) {
-    .registerContainer {
-        width: 32%; /* Ensure it takes full width available */
 
-    }
 
-    form {
-        width: 100%;
-    }
-}
-
-@media (max-width: 1200px) {
-    .registerContainer {
-        width: 30%; /* Ensure it takes full width available */
-
-    }
-
-    form {
-        width: 100%;
-    }
-}
-
-@media (max-width: 100px) {
-    .registerContainer {
-        width: 33%; /* Ensure it takes full width available */
-
-    }
-
-    form {
-        width: 100%;
-    }
-}
-
-@media (max-width: 900px) {
-    .registerContainer {
-        width: 36%; /* Ensure it takes full width available */
-
-    }
-
-    form {
-        width: 100%;
-    }
+.registerButtons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between; 
 }
 
 @media (max-width: 600px) {
     .registerContainer {
-        width: 55%; /* Ensure it takes full width available */
-
-    }
-
-    form {
-        width: 100%;
+        width: 100%; 
+        padding: 1rem; 
     }
 }

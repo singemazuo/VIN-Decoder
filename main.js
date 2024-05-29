@@ -6,7 +6,9 @@ const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
+const bcrypt = require('bcrypt');
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
+
 
 const app = express();
 app.use(cors());
@@ -229,47 +231,41 @@ app.delete('/vehicle/:id', async (req, res) => {
 
 // Register endpoint
 app.post('/register', async (req, res) => {
-    const { username, password } = req.body;
-
+    const { email, password, firstName, lastName } = req.body;
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-
         const result = await pool.query(
-            'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id',
-            [username, hashedPassword]
+            'INSERT INTO users (email, password, firstName, lastName) VALUES ($1, $2, $3, $4) RETURNING id',
+            [email, hashedPassword, firstName, lastName]
         );
-
-        res.status(201).send('User registered');
+        res.status(201).json({ userId: result.rows[0].id });
     } catch (error) {
         console.error('Error registering user:', error);
-        res.status(500).send('Error registering user');
+        res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+
 
 // Login endpoint
 app.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-
+    const { email, password } = req.body;
     try {
-        const result = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
+        const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
         const user = result.rows[0];
-
-        if (!user) {
-            return res.status(400).send('Invalid credentials');
+        if (user && await bcrypt.compare(password, user.password)) {
+            console.log('User first name:', user.firstname);  
+            res.status(200).json({ isAuthenticated: true, firstName: user.firstname });
+        } else {
+            res.status(401).json({ isAuthenticated: false });
         }
-
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(400).send('Invalid credentials');
-        }
-
-        const token = jwt.sign({ userId: user.id }, 'secretkey');
-        res.json({ token });
     } catch (error) {
-        console.error('Error logging in:', error);
-        res.status(500).send('Error logging in');
+        console.error('Error logging in user:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+
 
 // Middleware to protect routes
 const authMiddleware = (req, res, next) => {
