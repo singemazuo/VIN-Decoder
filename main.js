@@ -7,11 +7,16 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcrypt');
+const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000', 
+    credentials: true,
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
@@ -36,6 +41,17 @@ app.post('/decode_vin', async (req, res) => {
         res.status(500).json({ error: error.toString() });
     }
 });
+
+app.use(session({
+    store: new pgSession({
+        pool: pool,
+        tableName: 'session'
+    }),
+    secret: 'your_secret_key',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false, maxAge: 30 * 24 * 60 * 60 * 1000 }
+}));
 
 app.post('/decode_vin_batch', async (req, res) => {
     const vins = req.body.vins;
@@ -247,14 +263,14 @@ app.post('/register', async (req, res) => {
 
 
 
-// Login endpoint
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
     try {
         const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
         const user = result.rows[0];
         if (user && await bcrypt.compare(password, user.password)) {
-            console.log('User first name:', user.firstname);  
+            req.session.userId = user.id;
+            req.session.firstName = user.firstname;
             res.status(200).json({ isAuthenticated: true, firstName: user.firstname });
         } else {
             res.status(401).json({ isAuthenticated: false });
@@ -265,6 +281,22 @@ app.post('/login', async (req, res) => {
     }
 });
 
+app.post('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).json({ error: 'Failed to log out' });
+        }
+        res.clearCookie('connect.sid');
+        res.status(200).json({ message: 'Logged out successfully' });
+    });
+});
+
+app.get('/protected', (req, res) => {
+    if (!req.session.userId) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
+    res.json({ message: 'This is a protected route', firstName: req.session.firstName });
+});
 
 
 // Middleware to protect routes
