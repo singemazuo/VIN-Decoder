@@ -1,5 +1,11 @@
 .registerContainer {
-    padding: 15rem 40rem;
+
+    box-sizing: border-box; /* Ensure padding is included in the total width */
+    width: 20%; /* Ensure it takes full width available */
+    margin: 0 auto; /* Center the container */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
@@ -9,6 +15,7 @@ h1 {
 form {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 label {
@@ -21,5 +28,58 @@ label {
     gap: 0.5rem;
 }
 
-@media screen {
+/* Media query to handle small screen sizes */
+@media (max-width: 1400px) {
+    .registerContainer {
+        width: 32%; /* Ensure it takes full width available */
+
+    }
+
+    form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .registerContainer {
+        width: 30%; /* Ensure it takes full width available */
+
+    }
+
+    form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 100px) {
+    .registerContainer {
+        width: 33%; /* Ensure it takes full width available */
+
+    }
+
+    form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .registerContainer {
+        width: 36%; /* Ensure it takes full width available */
+
+    }
+
+    form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .registerContainer {
+        width: 55%; /* Ensure it takes full width available */
+
+    }
+
+    form {
+        width: 100%;
+    }
 }

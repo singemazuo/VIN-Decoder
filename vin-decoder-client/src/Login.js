@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useAuth } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
-import './Login.module.css';
+import styles from './Login.module.css';
+import NavigationBar from './NavigationBar';
+
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -21,11 +23,13 @@ const Login = () => {
     };
 
     return (
+        <>
+         <NavigationBar/>
         <div className="login-wrapper">
-            <h1 className="title">Login</h1>
+            <h1 className={styles.title}>Login</h1>
             <form onSubmit={handleSubmit} className="login-form">
-                <div className="container">
-                    <div className="input-group">
+                <div className={styles.container}>
+                    <div className={styles.inputGroup}>
                         <label>Username</label>
                         <input
                             type="text"
@@ -33,7 +37,7 @@ const Login = () => {
                             onChange={(e) => setUsername(e.target.value)}
                         />
                     </div>
-                    <div className="input-group">
+                    <div className={styles.inputGroup}>
                         <label>Password</label>
                         <input
                             type="password"
@@ -41,13 +45,15 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    <div className="loginregister">
+                    <div className={styles.loginRegister} id='login'>
                         <button type="submit">Login</button>
                         <button type="button" onClick={handleRegister}>Register</button>
                     </div>
                 </div>
             </form>
         </div>
+        </>
+       
     );
 };
 

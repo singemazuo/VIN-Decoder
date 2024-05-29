@@ -1,7 +1,5 @@
 input[type=text], input[type=password] {
   width: 100%;
-  padding: 7px;
-  margin: 2px 0;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box; 
@@ -28,27 +26,29 @@ label {
 }
 
 .container {
-  padding: 5px;
-  max-width: 100px;
-  width: 100%;
+  text-align: left;
+  padding: 6rem 10rem 10rem;
   margin: 0 auto; 
   box-sizing: border-box;
 }
 
-.input-group {
+.inputGroup {
   width: 100%;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   box-sizing: border-box;
+  
 }
 
-.loginregister {
+.loginRegister {
   display: flex;
   gap: 2px;
 }
 
-.loginregister button {
+.loginRegister button {
   flex: 1; 
-  padding: 5px;
+  padding: 0.5rem 2rem 0.75rem; 
+  margin: 0; 
+  
 }
 
 @media screen and (max-width: 300px) {
@@ -63,12 +63,10 @@ label {
 
 .title {
   margin-top: 10rem;
-  margin-bottom: 2rem;
   text-align: center;
   font-family: Helvetica, sans-serif;
 }
 
 .login-wrapper {
   max-width: 400px;
-  margin: 0 auto;
 }
