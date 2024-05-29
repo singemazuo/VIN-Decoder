@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './VinForm.css';
+import styles from './VinForm.module.css';
 import NavigationBar from './NavigationBar';
 import PhotoUpload from './PhotoUpload';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -171,199 +171,223 @@ const VinForm = () => {
     };
 
     return (
-        <div className="container">
+        <div className={styles.vinContainer}>
             <NavigationBar />
             <form onSubmit={handleSubmit}>
                 <br />
-                <input
-                    type="text"
-                    value={vin}
-                    onChange={(e) => setVin(e.target.value)}
-                    placeholder='Enter VIN here'
-                />
-                <button type="submit" className='button-6'>Search VIN</button>
+                <div className={styles.searchContainer}>
+                    <input
+                        type="text"
+                        value={vin}
+                        onChange={(e) => setVin(e.target.value)}
+                        placeholder='Enter VIN here'
+                        className={styles.vinSearchInput}
+                    />
+                    <button type="submit" className={styles.vinSubmitButton}>Search VIN</button>
+                </div>
             </form>
             <hr />
-            <div className="center-button">
-                <button onClick={handleEnterManually} className='button-5'>Enter Manually&nbsp;<FontAwesomeIcon icon={faCaretDown} /></button>
+            <div className={styles.centerButton}>
+                <button onClick={handleEnterManually} className={styles.button5}>Enter Manually&nbsp;<FontAwesomeIcon icon={faCaretDown} /></button>
             </div>
             {showForm && (
                 <div>
                     <hr />
-                    <div className="logo-and-details">
-                        {logoUrl && <img src={logoUrl} alt={`${result?.Make} logo`} className="car-logo" />}
-                        <div className="details-text">
-                        {result?.Year} {result?.Make} {result?.Model} 
+                    <div className={styles.logoAndDetails}>
+                        {logoUrl && <img src={logoUrl} alt={`${result?.Make} logo`} className={styles.carLogo} />}
+                        <div className={styles.detailsText}>
+                            {result?.Year} {result?.Make} {result?.Model}
                         </div>
                     </div>
                     <form onSubmit={handleFormSubmit}>
-                        <div className="form-group">
-                            <label>Year:</label>
+                        <div className={styles.formGroup}>
+                        <label className={styles.formLabels}>Year:</label>
                             <input
                                 type="text"
                                 value={fields.Year}
                                 onChange={(e) => handleFieldChange('Year', e.target.value)}
                                 required
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Make:</label>
+                        <div className={styles.formGroup}>
+                        <label className={styles.formLabels}>Make:</label>
                             <input
                                 type="text"
                                 value={fields.Make}
                                 onChange={(e) => handleFieldChange('Make', e.target.value)}
                                 required
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Model:</label>
+                        <div className={styles.formGroup}>
+                        <label className={styles.formLabels}>Model:</label>
                             <input
                                 type="text"
                                 value={fields.Model}
                                 onChange={(e) => handleFieldChange('Model', e.target.value)}
                                 required
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Transmission:</label>
+                        <div className={styles.formGroup}>
+                        <label className={styles.formLabels}>Transmission:</label>
                             <input
                                 type="text"
                                 value={fields.Transmission}
                                 onChange={(e) => handleFieldChange('Transmission', e.target.value)}
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Weight:</label>
+                        <div className={styles.formGroup}>
+                        <label className={styles.formLabels}>Weight:</label>
                             <input
                                 type="text"
                                 value={fields.Weight}
                                 onChange={(e) => handleFieldChange('Weight', e.target.value)}
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Exterior Color:</label>
+                        <div className={styles.formGroup}>
+                        <label className={styles.formLabels}>Exterior Color:</label>
                             <input
                                 type="text"
                                 value={fields.ExteriorColor}
                                 onChange={(e) => handleFieldChange('ExteriorColor', e.target.value)}
                                 required
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Interior Color:</label>
+                        <div className={styles.formGroup}>
+                        <label className={styles.formLabels}>Interior Color:</label>
                             <input
                                 type="text"
                                 value={fields.InteriorColor}
                                 onChange={(e) => handleFieldChange('InteriorColor', e.target.value)}
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Engine Brake:</label>
+                        <div className={styles.formGroup}>
+                        <label className={styles.formLabels}>Engine Brake:</label>
                             <input
                                 type="text"
                                 value={fields.EngineBrake}
                                 onChange={(e) => handleFieldChange('EngineBrake', e.target.value)}
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Engine:</label>
+                        <div className={styles.formGroup}>
+                        <label className={styles.formLabels}>Engine:</label>
                             <input
                                 type="text"
                                 value={fields.Engine}
                                 onChange={(e) => handleFieldChange('Engine', e.target.value)}
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Doors:</label>
+                        <div className={styles.formGroup}>
+                        <label className={styles.formLabels}>Doors:</label>
                             <input
                                 type="text"
                                 value={fields.Doors}
                                 onChange={(e) => handleFieldChange('Doors', e.target.value)}
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Stock Number:</label>
+                        <div className={styles.formGroup}>
+                        <label className={styles.formLabels}>Stock Number:</label>
                             <input
                                 type="text"
                                 value={fields.StockNumber}
                                 onChange={(e) => handleFieldChange('StockNumber', e.target.value)}
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Fuel:</label>
+                        <div className={styles.formGroup}>
+                        <label className={styles.formLabels}>Fuel:</label>
                             <input
                                 type="text"
                                 value={fields.Fuel}
                                 onChange={(e) => handleFieldChange('Fuel', e.target.value)}
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Title:</label>
+                        <div className={styles.formGroup}>
+                        <label className={styles.formLabels}>Title:</label>
                             <input
                                 type="text"
                                 value={fields.Title}
                                 onChange={(e) => handleFieldChange('Title', e.target.value)}
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Front Airbags:</label>
+                        <div className={styles.formGroup}>
+                        <label className={styles.formLabels}>Front Airbags:</label>
                             <input
                                 type="text"
                                 value={fields.FrontAirbags}
                                 onChange={(e) => handleFieldChange('FrontAirbags', e.target.value)}
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Knee Airbags:</label>
+                        <div className={styles.formGroup}>
+                        <label className={styles.formLabels}>Knee Airbags:</label>
                             <input
                                 type="text"
                                 value={fields.KneeAirbags}
                                 onChange={(e) => handleFieldChange('KneeAirbags', e.target.value)}
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Side Airbags:</label>
+                        <div className={styles.formGroup}>
+                            <label className={styles.formLabels}>Side Airbags:</label>
                             <input
                                 type="text"
                                 value={fields.SideAirbags}
                                 onChange={(e) => handleFieldChange('SideAirbags', e.target.value)}
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
+                        <div className={styles.formGroup}>
                             <label>Curtain Airbags:</label>
                             <input
                                 type="text"
                                 value={fields.CurtainAirbags}
                                 onChange={(e) => handleFieldChange('CurtainAirbags', e.target.value)}
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
+                        <div className={styles.formGroup}>
                             <label>Seat Cushion Airbags:</label>
                             <input
                                 type="text"
                                 value={fields.SeatCushionAirbags}
                                 onChange={(e) => handleFieldChange('SeatCushionAirbags', e.target.value)}
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
+                        <div className={styles.formGroup}>
                             <label>Other Restraint Info:</label>
                             <input
                                 type="text"
                                 value={fields.OtherRestraintInfo}
                                 onChange={(e) => handleFieldChange('OtherRestraintInfo', e.target.value)}
+                                className={styles.formInputBox}
                             />
                         </div>
-                        <div className="form-group">
+                        <div className={styles.formGroup}>
                             <label>Plant Information:</label>
                             <input
                                 type="text"
                                 value={fields.PlantInfo}
                                 onChange={(e) => handleFieldChange('PlantInfo', e.target.value)}
+                                className={styles.formInputBox}
+
                             />
                         </div>
                         <hr />
                         <PhotoUpload onPhotosChange={handlePhotosChange} />
-                        <button type="submit" className='button-6'>Submit Vehicle Data</button>
+                        <button type="submit" className={styles.button6}>Submit Vehicle Data</button>
                     </form>
                 </div>
             )}

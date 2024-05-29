@@ -1,0 +1,176 @@
+.vinContainer {
+    width: 90%; 
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.searchContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Optional: Add space between the input and button */
+}
+
+.vinSearchInput {
+    padding: 10px; 
+    margin: 5px 0; 
+    box-sizing: border-box; 
+    font-size: 16px; 
+    width: 100%;
+}
+
+.vinSubmitButton {
+    padding: 10px 20px; 
+    font-size: 16px;
+    margin-top: 10px; 
+}
+
+.vinDetails {
+    list-style-type: none;
+    padding: 0;
+    text-align: left; 
+}
+
+.vinDetailsItem {
+    margin: 10px 0; 
+}
+
+.vinDetailsItem strong {
+    display: inline-block;
+    width: 150px;
+}
+
+.carLogo {
+    width: 100px; 
+    margin-bottom: 20px;
+    display: block;
+    border-radius: 0.5rem;
+}
+
+.formGroup {
+    display: flex;
+    margin-right: 5rem;
+    margin-left: 5rem;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.logoAndDetails {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detailsText {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.button6 {
+    align-items: center;
+    z-index: 1000;
+    background-color: #FFFFFF;
+    border: 1.5px solid rgb(44, 42, 42);
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.85);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 16px;
+    font-weight: 200;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+}
+
+.button6:hover,
+.button6:focus {
+    border-color: rgb(65, 86, 206);
+    color: rgb(50, 73, 204);
+}
+
+.button6:hover {
+    font-weight: 300;
+    font-size: 16.5px;
+}
+
+.button6:active {
+    background-color: #F0F0F1;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    color: rgba(0, 0, 0, 0.65);
+    transform: translateY(0);
+}
+
+.centerButton {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.button5 {
+    align-items: center;
+    z-index: 1000;
+    background-color: #FFFFFF;
+    border: 1.5px solid rgb(110, 109, 136);
+    border-radius: 3rem;
+    box-sizing: border-box;
+    color: rgb(93, 92, 116);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 16px;
+    font-weight: 200;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+}
+  
+.button5:hover,
+.button5:focus {
+    border-color: rgb(65, 86, 206);
+    color: rgb(50, 73, 204);
+}
+  
+.button5:hover {
+    font-weight: 300;
+    font-size: 16px;
+}
+  
+.button5:active {
+    background-color: #F0F0F1;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    color: rgba(0, 0, 0, 0.65);
+    transform: translateY(0);
+}
+
+.formLabels{
+    padding-right: 5rem;
+}
+
+.formInputBox{
+    width: 100px;
+}
