@@ -1,0 +1,74 @@
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 7px;
+  margin: 2px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box; 
+}
+
+button {
+  background-color: #4e5e80;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%; 
+  box-sizing: border-box; 
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+label {
+  text-align: left;
+  font-size: 15px;
+  font-weight: 650;
+  display: block; 
+}
+
+.container {
+  padding: 5px;
+  max-width: 100px;
+  width: 100%;
+  margin: 0 auto; 
+  box-sizing: border-box;
+}
+
+.input-group {
+  width: 100%;
+  margin-bottom: 8px;
+  box-sizing: border-box;
+}
+
+.loginregister {
+  display: flex;
+  gap: 2px;
+}
+
+.loginregister button {
+  flex: 1; 
+  padding: 5px;
+}
+
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+  .cancelbtn {
+    width: 100%;
+  }
+}
+
+.title {
+  margin-top: 10rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+}
+
+.login-wrapper {
+  max-width: 400px;
+  margin: 0 auto;
+}

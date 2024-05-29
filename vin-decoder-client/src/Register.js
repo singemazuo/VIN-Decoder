@@ -1,20 +1,29 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Register.css';
+import React from 'react';
+import styles from './Register.module.css';
+import NavigationBar from './NavigationBar';
+
 
 const Register = () => {
 
     return (
-      <div className='container'>
+      <>
+      <NavigationBar />
+
+      <div className={styles.registerContainer}>
         <h1>Register</h1>
         <form>
           <label>Email</label>
           <input type="text"></input>
           <label>Password</label>
           <input type="password"></input>
-
+          <div className={styles.registerButtons}>
+            <button>Clear</button>
+            <button>Submit</button>
+          </div>
         </form>
       </div>
+      </>
+      
     );
 };
 

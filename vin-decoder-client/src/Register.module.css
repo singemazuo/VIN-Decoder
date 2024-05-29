@@ -1,0 +1,25 @@
+.registerContainer {
+    padding: 15rem 40rem;
+}
+
+h1 {
+    padding-bottom: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 0.5rem;
+}
+
+.registerButtons {
+    display: flex;
+    padding-top: 1rem;
+    gap: 0.5rem;
+}
+
+@media screen {
+}
