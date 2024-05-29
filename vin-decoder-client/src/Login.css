@@ -1,0 +1,84 @@
+/* Apply styles for text and password input fields */
+input[type=text], input[type=password] {
+  width: 100%; /* Take up to 100% of the parent element's width */
+  padding: 7px;
+  margin: 2px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+/* Apply styles for buttons */
+button {
+  background-color: #4e5e80;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%; /* Take up to 100% of the parent element's width */
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Apply styles for labels */
+label {
+  text-align: left;
+  font-size: 15px;
+  font-weight: 650;
+  display: block; /* Make labels block-level elements */
+}
+
+/* Apply styles for the container */
+.container {
+  padding: 5px;
+  max-width: 100px; /* Maximum width of the container */
+  width: 100%; /* Ensures the container can scale with its container */
+  margin: 0 auto; /* Center the container */
+  box-sizing: border-box;
+}
+
+/* Apply styles for the input groups */
+.input-group {
+  width: 100%;
+  margin-bottom: 8px;
+  box-sizing: border-box;
+}
+
+/* Apply styles for login and register button container */
+.loginregister {
+  display: flex;
+  gap: 2px;
+}
+
+.loginregister button {
+  flex: 1; /* Ensure all buttons inside loginregister take equal space */
+  padding: 5px;
+  margin: 0; /* Remove margin to make buttons consistent */
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+  .cancelbtn {
+    width: 100%;
+  }
+}
+
+/* Apply styles for title */
+.title {
+  margin-top: 10rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+}
+
+/* Apply styles for the login wrapper */
+.login-wrapper {
+  max-width: 400px;
+  margin: 0 auto;
+}

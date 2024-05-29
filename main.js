@@ -171,20 +171,38 @@ app.get('/vehicles', async (req, res) => {
 app.get('/search_vehicles', async (req, res) => {
     const { make, model, year } = req.query;
     try {
-        const result = await pool.query(`
+        // Create base query
+        let query = `
             SELECT v.*, p.photo_url
             FROM vehicles v
             LEFT JOIN photos p ON v.id = p.vehicle_id
-            WHERE ($1::text IS NULL OR v.make ILIKE $1)
-            AND ($2::text IS NULL OR v.model ILIKE $2)
-            AND ($3::int IS NULL OR v.year = $3)
-        `, [make ? `%${make}%` : null, model ? `%${model}%` : null, year ? parseInt(year) : null]);
+            WHERE 1=1
+        `;
+
+        const params = [];
+        let paramIndex = 1;
+
+        if (make) {
+            query += ` AND v.make ILIKE $${paramIndex++}`;
+            params.push(`%${make}%`);
+        }
+        if (model) {
+            query += ` AND v.model ILIKE $${paramIndex++}`;
+            params.push(`%${model}%`);
+        }
+        if (year) {
+            query += ` AND v.year = $${paramIndex++}`;
+            params.push(parseInt(year));
+        }
+
+        const result = await pool.query(query, params);
         res.json(result.rows);
     } catch (error) {
         console.error('Error searching vehicles:', error);
         res.status(500).json({ error: error.message });
     }
 });
+
 
 app.delete('/vehicle/:id', async (req, res) => {
     const { id } = req.params;
@@ -210,12 +228,64 @@ app.delete('/vehicle/:id', async (req, res) => {
 });
 
 // Register endpoint
+app.post('/register', async (req, res) => {
+    const { username, password } = req.body;
 
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const result = await pool.query(
+            'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id',
+            [username, hashedPassword]
+        );
+
+        res.status(201).send('User registered');
+    } catch (error) {
+        console.error('Error registering user:', error);
+        res.status(500).send('Error registering user');
+    }
+});
 
 // Login endpoint
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
 
+    try {
+        const result = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
+        const user = result.rows[0];
+
+        if (!user) {
+            return res.status(400).send('Invalid credentials');
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).send('Invalid credentials');
+        }
+
+        const token = jwt.sign({ userId: user.id }, 'secretkey');
+        res.json({ token });
+    } catch (error) {
+        console.error('Error logging in:', error);
+        res.status(500).send('Error logging in');
+    }
+});
 
 // Middleware to protect routes
+const authMiddleware = (req, res, next) => {
+    const token = req.header('Authorization').replace('Bearer ', '');
+    try {
+        const decoded = jwt.verify(token, 'secretkey');
+        req.user = decoded;
+        next();
+    } catch (e) {
+        res.status(401).send('Unauthorized');
+    }
+};
+
+app.get('/protected', authMiddleware, (req, res) => {
+    res.send('This is a protected route');
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -1,22 +1,34 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './HomePage';
 import VinForm from './VinForm';
+import Account from './Account';
+import Login from './Login';
+import PrivateRoute from './PrivateRoute';
+import { AuthProvider } from './AuthContext';
+import Register from './Register';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 const App = () => {
     return (
-        <Router>
-            <div className="App">
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/vin-form" element={<VinForm />} />
-                    <Route path="/account" element={<div>Account Page</div>} /> {/* Placeholder */}
-                </Routes>
-            </div>
-        </Router>
+        <AuthProvider>
+            <Router>
+                <div className="App">
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/vin-form" element={<VinForm />} />
+                        <Route path="/register" element={<Register/>}/>
+                        <Route path="/account" element={
+                            <PrivateRoute>
+                                <Account />
+                            </PrivateRoute>
+                        } />
+                        <Route path="/login" element={<Login />} />
+                    </Routes>
+                </div>
+            </Router>
+        </AuthProvider>
     );
 };
 

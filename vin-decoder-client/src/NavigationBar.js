@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import './NavigationBar.css';
 
+
 const NavigationBar = () => {
     return (
         <Navbar bg="light" variant="light" className='customNav'>
