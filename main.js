@@ -38,18 +38,12 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         const filename = `${file.fieldname}-${Date.now()}.jpeg`;
         cb(null, filename);
-        req.savedFilePath = filename; // Save only the filename, not the full path
+        req.savedFilePath = filename; 
     }
 });
 
 // Update multer upload initialization
 const upload = multer({ storage: storage });
-
-
-// Function to get the relative path
-const getRelativePath = (absolutePath) => {
-    return path.relative(path.join(__dirname, 'public'), absolutePath).replace(/\\/g, '/');
-};
 
 app.post('/decode_vin', async (req, res) => {
     const vin = req.body.vin;

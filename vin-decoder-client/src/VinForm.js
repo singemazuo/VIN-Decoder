@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import styles from './VinForm.module.css';
 import NavigationBar from './NavigationBar';
 import PhotoUpload from './PhotoUpload';
@@ -34,6 +35,7 @@ const VinForm = () => {
         PlantInfo: ''
     });
     const [showForm, setShowForm] = useState(false);
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -161,6 +163,7 @@ const VinForm = () => {
             },
         });
         console.log('Submit Response:', response.data);
+        navigate('/');
     } catch (error) {
         console.error('Error submitting vehicle data:', error);
     }
