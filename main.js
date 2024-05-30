@@ -36,16 +36,14 @@ const storage = multer.diskStorage({
         cb(null, process.env.PHOTO_STORAGE_PATH);
     },
     filename: (req, file, cb) => {
-        const filename = `${file.fieldname}-${Date.now()}.jpeg`; // Always use .jpeg extension
+        const filename = `${file.fieldname}-${Date.now()}.jpeg`;
         cb(null, filename);
-
-        req.savedFilePath = `/uploads/${filename}`;
+        req.savedFilePath = filename; // Save only the filename, not the full path
     }
 });
 
 // Update multer upload initialization
 const upload = multer({ storage: storage });
-
 
 
 // Function to get the relative path
@@ -171,9 +169,8 @@ app.post('/submit_vehicle', upload.array('photos'), async (req, res) => {
             const vehicleId = vehicleResult.rows[0].id;
 
             const photoInsertPromises = req.files.map(file => {
-                const relativePath = getRelativePath(file.path);
                 const photoQueryText = 'INSERT INTO photos(vehicle_id, photo_url) VALUES($1, $2)';
-                const photoValues = [vehicleId, `/uploads/${relativePath}`];
+                const photoValues = [vehicleId, `/uploads/${file.filename}`]; // Construct the correct URL
                 return client.query(photoQueryText, photoValues);
             });
 
