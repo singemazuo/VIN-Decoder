@@ -20,7 +20,8 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-const upload = multer({ dest: process.env.PHOTO_STORAGE_PATH });
+
+app.use('/uploads', express.static('C:/var/www/vehicle-backend/uploads'));
 
 const pool = new Pool({
     user: process.env.DB_USER,
@@ -29,6 +30,28 @@ const pool = new Pool({
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
 });
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, process.env.PHOTO_STORAGE_PATH);
+    },
+    filename: (req, file, cb) => {
+        const filename = `${file.fieldname}-${Date.now()}.jpeg`; // Always use .jpeg extension
+        cb(null, filename);
+
+        req.savedFilePath = `/uploads/${filename}`;
+    }
+});
+
+// Update multer upload initialization
+const upload = multer({ storage: storage });
+
+
+
+// Function to get the relative path
+const getRelativePath = (absolutePath) => {
+    return path.relative(path.join(__dirname, 'public'), absolutePath).replace(/\\/g, '/');
+};
 
 app.post('/decode_vin', async (req, res) => {
     const vin = req.body.vin;
@@ -148,8 +171,9 @@ app.post('/submit_vehicle', upload.array('photos'), async (req, res) => {
             const vehicleId = vehicleResult.rows[0].id;
 
             const photoInsertPromises = req.files.map(file => {
+                const relativePath = getRelativePath(file.path);
                 const photoQueryText = 'INSERT INTO photos(vehicle_id, photo_url) VALUES($1, $2)';
-                const photoValues = [vehicleId, path.join(process.env.PHOTO_STORAGE_PATH, file.filename)];
+                const photoValues = [vehicleId, `/uploads/${relativePath}`];
                 return client.query(photoQueryText, photoValues);
             });
 
@@ -189,11 +213,14 @@ app.get('/vehicles', async (req, res) => {
 app.get('/search_vehicles', async (req, res) => {
     const { make, model, year } = req.query;
     try {
-        // Create base query
         let query = `
             SELECT v.*, p.photo_url
             FROM vehicles v
-            LEFT JOIN photos p ON v.id = p.vehicle_id
+            LEFT JOIN (
+                SELECT DISTINCT ON (vehicle_id) vehicle_id, photo_url
+                FROM photos
+                ORDER BY vehicle_id, id
+            ) p ON v.id = p.vehicle_id
             WHERE 1=1
         `;
 
@@ -220,6 +247,7 @@ app.get('/search_vehicles', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
 
 
 app.delete('/vehicle/:id', async (req, res) => {
@@ -297,7 +325,6 @@ app.get('/protected', (req, res) => {
     }
     res.json({ message: 'This is a protected route', firstName: req.session.firstName });
 });
-
 
 // Middleware to protect routes
 const authMiddleware = (req, res, next) => {

@@ -55,7 +55,7 @@ const HomePage = () => {
                             <button onClick={() => handleDelete(vehicle.id)} className={styles.button6}>Delete</button>
                             <h2>{vehicle.make} {vehicle.model} - {vehicle.year}</h2>
                             {vehicle.photo_url && (
-                                <img src={vehicle.photo_url} alt={`${vehicle.make} ${vehicle.model}`} className={styles.vehiclePhoto} />
+                                <img src={`http://localhost:5000${vehicle.photo_url}`} alt={`${vehicle.make} ${vehicle.model}`} className={styles.vehiclePhoto} />
                             )}
                             <p><strong>VIN:</strong> {vehicle.vin}</p>
                             <p><strong>Transmission:</strong> {vehicle.transmission}</p>

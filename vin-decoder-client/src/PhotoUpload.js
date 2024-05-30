@@ -17,6 +17,19 @@ const PhotoUpload = ({ onPhotosChange }) => {
         onPhotosChange(newPhotos);
     };
 
+    const PhotoUpload = ({ onPhotosChange }) => {
+        const handleFileChange = (e) => {
+            const files = Array.from(e.target.files);
+            onPhotosChange(files);
+        };
+    
+        return (
+            <div>
+                <input type="file" multiple onChange={handleFileChange} />
+            </div>
+        );
+    };
+
     return (
         <div className="photo-upload-container">
             <label htmlFor="photo-upload">Upload Vehicle Photos:</label>

@@ -126,45 +126,46 @@ const VinForm = () => {
     };
 
     const handleFormSubmit = async (event) => {
-        event.preventDefault();
-        const formData = new FormData();
-        formData.append('vin', vin);
-        formData.append('year', fields.Year);
-        formData.append('make', fields.Make);
-        formData.append('model', fields.Model);
-        formData.append('transmission', fields.Transmission);
-        formData.append('weight', fields.Weight);
-        formData.append('exteriorColor', fields.ExteriorColor);
-        formData.append('interiorColor', fields.InteriorColor);
-        formData.append('engineBrake', fields.EngineBrake);
-        formData.append('engine', fields.Engine);
-        formData.append('doors', fields.Doors);
-        formData.append('stockNumber', fields.StockNumber);
-        formData.append('fuel', fields.Fuel);
-        formData.append('title', fields.Title);
-        formData.append('frontAirbags', fields.FrontAirbags);
-        formData.append('kneeAirbags', fields.KneeAirbags);
-        formData.append('sideAirbags', fields.SideAirbags);
-        formData.append('curtainAirbags', fields.CurtainAirbags);
-        formData.append('seatCushionAirbags', fields.SeatCushionAirbags);
-        formData.append('otherRestraintInfo', fields.OtherRestraintInfo);
-        formData.append('plantInfo', fields.PlantInfo);
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('vin', vin);
+    formData.append('year', fields.Year);
+    formData.append('make', fields.Make);
+    formData.append('model', fields.Model);
+    formData.append('transmission', fields.Transmission);
+    formData.append('weight', fields.Weight);
+    formData.append('exteriorColor', fields.ExteriorColor);
+    formData.append('interiorColor', fields.InteriorColor);
+    formData.append('engineBrake', fields.EngineBrake);
+    formData.append('engine', fields.Engine);
+    formData.append('doors', fields.Doors);
+    formData.append('stockNumber', fields.StockNumber);
+    formData.append('fuel', fields.Fuel);
+    formData.append('title', fields.Title);
+    formData.append('frontAirbags', fields.FrontAirbags);
+    formData.append('kneeAirbags', fields.KneeAirbags);
+    formData.append('sideAirbags', fields.SideAirbags);
+    formData.append('curtainAirbags', fields.CurtainAirbags);
+    formData.append('seatCushionAirbags', fields.SeatCushionAirbags);
+    formData.append('otherRestraintInfo', fields.OtherRestraintInfo);
+    formData.append('plantInfo', fields.PlantInfo);
 
-        photos.forEach((photo, index) => {
-            formData.append(`photos`, photo);
+    photos.forEach((photo, index) => {
+        formData.append(`photos`, photo);
+    });
+
+    try {
+        const response = await axios.post('http://localhost:5000/submit_vehicle', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
         });
+        console.log('Submit Response:', response.data);
+    } catch (error) {
+        console.error('Error submitting vehicle data:', error);
+    }
+};
 
-        try {
-            const response = await axios.post('http://localhost:5000/submit_vehicle', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            console.log('Submit Response:', response.data);
-        } catch (error) {
-            console.error('Error submitting vehicle data:', error);
-        }
-    };
 
     const handleEnterManually = () => {
         setShowForm(true);
