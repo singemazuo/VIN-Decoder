@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './HomePage.css';
+import styles from './HomePage.module.css';
 import NavigationBar from './NavigationBar';
 import CarMakeDropdown from './CarMakeDropdown';
 import YearDropdown from './YearDropdown';
@@ -38,26 +38,24 @@ const HomePage = () => {
     };
 
     return (
-        <div className='container'>
+        <div className={styles.container}>
             <NavigationBar />
-            <div className="home-page">
+            <div className={styles.homePage}>
                 <h1>Search Vehicles</h1>
-                <form onSubmit={handleSearch}>
-                    <div className="search-container">
-                        <CarMakeDropdown make={make} setMake={setMake} model={model} setModel={setModel} className='makemodel-dropdown' />
-                        <YearDropdown year={year} setYear={setYear} className='year-dropdown' />
+                <form onSubmit={handleSearch} className={styles.searchForm}>
+                    <div className={styles.searchContainer}>
+                        <CarMakeDropdown make={make} setMake={setMake} model={model} setModel={setModel} className={styles.makeModelDropdown} />
+                        <YearDropdown year={year} setYear={setYear} className={styles.yearDropdown} />
                     </div>
-
-                    <button type="submit" className='button-6'>{buttonText}</button>
-
+                    <button type="submit" className={styles.button6}>{buttonText}</button>
                 </form>
-                <div className="vehicle-list">
+                <div className={styles.vehicleList}>
                     {vehicles.map((vehicle) => (
-                        <div key={vehicle.id} className="vehicle-item">
-                            <button onClick={() => handleDelete(vehicle.id)} className='button-6'>Delete</button>
+                        <div key={vehicle.id} className={styles.vehicleItem}>
+                            <button onClick={() => handleDelete(vehicle.id)} className={styles.button6}>Delete</button>
                             <h2>{vehicle.make} {vehicle.model} - {vehicle.year}</h2>
                             {vehicle.photo_url && (
-                                <img src={vehicle.photo_url} alt={`${vehicle.make} ${vehicle.model}`} className="vehicle-photo" />
+                                <img src={vehicle.photo_url} alt={`${vehicle.make} ${vehicle.model}`} className={styles.vehiclePhoto} />
                             )}
                             <p><strong>VIN:</strong> {vehicle.vin}</p>
                             <p><strong>Transmission:</strong> {vehicle.transmission}</p>

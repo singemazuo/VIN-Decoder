@@ -201,7 +201,7 @@ const VinForm = () => {
                     </div>
                     <form onSubmit={handleFormSubmit}>
                         <div className={styles.formGroup}>
-                        <label className={styles.formLabels}>Year:</label>
+                            <label className={styles.formLabels}>Year:</label>
                             <input
                                 type="text"
                                 value={fields.Year}
@@ -211,7 +211,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                        <label className={styles.formLabels}>Make:</label>
+                            <label className={styles.formLabels}>Make:</label>
                             <input
                                 type="text"
                                 value={fields.Make}
@@ -221,7 +221,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                        <label className={styles.formLabels}>Model:</label>
+                            <label className={styles.formLabels}>Model:</label>
                             <input
                                 type="text"
                                 value={fields.Model}
@@ -231,7 +231,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                        <label className={styles.formLabels}>Transmission:</label>
+                            <label className={styles.formLabels}>Transmission:</label>
                             <input
                                 type="text"
                                 value={fields.Transmission}
@@ -240,7 +240,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                        <label className={styles.formLabels}>Weight:</label>
+                            <label className={styles.formLabels}>Weight:</label>
                             <input
                                 type="text"
                                 value={fields.Weight}
@@ -249,7 +249,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                        <label className={styles.formLabels}>Exterior Color:</label>
+                            <label className={styles.formLabels}>Exterior Color:</label>
                             <input
                                 type="text"
                                 value={fields.ExteriorColor}
@@ -259,7 +259,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                        <label className={styles.formLabels}>Interior Color:</label>
+                            <label className={styles.formLabels}>Interior Color:</label>
                             <input
                                 type="text"
                                 value={fields.InteriorColor}
@@ -268,7 +268,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                        <label className={styles.formLabels}>Engine Brake:</label>
+                            <label className={styles.formLabels}>Engine Brake:</label>
                             <input
                                 type="text"
                                 value={fields.EngineBrake}
@@ -277,7 +277,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                        <label className={styles.formLabels}>Engine:</label>
+                            <label className={styles.formLabels}>Engine:</label>
                             <input
                                 type="text"
                                 value={fields.Engine}
@@ -286,7 +286,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                        <label className={styles.formLabels}>Doors:</label>
+                            <label className={styles.formLabels}>Doors:</label>
                             <input
                                 type="text"
                                 value={fields.Doors}
@@ -295,7 +295,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                        <label className={styles.formLabels}>Stock Number:</label>
+                            <label className={styles.formLabels}>Stock Number:</label>
                             <input
                                 type="text"
                                 value={fields.StockNumber}
@@ -304,7 +304,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                        <label className={styles.formLabels}>Fuel:</label>
+                            <label className={styles.formLabels}>Fuel:</label>
                             <input
                                 type="text"
                                 value={fields.Fuel}
@@ -313,7 +313,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                        <label className={styles.formLabels}>Title:</label>
+                            <label className={styles.formLabels}>Title:</label>
                             <input
                                 type="text"
                                 value={fields.Title}
@@ -322,7 +322,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                        <label className={styles.formLabels}>Front Airbags:</label>
+                            <label className={styles.formLabels}>Front Airbags:</label>
                             <input
                                 type="text"
                                 value={fields.FrontAirbags}
@@ -331,7 +331,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                        <label className={styles.formLabels}>Knee Airbags:</label>
+                            <label className={styles.formLabels}>Knee Airbags:</label>
                             <input
                                 type="text"
                                 value={fields.KneeAirbags}
@@ -349,7 +349,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                            <label>Curtain Airbags:</label>
+                            <label className={styles.formLabels}>Curtain Airbags:</label>
                             <input
                                 type="text"
                                 value={fields.CurtainAirbags}
@@ -358,7 +358,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                            <label>Seat Cushion Airbags:</label>
+                            <label className={styles.formLabels}>Seat Cushion Airbags:</label>
                             <input
                                 type="text"
                                 value={fields.SeatCushionAirbags}
@@ -367,7 +367,7 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                            <label>Other Restraint Info:</label>
+                            <label className={styles.formLabels}>Other Restraint Info:</label>
                             <input
                                 type="text"
                                 value={fields.OtherRestraintInfo}
@@ -376,13 +376,12 @@ const VinForm = () => {
                             />
                         </div>
                         <div className={styles.formGroup}>
-                            <label>Plant Information:</label>
+                            <label className={styles.formLabels}>Plant Information:</label>
                             <input
                                 type="text"
                                 value={fields.PlantInfo}
                                 onChange={(e) => handleFieldChange('PlantInfo', e.target.value)}
                                 className={styles.formInputBox}
-
                             />
                         </div>
                         <hr />

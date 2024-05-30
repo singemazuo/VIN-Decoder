@@ -1,5 +1,5 @@
 .vinContainer {
-    width: 90%; 
+    width: 90%;
     max-width: 1200px;
     margin: 0 auto;
     text-align: left;
@@ -10,31 +10,31 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px; /* Optional: Add space between the input and button */
+    gap: 10px;
 }
 
 .vinSearchInput {
-    padding: 10px; 
-    margin: 5px 0; 
-    box-sizing: border-box; 
-    font-size: 16px; 
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    font-size: 16px;
     width: 100%;
 }
 
 .vinSubmitButton {
-    padding: 10px 20px; 
+    padding: 10px 20px;
     font-size: 16px;
-    margin-top: 10px; 
+    margin-top: 10px;
 }
 
 .vinDetails {
     list-style-type: none;
     padding: 0;
-    text-align: left; 
+    text-align: left;
 }
 
 .vinDetailsItem {
-    margin: 10px 0; 
+    margin: 10px 0;
 }
 
 .vinDetailsItem strong {
@@ -43,7 +43,7 @@
 }
 
 .carLogo {
-    width: 100px; 
+    width: 100px;
     margin-bottom: 20px;
     display: block;
     border-radius: 0.5rem;
@@ -51,9 +51,7 @@
 
 .formGroup {
     display: flex;
-    margin-right: 5rem;
-    margin-left: 5rem;
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 10px;
 }
 
@@ -147,18 +145,18 @@
     vertical-align: baseline;
     width: auto;
 }
-  
+
 .button5:hover,
 .button5:focus {
     border-color: rgb(65, 86, 206);
     color: rgb(50, 73, 204);
 }
-  
+
 .button5:hover {
     font-weight: 300;
     font-size: 16px;
 }
-  
+
 .button5:active {
     background-color: #F0F0F1;
     border-color: rgba(0, 0, 0, 0.15);
@@ -167,10 +165,13 @@
     transform: translateY(0);
 }
 
-.formLabels{
-    padding-right: 5rem;
+.formLabels {
+    padding-right: 1rem;
+    flex: 1;
 }
 
-.formInputBox{
-    width: 100px;
+.formInputBox {
+    width: 100%;
+    max-width: 100%;
+    flex: 8;
 }

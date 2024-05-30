@@ -1,32 +1,32 @@
-.home-page {
+.homePage {
     text-align: center;
     padding: 20px;
 }
 
-form {
+.searchForm {
     margin-bottom: 20px;
 }
 
-.search-container {
+.searchContainer {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-select {
+.dropdownSelect {
     background-color: #ffffff;
     border-radius: 0.5rem;
 }
 
-.year-dropdown {
+.yearDropdown {
     width: 10%;
 }
 
-.makemodel-dropdown{
+.makeModelDropdown {
     width: 22%;
 }
 
-.button-6 {
+.button6 {
     align-items: center;
     z-index: 1000;
     background-color: #FFFFFF;
@@ -53,13 +53,13 @@ select {
     vertical-align: baseline;
 }
   
-.button-6:hover,
-.button-6:focus {
+.button6:hover,
+.button6:focus {
     border-color: rgb(35, 60, 204);
     color: rgb(47, 72, 212);
 }
 
-.button-6:active {
+.button6:active {
     background-color: #F0F0F1;
     border-color: rgba(0, 0, 0, 0.15);
     box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
@@ -67,20 +67,20 @@ select {
     transform: translateY(0);
 }
 
-
-
-input, select, button {
+.inputField,
+.selectField,
+.button6 {
     padding: 11px;
     font-size: 16px;
 }
 
-.vehicle-list {
+.vehicleList {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.vehicle-item {
+.vehicleItem {
     border: 1px solid #ccc;
     padding: 20px;
     margin: 10px;
@@ -88,7 +88,7 @@ input, select, button {
     width: 300px;
 }
 
-.vehicle-photo {
+.vehiclePhoto {
     width: 100%;
     height: auto;
     display: block;
