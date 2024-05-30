@@ -31,33 +31,37 @@ const Register = () => {
       <div className={styles.registerContainer}>
         <h1>Register</h1>
         <form onSubmit={handleSubmit}>
-         <label>Email</label>
+         <label className={styles.label}>Email</label>
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className={styles.registerInputBox}
           />
-          <label>First Name</label>
+          <label className={styles.label}>First Name</label>
           <input
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
+            className={styles.registerInputBox}
           />
-          <label>Last Name</label>
+          <label className={styles.label}>Last Name</label>
           <input
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
+            className={styles.registerInputBox}
           />
-          <label>Password</label>
+          <label className={styles.label}>Password</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className={styles.registerInputBox}
           />
           <div className={styles.registerButtons}>
-            <button>Clear</button>
-            <button>Submit</button>
+            <button className={styles.button}>Clear</button>
+            <button className={styles.button}>Submit</button>
           </div>
         </form>
       </div>

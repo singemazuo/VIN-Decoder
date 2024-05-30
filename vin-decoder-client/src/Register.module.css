@@ -15,7 +15,7 @@ h1 {
 
 form {
     display: grid;
-    gap: 0.5rem;
+    gap: 0.25rem;
 }
 
 
@@ -23,7 +23,27 @@ form {
 .registerButtons {
     display: flex;
     gap: 0.5rem;
-    justify-content: space-between; 
+    margin-top: 8px;
+    height: 2.5rem;
+    
+}
+
+.registerInputBox{
+    height: 2.5rem;
+}
+
+.button{
+    background-color: #4e5e80;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+.label{
+    text-align: left;
+    font-weight: 600;
 }
 
 @media (max-width: 600px) {

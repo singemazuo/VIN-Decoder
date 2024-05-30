@@ -1,56 +1,81 @@
-input[type=text], input[type=password] {
+/* Apply styles for text and password input fields */
+.input {
   width: 100%;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box; 
+  padding: 12px 20px;
+  margin: 8px 0;
 }
 
-button {
+/* Apply styles for buttons */
+.button {
   background-color: #4e5e80;
   color: white;
   border: none;
   cursor: pointer;
   width: 100%; 
   box-sizing: border-box; 
+  padding: 14px 20px;
 }
 
-button:hover {
+.button:hover {
   opacity: 0.8;
 }
 
-label {
+/* Apply styles for labels */
+.label {
   text-align: left;
   font-size: 15px;
   font-weight: 650;
   display: block; 
 }
 
+/* Apply styles for the container */
 .container {
-  text-align: left;
-  padding: 6rem 10rem 10rem;
+  text-align: center;
   margin: 0 auto; 
   box-sizing: border-box;
+  max-width: 300px; /* Ensure container does not exceed 300px */
 }
 
+/* Apply styles for input groups */
 .inputGroup {
   width: 100%;
   margin-bottom: 10px;
   box-sizing: border-box;
-  
 }
 
+/* Apply styles for login and register button container */
 .loginRegister {
   display: flex;
   gap: 2px;
 }
 
-.loginRegister button {
+.loginRegister .button {
   flex: 1; 
-  padding: 0.5rem 2rem 0.75rem; 
   margin: 0; 
-  
 }
 
+/* Apply styles for title */
+.title {
+  margin-top: 10rem;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+}
+
+/* Apply styles for login wrapper */
+.loginWrapper {
+  max-width: 600px;
+  margin: 0 auto; /* Center the wrapper */
+}
+
+/* Apply styles for login input box */
+.loginInputBox {
+  height: 2.5rem;
+}
+
+/* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
   span.psw {
     display: block;
@@ -59,14 +84,4 @@ label {
   .cancelbtn {
     width: 100%;
   }
-}
-
-.title {
-  margin-top: 10rem;
-  text-align: center;
-  font-family: Helvetica, sans-serif;
-}
-
-.login-wrapper {
-  max-width: 400px;
 }

@@ -25,6 +25,13 @@
     padding: 10px 20px;
     font-size: 16px;
     margin-top: 10px;
+    background-color: #4e5e80;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%; 
+    box-sizing: border-box; 
+    padding: 14px 20px;
 }
 
 .vinDetails {
@@ -168,10 +175,12 @@
 .formLabels {
     padding-right: 1rem;
     flex: 1;
+    text-align: right;
 }
 
 .formInputBox {
     width: 100%;
     max-width: 100%;
-    flex: 8;
+    height: 2.5rem;
+    flex: 5;
 }

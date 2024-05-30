@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
 import NavigationBar from './NavigationBar';
 
-
-
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -31,35 +29,36 @@ const Login = () => {
     return (
         <>
          <NavigationBar/>
-        <div className="login-wrapper">
+        <div className={styles.loginWrapper}>
             <h1 className={styles.title}>Login</h1>
-            <form onSubmit={handleSubmit} className="login-form">
+            <form onSubmit={handleSubmit} className={styles.loginForm}>
                 <div className={styles.container}>
                     <div className={styles.inputGroup}>
-                        <label>Username</label>
+                        <label className={styles.label}>Username</label>
                         <input
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
+                            className={styles.input}
                         />
                     </div>
                     <div className={styles.inputGroup}>
-                        <label>Password</label>
+                        <label className={styles.label}>Password</label>
                         <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            className={styles.input}
                         />
                     </div>
-                    <div className={styles.loginRegister} id='login'>
-                        <button type="submit">Login</button>
-                        <button type="button" onClick={handleRegister}>Register</button>
+                    <div className={styles.loginRegister}>
+                        <button type="submit" className={styles.button}>Login</button>
+                        <button type="button" onClick={handleRegister} className={styles.button}>Register</button>
                     </div>
                 </div>
             </form>
         </div>
         </>
-       
     );
 };
 

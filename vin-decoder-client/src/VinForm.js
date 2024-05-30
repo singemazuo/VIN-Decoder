@@ -63,7 +63,7 @@ const VinForm = () => {
             });
             setResult(null);
             setLogoUrl('');
-            setShowForm(true); // Show form when VIN is empty
+            setShowForm(true); 
             return;
         }
 
@@ -299,7 +299,7 @@ const VinForm = () => {
                             <input
                                 type="text"
                                 value={fields.StockNumber}
-                                onChange={(e) => handleFieldChange('StockNumber', e.target.value)}
+                                onChange={(e) => handleFieldChange('StockNumber', e.target.value)}  
                                 className={styles.formInputBox}
                             />
                         </div>
