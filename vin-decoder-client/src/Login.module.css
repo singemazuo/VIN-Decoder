@@ -34,9 +34,11 @@
 /* Apply styles for the container */
 .container {
   text-align: center;
-  margin: 0 auto; 
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  margin: 0 auto;
   box-sizing: border-box;
-  max-width: 300px; /* Ensure container does not exceed 300px */
 }
 
 /* Apply styles for input groups */
@@ -66,7 +68,6 @@
 
 /* Apply styles for login wrapper */
 .loginWrapper {
-  max-width: 600px;
   margin: 0 auto; /* Center the wrapper */
 }
 
@@ -74,6 +75,27 @@
 .loginInputBox {
   height: 2.5rem;
 }
+
+
+@media screen and (max-width: 1200px) {
+
+  .container {
+    width: 40%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 900px) {
+ 
+  .container {
+
+    width: 55%;
+    margin: 0 auto;
+
+  }
+}
+
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
@@ -83,5 +105,13 @@
   }
   .cancelbtn {
     width: 100%;
+  }
+  .container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 0 auto;
+    box-sizing: border-box;
   }
 }
