@@ -1,7 +1,8 @@
+// HomePage.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './HomePage.module.css';
-import NavigationBar from './NavigationBar';
+import Sidebar from './Sidebar';
 import CarMakeDropdown from './CarMakeDropdown';
 import YearDropdown from './YearDropdown';
 import { useNavigate } from 'react-router-dom';
@@ -45,8 +46,8 @@ const HomePage = () => {
 
     return (
         <div className={styles.container}>
-            <NavigationBar />
-            <div className={styles.homePage}>
+            <Sidebar />
+            <div className={styles.mainContent}>
                 <h1>Search Vehicles</h1>
                 <form onSubmit={handleSearch} className={styles.searchForm}>
                     <div className={styles.searchContainer}>
@@ -77,8 +78,8 @@ const HomePage = () => {
                             <p><strong>Other Restraint Info:</strong> {vehicle.other_restraint_info}</p>
                             <p><strong>Plant Information:</strong> {vehicle.plant_info}</p>
                             <div className={styles.editDeleteButtons}>
-                            <button onClick={() => handleDelete(vehicle.id)} className={styles.button6}>Delete</button>
-                            <button onClick={() => handleEdit(vehicle.id)} className={styles.button4}>Edit</button>
+                                <button onClick={() => handleDelete(vehicle.id)} className={styles.button6}>Delete</button>
+                                <button onClick={() => handleEdit(vehicle.id)} className={styles.button4}>Edit</button>
                             </div>
                         </div>
                     ))}

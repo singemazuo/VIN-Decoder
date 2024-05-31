@@ -8,7 +8,7 @@
 }
 
 .button {
-  background-color: #4e5e80;
+  background-color:#2e3b55;
   color: white;
   border: none;
   cursor: pointer;
@@ -32,7 +32,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  width: 25%;
+  width: 35%;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -60,7 +60,7 @@
 }
 
 .loginWrapper {
-  margin: 0 auto; 
+  margin: 0 auto 0 240px; 
 }
 
 .loginInputBox {
@@ -71,7 +71,7 @@
 @media screen and (max-width: 1200px) {
 
   .container {
-    width: 40%;
+    width: 50%;
     margin: 0 auto;
     box-sizing: border-box;
   }

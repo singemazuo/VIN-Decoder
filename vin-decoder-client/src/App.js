@@ -18,6 +18,7 @@ const App = () => {
                 <div className="App">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
+                        
                         <Route path="/vin-form" element={<VinForm />} />
                         <Route path='/edit-form' element={<EditForm/>}/>
                         <Route path="/register" element={<Register/>}/>

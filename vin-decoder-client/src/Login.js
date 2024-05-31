@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
-import NavigationBar from './NavigationBar';
+import Sidebar from './Sidebar';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -26,7 +26,7 @@ const Login = () => {
 
     return (
         <>
-         <NavigationBar/>
+         <Sidebar/>
         <div className={styles.loginWrapper}>
             <h1 className={styles.title}>Login</h1>
             <form onSubmit={handleSubmit} className={styles.loginForm}>
