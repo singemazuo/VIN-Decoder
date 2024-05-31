@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './HomePage.module.css';
 import Sidebar from './Sidebar';
+import NavigationBar from './NavigationBar';
 import CarMakeDropdown from './CarMakeDropdown';
 import YearDropdown from './YearDropdown';
 import { useNavigate } from 'react-router-dom';
@@ -47,6 +48,7 @@ const HomePage = () => {
     return (
         <div className={styles.container}>
             <Sidebar />
+            <NavigationBar/>
             <div className={styles.mainContent}>
                 <h1>Search Vehicles</h1>
                 <form onSubmit={handleSearch} className={styles.searchForm}>

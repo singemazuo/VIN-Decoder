@@ -18,7 +18,7 @@ const Sidebar = () => {
                     </li>
 
                     <li>
-                        <NavLink to="/products" activeClassName={styles.active}>
+                        <NavLink to="/inventory" activeClassName={styles.active}>
                             <span className={styles.icon}>🛍️</span> Inventory
                         </NavLink>
                     </li>
