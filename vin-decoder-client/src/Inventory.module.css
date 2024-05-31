@@ -2,23 +2,75 @@
     display: flex;
     margin: 0;
     padding: 0;
+    position: relative;
 }
 
 .mainContent {
     flex-grow: 1;
     display: flex;
-    justify-content: flex-end;
     flex-direction: column;
-    z-index: -1;
+    z-index: 1;
+    position: relative;
 }
 
 .content {
     flex-grow: 1;
+    position: relative;
 }
 
-.addSearchSection{
+.addSearchSection {
     display: flex;
     margin-left: 235px;
     justify-content: space-evenly;
 }
 
+.addSection {
+    flex: 1;
+}
+
+.searchSection {
+    flex: 3;
+}
+
+.buttonAdd {
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 2px solid rgb(110, 109, 136);
+    border-radius: 3rem;
+    box-sizing: border-box;
+    color: rgb(93, 92, 116);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 50px 0 0;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.buttonAdd:hover {
+    background-color: rgb(93, 92, 116);
+    color: white;
+    opacity: 80%;
+}
+
+.addIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+.addIcon:hover{
+    fill:white;
+}

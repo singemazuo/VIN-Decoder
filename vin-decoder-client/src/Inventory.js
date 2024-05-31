@@ -49,15 +49,20 @@ const Inventory = () => {
 
   return (
     <div className={styles.container}>
-      <Sidebar />
       <div className={styles.mainContent}>
         <NavigationBar />
+
         <div className={styles.content}>
+        <Sidebar />
+
           <div className={styles.addSearchSection}>
             <div className={styles.addSection}>
-                <button ></button>
+              <button className={styles.buttonAdd}>
+                <img src="/add.svg" alt="Add" className={styles.addIcon} />
+                Add Vehicle
+              </button>
             </div>
-            <div className={styles.searchSections}>
+            <div className={styles.searchSection}>
               <h1>Search Vehicles</h1>
               <form onSubmit={handleSearch} className={styles.searchForm}>
                 <div className={styles.searchContainer}>
