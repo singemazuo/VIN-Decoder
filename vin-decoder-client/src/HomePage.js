@@ -37,6 +37,10 @@ const HomePage = () => {
         }
     };
 
+    const handleEdit = (id) =>{
+
+    }
+
     return (
         <div className={styles.container}>
             <NavigationBar />
@@ -47,13 +51,12 @@ const HomePage = () => {
                         <CarMakeDropdown make={make} setMake={setMake} model={model} setModel={setModel} className={styles.makeModelDropdown} />
                         <YearDropdown year={year} setYear={setYear} className={styles.yearDropdown} />
                     </div>
-                    <button type="submit" className={styles.button6}>{buttonText}</button>
+                    <button type="submit" className={styles.button7}>{buttonText}</button>
                 </form>
                 <div className={styles.vehicleList}>
                     {vehicles.map((vehicle) => (
                         <div key={vehicle.id} className={styles.vehicleItem}>
-                            <button onClick={() => handleDelete(vehicle.id)} className={styles.button6}>Delete</button>
-                            <h2>{vehicle.make} {vehicle.model} - {vehicle.year}</h2>
+                            <h2>{vehicle.year} {vehicle.make} {vehicle.model}</h2>
                             {vehicle.photo_url && (
                                 <img src={`http://localhost:5000${vehicle.photo_url}`} alt={`${vehicle.make} ${vehicle.model}`} className={styles.vehiclePhoto} />
                             )}
@@ -71,6 +74,10 @@ const HomePage = () => {
                             <p><strong>Airbags:</strong> {vehicle.front_airbags}, {vehicle.knee_airbags}, {vehicle.side_airbags}, {vehicle.curtain_airbags}, {vehicle.seat_cushion_airbags}</p>
                             <p><strong>Other Restraint Info:</strong> {vehicle.other_restraint_info}</p>
                             <p><strong>Plant Information:</strong> {vehicle.plant_info}</p>
+                            <div className={styles.editDeleteButtons}>
+                            <button onClick={() => handleDelete(vehicle.id)} className={styles.button6}>Delete</button>
+                            <button onClick={() => handleEdit(vehicle.id)} className={styles.button4}>Edit</button>
+                            </div>
                         </div>
                     ))}
                 </div>

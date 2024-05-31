@@ -97,7 +97,7 @@ const VinForm = () => {
                 OtherRestraintInfo: response.data.Airbags?.OtherRestraintInfo || '',
                 PlantInfo: response.data.PlantInfo || ''
             });
-            setShowForm(true); // Show form when VIN is decoded successfully
+            setShowForm(true); 
         } catch (error) {
             console.error('Error decoding VIN:', error);
             setResult({ error: 'Error decoding VIN' });
@@ -168,7 +168,6 @@ const VinForm = () => {
         console.error('Error submitting vehicle data:', error);
     }
 };
-
 
     const handleEnterManually = () => {
         setShowForm(true);
