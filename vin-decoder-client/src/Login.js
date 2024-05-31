@@ -13,7 +13,6 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const email = username;
             await login(username, password);
             navigate('/account');
         } catch (error) {
@@ -21,7 +20,6 @@ const Login = () => {
         }
     };
     
-
     const handleRegister = () => {
         navigate('/register');
     };

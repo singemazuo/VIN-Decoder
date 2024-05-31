@@ -1,6 +1,43 @@
 -- Table: public.photos
 
 -- DROP TABLE IF EXISTS public.photos;
+-- DROP TABLE IF EXISTS public.vehicles;
+-- DROP TABLE IF EXISTS public.session;
+-- DROP TABLE IF EXISTS public.users;
+
+
+CREATE TABLE IF NOT EXISTS public.vehicles
+(
+    id integer NOT NULL DEFAULT nextval('vehicles_id_seq'::regclass),
+    vin character varying(100) COLLATE pg_catalog."default" NOT NULL UNIQUE,
+    year integer,
+    make character varying(100) COLLATE pg_catalog."default",
+    model character varying(100) COLLATE pg_catalog."default",
+    transmission character varying(100) COLLATE pg_catalog."default",
+    weight character varying(100) COLLATE pg_catalog."default",
+    exterior_color character varying(100) COLLATE pg_catalog."default",
+    interior_color character varying(100) COLLATE pg_catalog."default",
+    engine_brake character varying(100) COLLATE pg_catalog."default",
+    engine character varying(100) COLLATE pg_catalog."default",
+    doors integer,
+    stock_number character varying(100) COLLATE pg_catalog."default",
+    fuel character varying(100) COLLATE pg_catalog."default",
+    title character varying(100) COLLATE pg_catalog."default",
+    front_airbags character varying(150) COLLATE pg_catalog."default",
+    knee_airbags character varying(150) COLLATE pg_catalog."default",
+    side_airbags character varying(150) COLLATE pg_catalog."default",
+    curtain_airbags character varying(255) COLLATE pg_catalog."default",
+    seat_cushion_airbags character varying(255) COLLATE pg_catalog."default",
+    other_restraint_info character varying(255) COLLATE pg_catalog."default",
+    plant_info character varying(100) COLLATE pg_catalog."default",
+    CONSTRAINT vehicles_pkey PRIMARY KEY (id),
+    CONSTRAINT vehicles_vin_key UNIQUE (vin)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.vehicles
+    OWNER to postgres;
 
 CREATE TABLE IF NOT EXISTS public.photos
 (
@@ -48,35 +85,3 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public.users
     OWNER to postgres;
 
-CREATE TABLE IF NOT EXISTS public.vehicles
-(
-    id integer NOT NULL DEFAULT nextval('vehicles_id_seq'::regclass),
-    vin character varying(100) COLLATE pg_catalog."default" NOT NULL,
-    year integer,
-    make character varying(100) COLLATE pg_catalog."default",
-    model character varying(100) COLLATE pg_catalog."default",
-    transmission character varying(100) COLLATE pg_catalog."default",
-    weight character varying(100) COLLATE pg_catalog."default",
-    exterior_color character varying(100) COLLATE pg_catalog."default",
-    interior_color character varying(100) COLLATE pg_catalog."default",
-    engine_brake character varying(100) COLLATE pg_catalog."default",
-    engine character varying(100) COLLATE pg_catalog."default",
-    doors integer,
-    stock_number character varying(100) COLLATE pg_catalog."default",
-    fuel character varying(100) COLLATE pg_catalog."default",
-    title character varying(100) COLLATE pg_catalog."default",
-    front_airbags character varying(100) COLLATE pg_catalog."default",
-    knee_airbags character varying(100) COLLATE pg_catalog."default",
-    side_airbags character varying(100) COLLATE pg_catalog."default",
-    curtain_airbags character varying(100) COLLATE pg_catalog."default",
-    seat_cushion_airbags character varying(100) COLLATE pg_catalog."default",
-    other_restraint_info character varying(255) COLLATE pg_catalog."default",
-    plant_info character varying(100) COLLATE pg_catalog."default",
-    CONSTRAINT vehicles_pkey PRIMARY KEY (id),
-    CONSTRAINT vehicles_vin_key UNIQUE (vin)
-)
-
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public.vehicles
-    OWNER to postgres;

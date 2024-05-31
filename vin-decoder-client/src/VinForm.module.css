@@ -34,6 +34,11 @@
     padding: 14px 20px;
 }
 
+.vinSubmitButton:hover{
+    opacity: 70%;
+
+}
+
 .vinDetails {
     list-style-type: none;
     padding: 0;
@@ -99,6 +104,7 @@
     touch-action: manipulation;
     vertical-align: baseline;
     width: auto;
+    margin-bottom: 4rem;
 }
 
 .button6:hover,
@@ -156,7 +162,9 @@
 .button5:hover,
 .button5:focus {
     border-color: rgb(65, 86, 206);
-    color: rgb(50, 73, 204);
+    color: rgb(255, 255, 255);
+    opacity: 70%;
+    background-color: #4e5e80;
 }
 
 .button5:hover {

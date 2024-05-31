@@ -31,6 +31,7 @@ const pool = new Pool({
     port: process.env.DB_PORT,
 });
 
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, process.env.PHOTO_STORAGE_PATH);
@@ -62,11 +63,23 @@ app.use(session({
         pool: pool,
         tableName: 'session'
     }),
-    secret: 'your_secret_key',
+    secret: '05ea60419cf827f777bfdfacd84ab4539dcfaa5ed374ccbb02ee18069fdd385f2e59a93f78b9491bb7dc3d7112365d98f9b9100578682e1419e54e1b04ae1b37',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false, maxAge: 30 * 24 * 60 * 60 * 1000 }
+    cookie: { 
+        secure: false, 
+        httpOnly: true,
+        maxAge: 30 * 24 * 60 * 60 * 1000 
+    }
 }));
+
+app.get('/protected', (req, res) => {
+    if (!req.session.userId) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
+    res.json({ isAuthenticated: true, firstName: req.session.firstName });
+});
+
 
 app.post('/decode_vin_batch', async (req, res) => {
     const vins = req.body.vins;
@@ -328,10 +341,6 @@ const authMiddleware = (req, res, next) => {
         res.status(401).send('Unauthorized');
     }
 };
-
-app.get('/protected', authMiddleware, (req, res) => {
-    res.send('This is a protected route');
-});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

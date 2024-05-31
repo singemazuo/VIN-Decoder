@@ -4,6 +4,7 @@ import styles from './HomePage.module.css';
 import NavigationBar from './NavigationBar';
 import CarMakeDropdown from './CarMakeDropdown';
 import YearDropdown from './YearDropdown';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
     const [make, setMake] = useState('');
@@ -11,6 +12,7 @@ const HomePage = () => {
     const [year, setYear] = useState('');
     const [vehicles, setVehicles] = useState([]);
     const [buttonText, setButtonText] = useState('Search All');
+    const navigate = useNavigate();
 
     const handleSearch = async (e) => {
         e.preventDefault();
@@ -37,9 +39,9 @@ const HomePage = () => {
         }
     };
 
-    const handleEdit = (id) =>{
-
-    }
+    const handleEdit = (id) => {
+        navigate(`/vin-form?id=${id}`);
+    };
 
     return (
         <div className={styles.container}>

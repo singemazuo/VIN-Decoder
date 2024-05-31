@@ -41,6 +41,10 @@ form {
     box-sizing: border-box; 
 }
 
+.button:hover{
+    opacity: 50%;
+}
+
 .label{
     text-align: left;
     font-weight: 600;

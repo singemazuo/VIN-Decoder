@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
     const login = async (email, password) => {
         try {
             const response = await axios.post('http://localhost:5000/login', { email, password }, { withCredentials: true });
-            console.log('Login response:', response.data);  // Check the response data
+            console.log('Login response:', response.data);  
             if (response.data.isAuthenticated) {
                 setIsAuthenticated(true);
                 setUserEmail(email);
