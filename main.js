@@ -46,24 +46,13 @@ const storage = multer.diskStorage({
 // Update multer upload initialization
 const upload = multer({ storage: storage });
 
-app.post('/decode_vin', async (req, res) => {
-    const vin = req.body.vin;
-    try {
-        const result = await decodeVin(vin);
-        console.log('VIN Decode Result:', result);  
-        res.json(result);
-    } catch (error) {
-        console.error('Error decoding VIN:', error);  
-        res.status(500).json({ error: error.toString() });
-    }
-});
 
 app.use(session({
     store: new pgSession({
         pool: pool,
         tableName: 'session'
     }),
-    secret: '05ea60419cf827f777bfdfacd84ab4539dcfaa5ed374ccbb02ee18069fdd385f2e59a93f78b9491bb7dc3d7112365d98f9b9100578682e1419e54e1b04ae1b37',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: { 
@@ -81,6 +70,18 @@ app.get('/protected', (req, res) => {
 });
 
 
+app.post('/decode_vin', async (req, res) => {
+    const vin = req.body.vin;
+    try {
+        const result = await decodeVin(vin);
+        console.log('VIN Decode Result:', result);  
+        res.json(result);
+    } catch (error) {
+        console.error('Error decoding VIN:', error);  
+        res.status(500).json({ error: error.toString() });
+    }
+});
+
 app.post('/decode_vin_batch', async (req, res) => {
     const vins = req.body.vins;
     try {
@@ -92,7 +93,6 @@ app.post('/decode_vin_batch', async (req, res) => {
         res.status(500).json({ error: error.toString() });
     }
 });
-
 
 const decodeVin = async (vin) => {
     const url = `https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVin/${vin}?format=json`;
@@ -213,6 +213,67 @@ app.get('/vehicles', async (req, res) => {
     }
 });
 
+app.get('/vehicle/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await pool.query(`
+            SELECT v.*, p.photo_url
+            FROM vehicles v
+            LEFT JOIN photos p ON v.id = p.vehicle_id
+            WHERE v.id = $1
+        `, [id]);
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error('Error fetching vehicle:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.put('/vehicle/:id', upload.array('photos'), async (req, res) => {
+    const { id } = req.params;
+    const {
+        vin, year, make, model, transmission, weight,
+        exteriorColor, interiorColor, engineBrake, engine,
+        doors, stockNumber, fuel, title, frontAirbags, kneeAirbags,
+        sideAirbags, curtainAirbags, seatCushionAirbags, otherRestraintInfo, plantInfo
+    } = req.body;
+
+    try {
+        const client = await pool.connect();
+        try {
+            await client.query('BEGIN');
+            const vehicleQueryText = `
+                UPDATE vehicles SET
+                    vin = $1, year = $2, make = $3, model = $4, transmission = $5, weight = $6, exterior_color = $7, interior_color = $8, engine_brake = $9, engine = $10, doors = $11, stock_number = $12, fuel = $13, title = $14, front_airbags = $15, knee_airbags = $16, side_airbags = $17, curtain_airbags = $18, seat_cushion_airbags = $19, other_restraint_info = $20, plant_info = $21
+                WHERE id = $22`;
+            const vehicleValues = [vin, year, make, model, transmission, weight, exteriorColor, interiorColor, engineBrake, engine, doors, stockNumber, fuel, title, frontAirbags, kneeAirbags, sideAirbags, curtainAirbags, seatCushionAirbags, otherRestraintInfo, plantInfo, id];
+            await client.query(vehicleQueryText, vehicleValues);
+
+            await client.query('DELETE FROM photos WHERE vehicle_id = $1', [id]);
+            const photoInsertPromises = req.files.map(file => {
+                const photoQueryText = 'INSERT INTO photos(vehicle_id, photo_url) VALUES($1, $2)';
+                const photoValues = [id, `/uploads/${file.filename}`];
+                return client.query(photoQueryText, photoValues);
+            });
+
+            await Promise.all(photoInsertPromises);
+
+            await client.query('COMMIT');
+            res.json({ message: 'Vehicle data and photos updated successfully' });
+        } catch (error) {
+            await client.query('ROLLBACK');
+            console.error('Error updating vehicle data:', error);
+            res.status(500).json({ error: error.message });
+        } finally {
+            client.release();
+        }
+    } catch (error) {
+        console.error('Error connecting to database:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
 // Endpoint to search vehicles
 app.get('/search_vehicles', async (req, res) => {
     const { make, model, year } = req.query;
@@ -323,12 +384,6 @@ app.post('/logout', (req, res) => {
     });
 });
 
-app.get('/protected', (req, res) => {
-    if (!req.session.userId) {
-        return res.status(401).json({ error: 'Unauthorized' });
-    }
-    res.json({ message: 'This is a protected route', firstName: req.session.firstName });
-});
 
 // Middleware to protect routes
 const authMiddleware = (req, res, next) => {

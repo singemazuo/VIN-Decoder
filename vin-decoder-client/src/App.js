@@ -4,6 +4,7 @@ import HomePage from './HomePage';
 import VinForm from './VinForm';
 import Account from './Account';
 import Login from './Login';
+import EditForm from './EditForm';
 import PrivateRoute from './PrivateRoute';
 import { AuthProvider } from './AuthContext';
 import Register from './Register';
@@ -18,6 +19,7 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/vin-form" element={<VinForm />} />
+                        <Route path='/edit-form' element={<EditForm/>}/>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/account" element={
                             <PrivateRoute>

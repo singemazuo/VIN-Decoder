@@ -40,8 +40,8 @@ const HomePage = () => {
     };
 
     const handleEdit = (id) => {
-        navigate(`/vin-form?id=${id}`);
-    };
+        navigate(`/edit-form?id=${id}`);
+    };    
 
     return (
         <div className={styles.container}>
