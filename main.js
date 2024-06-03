@@ -342,16 +342,17 @@ app.delete('/vehicle/:id', async (req, res) => {
     }
 });
 
+
 //////////////////////
 ///  Add Customer  ///
 //////////////////////
 
 app.post('/add-customer', async (req, res) => {
-    const { firstname, lastname, email, address, group } = req.body;
+    const { firstname, lastname, email, address, phone,group } = req.body;
     try {
         const result = await pool.query(
-            'INSERT INTO customers (firstname, lastname, email, address, "group") VALUES ($1, $2, $3, $4, $5) RETURNING id',
-            [firstname, lastname, email, address, group]
+            'INSERT INTO customers (firstname, lastname, email, address, phone, "group") VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
+            [firstname, lastname, email, address, phone,group]
         );
         res.status(201).json({ customerId: result.rows[0].id });
     } catch (error) {
@@ -359,6 +360,40 @@ app.post('/add-customer', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+//////////////////////
+///  Get Customer  ///
+//////////////////////
+
+app.get('/customers', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM customers');
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error fetching customers:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+/////////////////////////
+///  Delete Customer  ///
+/////////////////////////
+
+app.delete('/customer/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        await pool.query('DELETE FROM customers WHERE id = $1', [id]);
+        res.status(200).json({ message: 'Customer deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting customer:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+///////////////////////
+///  Edit Customer  ///
+///////////////////////
+
 
 ////////////////////////
 ///  Login / Logout  ///

@@ -80,11 +80,11 @@
 }
 
 .customerTable tr:nth-of-type(even) {
-    background-color: #9b9898;
+    background-color: rgba(167, 147, 147, 0.288);
 }
 
 .customerTable tr:hover {
-    background-color: #f1f1f1;
+    background-color: #d8ddd6f3;
 }
 
 .customerTable td button {

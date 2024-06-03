@@ -31,7 +31,7 @@
     width: 100%; 
 }
 
-.btnSubmitCustomer{
+.btnSubmitCustomer {
     width: 195px;
     background-color: #394864;
     color: whitesmoke;
@@ -39,18 +39,18 @@
     height: 33px;
 }
 
-.btnClearCustomer{
+.btnClearCustomer {
     width: 195px;
     background-color: #394864;
     color: whitesmoke;
     border: none;
 }
 
-.btnClearCustomer:hover, .btnSubmitCustomer:hover{
+.btnClearCustomer:hover, .btnSubmitCustomer:hover {
     opacity: 70%;
 }
 
-.frmButtons{
+.frmButtons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -58,3 +58,6 @@
     width: 100%;
 }
 
+.tdTotalOrders {
+    text-align: center;
+}

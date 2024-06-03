@@ -91,5 +91,7 @@ CREATE TABLE IF NOT EXISTS public.customers (
     lastname VARCHAR(40) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     address VARCHAR(255),
+	phone VARCHAR(20) NOT NULL,
     "group" VARCHAR(100)
 );
+

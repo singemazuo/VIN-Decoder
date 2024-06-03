@@ -3,6 +3,7 @@ import axios from 'axios';
 import styles from './AddCustomer.module.css';
 import Sidebar from './Sidebar';
 import NavigationBar from './NavigationBar';
+import { useNavigate } from "react-router-dom";
 
 const AddCustomer = () => {
     const [firstname, setFirstname] = useState('');
@@ -10,6 +11,9 @@ const AddCustomer = () => {
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
     const [group, setGroup] = useState('');
+    const [phone, setPhone] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,8 +23,10 @@ const AddCustomer = () => {
                 lastname,
                 email,
                 address,
+                phone,
                 group
             });
+            navigate('/customers')
             console.log('Customer added:', response.data);
         } catch (error) {
             console.error('Error adding customer:', error);
@@ -33,6 +39,7 @@ const AddCustomer = () => {
         setLastname('');
         setEmail('');
         setAddress('');
+        setPhone('');
         setGroup('');
     };
 
@@ -56,6 +63,8 @@ const AddCustomer = () => {
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     <label className={styles.lblCustomer}>Address</label>
                     <input value={address} onChange={(e) => setAddress(e.target.value)} />
+                    <label className={styles.lblCustomer}>Phone</label>
+                    <input value={phone} onChange={(e) => setPhone(e.target.value)} />
                     <label className={styles.lblCustomer}>Group</label>
                     <input value={group} onChange={(e) => setGroup(e.target.value)} />
                     <div className={styles.frmButtons}>
