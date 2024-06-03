@@ -394,6 +394,21 @@ app.delete('/customer/:id', async (req, res) => {
 ///  Edit Customer  ///
 ///////////////////////
 
+app.put('/customer/:id', async (req, res) => {
+    const { id } = req.params;
+    const { firstname, lastname, email, address, phone, group } = req.body;
+    try {
+        await pool.query(
+            'UPDATE customers SET firstname = $1, lastname = $2, email = $3, address = $4, phone = $5, "group" = $6 WHERE id = $7',
+            [firstname, lastname, email, address, phone, group, id]
+        );
+        res.status(200).json({ message: 'Customer updated successfully' });
+    } catch (error) {
+        console.error('Error updating customer:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 ////////////////////////
 ///  Login / Logout  ///
