@@ -1,19 +1,112 @@
+/* Sidebar.module.css */
+.sidebar {
+  width: 235px;
+  height: 100vh;
+  background-color: #2e3b55;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1001; /* Ensure Sidebar is on top */
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.nav {
+  flex: 1;
+}
+
+.nav ul {
+  list-style: none;
+  padding: 1.5rem 0 0 10px;
+}
+
+.nav ul li {
+  margin-bottom: 20px;
+}
+
+.nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.nav ul li a:hover {
+  color: #acaab9;
+  opacity: 80%;
+}
+
+.nav ul li a .icon {
+  margin-right: 10px;
+}
+
+.nav ul li a.active {
+  background-color: #1e2a45;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* NavigationBar.module.css */
+.customNav {
+  background-color: #f8f9fa; /* Set your desired background color */
+  position: fixed;
+  top: 0;
+  left: 235px; /* Adjust to avoid overlap with the sidebar */
+  width: calc(100% - 235px); /* Adjust to avoid overlap with the sidebar */
+  z-index: 1000; /* Ensure NavigationBar is below Sidebar */
+}
+
+.userImage {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.accountLink:hover {
+  opacity: 60%;
+}
+
+.accountLink {
+  margin-right: 0.5rem;
+}
+
+/* Login.module.css */
+.pageContainer {
+  display: flex;
+}
+
+.contentContainer {
+  flex-grow: 1;
+  margin-left: 235px; /* Adjust to avoid overlap with the sidebar */
+  position: relative;
+}
+
 .input {
   width: 100%;
   display: inline-block;
   border: 1px solid #ccc;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   padding: 12px 20px;
   margin: 8px 0;
 }
 
 .button {
-  background-color:#2e3b55;
+  background-color: #2e3b55;
   color: white;
   border: none;
   cursor: pointer;
-  width: 100%; 
-  box-sizing: border-box; 
+  width: 100%;
+  box-sizing: border-box;
   padding: 14px 20px;
 }
 
@@ -25,7 +118,7 @@
   text-align: left;
   font-size: 15px;
   font-weight: 650;
-  display: block; 
+  display: block;
 }
 
 .container {
@@ -49,8 +142,8 @@
 }
 
 .loginRegister .button {
-  flex: 1; 
-  margin: 0; 
+  flex: 1;
+  margin: 0;
 }
 
 .title {
@@ -60,48 +153,43 @@
 }
 
 .loginWrapper {
-  margin: 0 auto 0 240px; 
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .loginInputBox {
   height: 2.5rem;
 }
 
-
 @media screen and (max-width: 1200px) {
-
   .container {
-    width: 50%;
-    margin: 0 auto;
-    box-sizing: border-box;
+      width: 50%;
+      margin: 0 auto;
+      box-sizing: border-box;
   }
 }
 
 @media screen and (max-width: 900px) {
- 
   .container {
-
-    width: 55%;
-    margin: 0 auto;
-
+      width: 55%;
+      margin: 0 auto;
   }
 }
 
-
 @media screen and (max-width: 300px) {
   span.psw {
-    display: block;
-    float: none;
+      display: block;
+      float: none;
   }
   .cancelbtn {
-    width: 100%;
+      width: 100%;
   }
   .container {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    width: 60%;
-    margin: 0 auto;
-    box-sizing: border-box;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      width: 60%;
+      margin: 0 auto;
+      box-sizing: border-box;
   }
 }

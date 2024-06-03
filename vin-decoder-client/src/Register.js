@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from "./Register.module.css";
+import Sidebar from "./Sidebar";
 import NavigationBar from "./NavigationBar";
+import { useNavigate } from "react-router-dom";
 
 
 const Register = () => {
@@ -10,6 +12,8 @@ const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -17,9 +21,9 @@ const Register = () => {
         email,
         password,
         firstName,
-        lastName
+        lastName,
       });
-      // Redirect to login page or show success message
+      navigate('/login');
     } catch (error) {
       console.error("Error registering user:", error);
     }
@@ -27,11 +31,16 @@ const Register = () => {
 
   return (
     <>
-      <NavigationBar />
+      <div className={styles.sideBar}>
+        <Sidebar />
+      </div>
+      <div className={styles.navBar}>
+        <NavigationBar />
+      </div>
       <div className={styles.registerContainer}>
         <h1>Register</h1>
-        <form onSubmit={handleSubmit}>
-         <label className={styles.label}>Email</label>
+        <form onSubmit={handleSubmit} className={styles.registerForm}>
+          <label className={styles.label}>Email</label>
           <input
             type="text"
             value={email}
@@ -60,8 +69,21 @@ const Register = () => {
             className={styles.registerInputBox}
           />
           <div className={styles.registerButtons}>
-            <button className={styles.button}>Clear</button>
-            <button className={styles.button}>Submit</button>
+            <button
+              type="button"
+              className={styles.button}
+              onClick={() => {
+                setEmail("");
+                setFirstName("");
+                setLastName("");
+                setPassword("");
+              }}
+            >
+              Clear
+            </button>
+            <button type="submit" className={styles.button}>
+              Submit
+            </button>
           </div>
         </form>
       </div>
