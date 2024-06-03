@@ -34,9 +34,8 @@ const Customer = () => {
                                 <th><input type='checkbox'/></th>
                                 <th>Customer Name</th>
                                 <th>Email</th>
+                                <th>Address</th>
                                 <th>Group</th>
-                                <th>Status</th>
-                                <th>Approved</th>
                                 <th>Total Orders</th>
                                 <th>Action</th>
                             </tr>
@@ -44,7 +43,6 @@ const Customer = () => {
                         <tbody>
                         <tr>
                                 <td><input type="checkbox" /></td>
-                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
