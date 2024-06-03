@@ -1,0 +1,32 @@
+.sideBar {
+    position: relative;
+    z-index: 100;
+}
+
+.navBar {
+    position: relative;
+    z-index: 10;
+}
+
+.addCustomerPage {
+    margin-left: 235px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 150px;
+    height: 100vh; 
+}
+
+.lblCustomer {
+    text-align: left;
+    font-weight: 600;
+}
+
+.frmAddCustomer {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    max-width: 400px;
+    width: 100%; 
+}

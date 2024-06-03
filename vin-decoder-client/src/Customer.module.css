@@ -8,16 +8,15 @@
     z-index: 10;
 }
 
-.customerPage{
+.customerPage {
     margin-left: 235px;
 }
 
-.customerTop{
+.customerTop {
     display: flex;
-
 }
 
-.btnAddCustomer{
+.btnAddCustomer {
     align-items: center;
     background-color: #FFFFFF;
     border: 2px solid rgb(110, 109, 136);
@@ -45,7 +44,7 @@
     margin-left: 5rem; 
 }
 
-.btnAddCustomer:hover{
+.btnAddCustomer:hover {
     background-color: rgb(93, 92, 116);
     color: white;
     opacity: 80%;
@@ -57,10 +56,8 @@
     margin-right: 8px;
 }
 
-tr{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+.tableContainer {
+    overflow-x: auto;
 }
 
 .customerTable {
@@ -70,6 +67,40 @@ tr{
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-.hr{
+.customerTable th, .customerTable td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.customerTable th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+}
+
+.customerTable tr:nth-of-type(even) {
+    background-color: #9b9898;
+}
+
+.customerTable tr:hover {
+    background-color: #f1f1f1;
+}
+
+.customerTable td button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #b7babd;
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.customerTable td button:hover {
+    background-color: #4567ac;
+}
+
+.hr {
     margin-top: 40px;
 }

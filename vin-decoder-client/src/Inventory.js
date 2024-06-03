@@ -47,6 +47,10 @@ const Inventory = () => {
     navigate(`/edit-form?id=${id}`);
   };
 
+  const handleAddVehicle = () => {
+    navigate('/vin-form');
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.mainContent}>
@@ -57,7 +61,7 @@ const Inventory = () => {
 
           <div className={styles.addSearchSection}>
             <div className={styles.addSection}>
-              <button className={styles.buttonAdd}>
+              <button className={styles.buttonAdd} onClick={handleAddVehicle}>
                 <img src="/add.svg" alt="Add" className={styles.addIcon} />
                 Add Vehicle
               </button>

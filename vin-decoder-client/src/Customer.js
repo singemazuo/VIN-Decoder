@@ -2,8 +2,16 @@ import React from 'react';
 import styles from './Customer.module.css';
 import Sidebar from './Sidebar';
 import NavigationBar from './NavigationBar';
+import { useNavigate } from 'react-router-dom';
+
 
 const Customer = () => {
+    const navigate = useNavigate();
+
+    const handleAddCustomer = () => {
+        navigate('/add-customer');
+    }
+    
     return (
         <>
             <div className={styles.sideBar}>
@@ -14,7 +22,7 @@ const Customer = () => {
             </div>
             <div className={styles.customerPage}>
                 <div className={styles.customerTop}>
-                    <button className={styles.btnAddCustomer}>
+                    <button className={styles.btnAddCustomer}onClick={handleAddCustomer}>
                     <img src="/add.svg" alt="Add" className={styles.addIcon} />
                         Add Customer</button>
                 </div>
@@ -33,6 +41,22 @@ const Customer = () => {
                                 <th>Action</th>
                             </tr>
                         </thead>
+                        <tbody>
+                        <tr>
+                                <td><input type="checkbox" /></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <button>-</button>
+                                    <button>-</button>
+                                    <button>-</button>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>                
                 </div>
             </div>

@@ -9,6 +9,7 @@ import PrivateRoute from './PrivateRoute';
 import { AuthProvider } from './AuthContext';
 import Inventory from './Inventory';
 import Register from './Register';
+import AddCustomer from './AddCustomer';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Customer from './Customer';
@@ -21,6 +22,7 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/inventory" element={<Inventory />} />
+                        <Route path='/add-customer' element={<AddCustomer />}/>
                         <Route path="/customers" element={<Customer/>}/>
                         <Route path="/vin-form" element={<VinForm />} />
                         <Route path='/edit-form' element={<EditForm/>}/>
