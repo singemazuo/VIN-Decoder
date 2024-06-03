@@ -30,10 +30,13 @@ const Customer = () => {
         navigate('/add-customer', { state: { customer } });
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (customer) => {
+        const confirmed = window.confirm(`Are you sure you want to delete customer ${customer.firstname} ${customer.lastname}?`);
+        if (!confirmed) return;
+
         try {
-            await axios.delete(`http://localhost:5000/customer/${id}`);
-            setCustomers(customers.filter(customer => customer.id !== id));
+            await axios.delete(`http://localhost:5000/customer/${customer.id}`);
+            setCustomers(customers.filter(c => c.id !== customer.id));
         } catch (error) {
             console.error('Error deleting customer:', error);
         }
@@ -81,7 +84,7 @@ const Customer = () => {
                                     <td className={styles.tdTotalOrders}>{customer.totalOrders || 0}</td>
                                     <td>
                                         <button onClick={() => handleEdit(customer)}>Edit</button>
-                                        <button onClick={() => handleDelete(customer.id)}>Delete</button>
+                                        <button onClick={() => handleDelete(customer)}>Delete</button>
                                     </td>
                                 </tr>
                             ))}
