@@ -1,0 +1,13 @@
+.sideBar {
+    position: relative;
+    z-index: 1001;
+}
+
+.navBar {
+    position: relative;
+    z-index: 10;
+}
+
+.container{
+    margin-left: 230px;
+}

@@ -159,6 +159,10 @@ const decodeVinBatch = async (vins) => {
     return response.data;
 };
 
+/////////////////////
+///  Add Vehicle  ///
+/////////////////////
+
 app.post('/submit_vehicle', upload.array('photos'), async (req, res) => {
     const {
         vin, year, make, model, transmission, weight,
@@ -202,20 +206,50 @@ app.post('/submit_vehicle', upload.array('photos'), async (req, res) => {
     }
 });
 
-// Endpoint to list all vehicles
-app.get('/vehicles', async (req, res) => {
+
+////////////////////////
+///  Vehicle Search  ///
+////////////////////////
+
+// Endpoint to search vehicles
+app.get('/search_vehicles', async (req, res) => {
+    const { make, model, year } = req.query;
     try {
-        const result = await pool.query(`
+        let query = `
             SELECT v.*, p.photo_url
             FROM vehicles v
-            LEFT JOIN photos p ON v.id = p.vehicle_id
-        `);
+            LEFT JOIN (
+                SELECT DISTINCT ON (vehicle_id) vehicle_id, photo_url
+                FROM photos
+                ORDER BY vehicle_id, id
+            ) p ON v.id = p.vehicle_id
+            WHERE 1=1
+        `;
+
+        const params = [];
+        let paramIndex = 1;
+
+        if (make) {
+            query += ` AND v.make ILIKE $${paramIndex++}`;
+            params.push(`%${make}%`);
+        }
+        if (model) {
+            query += ` AND v.model ILIKE $${paramIndex++}`;
+            params.push(`%${model}%`);
+        }
+        if (year) {
+            query += ` AND v.year = $${paramIndex++}`;
+            params.push(parseInt(year));
+        }
+
+        const result = await pool.query(query, params);
         res.json(result.rows);
     } catch (error) {
-        console.error('Error fetching vehicles:', error);
+        console.error('Error searching vehicles:', error);
         res.status(500).json({ error: error.message });
     }
 });
+
 
 app.get('/vehicle/:id', async (req, res) => {
     const { id } = req.params;
@@ -232,6 +266,25 @@ app.get('/vehicle/:id', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+// Endpoint to list all vehicles
+app.get('/vehicles', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT v.*, p.photo_url
+            FROM vehicles v
+            LEFT JOIN photos p ON v.id = p.vehicle_id
+        `);
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error fetching vehicles:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+////////////////////////
+///  Update Vehicle  ///
+////////////////////////
 
 app.put('/vehicle/:id', upload.array('photos'), async (req, res) => {
     const { id } = req.params;
@@ -277,47 +330,9 @@ app.put('/vehicle/:id', upload.array('photos'), async (req, res) => {
     }
 });
 
-
-// Endpoint to search vehicles
-app.get('/search_vehicles', async (req, res) => {
-    const { make, model, year } = req.query;
-    try {
-        let query = `
-            SELECT v.*, p.photo_url
-            FROM vehicles v
-            LEFT JOIN (
-                SELECT DISTINCT ON (vehicle_id) vehicle_id, photo_url
-                FROM photos
-                ORDER BY vehicle_id, id
-            ) p ON v.id = p.vehicle_id
-            WHERE 1=1
-        `;
-
-        const params = [];
-        let paramIndex = 1;
-
-        if (make) {
-            query += ` AND v.make ILIKE $${paramIndex++}`;
-            params.push(`%${make}%`);
-        }
-        if (model) {
-            query += ` AND v.model ILIKE $${paramIndex++}`;
-            params.push(`%${model}%`);
-        }
-        if (year) {
-            query += ` AND v.year = $${paramIndex++}`;
-            params.push(parseInt(year));
-        }
-
-        const result = await pool.query(query, params);
-        res.json(result.rows);
-    } catch (error) {
-        console.error('Error searching vehicles:', error);
-        res.status(500).json({ error: error.message });
-    }
-});
-
-
+////////////////////////
+///  Delete Vehicle  ///
+////////////////////////
 
 app.delete('/vehicle/:id', async (req, res) => {
     const { id } = req.params;
@@ -341,7 +356,6 @@ app.delete('/vehicle/:id', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
 
 //////////////////////
 ///  Add Customer  ///

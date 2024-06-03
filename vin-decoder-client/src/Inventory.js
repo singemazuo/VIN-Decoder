@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar";
 import NavigationBar from "./NavigationBar";
 import CarMakeDropdown from "./CarMakeDropdown";
 import YearDropdown from "./YearDropdown";
+import PriceFilter from "./PriceFilter"; // Import the new PriceFilter component
 import { useNavigate } from "react-router-dom";
 import styles from "./Inventory.module.css";
 
@@ -11,6 +12,8 @@ const Inventory = () => {
   const [make, setMake] = useState("");
   const [model, setModel] = useState("");
   const [year, setYear] = useState("");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
   const [vehicles, setVehicles] = useState([]);
   const [buttonText, setButtonText] = useState("Search All");
   const navigate = useNavigate();
@@ -18,16 +21,15 @@ const Inventory = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(
-        "http://localhost:5000/search_vehicles",
-        {
-          params: {
-            make: make || null,
-            model: model || null,
-            year: year || null,
-          },
-        }
-      );
+      const response = await axios.get("http://localhost:5000/search_vehicles", {
+        params: {
+          make: make || null,
+          model: model || null,
+          year: year || null,
+          minPrice: minPrice || null,
+          maxPrice: maxPrice || null,
+        },
+      });
       setVehicles(response.data);
     } catch (error) {
       console.error("Error searching vehicles:", error);
@@ -55,19 +57,15 @@ const Inventory = () => {
     <div className={styles.container}>
       <div className={styles.mainContent}>
         <NavigationBar />
-
         <div className={styles.content}>
-        <Sidebar />
-
+          <Sidebar />
           <div className={styles.addSearchSection}>
             <div className={styles.addSection}>
               <button className={styles.buttonAdd} onClick={handleAddVehicle}>
                 <img src="/add.svg" alt="Add" className={styles.addIcon} />
                 Add Vehicle
               </button>
-            </div>
-            <div className={styles.searchSection}>
-              <h1>Search Vehicles</h1>
+
               <form onSubmit={handleSearch} className={styles.searchForm}>
                 <div className={styles.searchContainer}>
                   <CarMakeDropdown
@@ -82,11 +80,21 @@ const Inventory = () => {
                     setYear={setYear}
                     className={styles.yearDropdown}
                   />
+                  <PriceFilter
+                    minPrice={minPrice}
+                    setMinPrice={setMinPrice}
+                    maxPrice={maxPrice}
+                    setMaxPrice={setMaxPrice}
+                  />
+                  {/* Add other filters here */}
                 </div>
                 <button type="submit" className={styles.button7}>
                   {buttonText}
                 </button>
               </form>
+            </div>
+            <div className={styles.results}>
+                
             </div>
           </div>
         </div>

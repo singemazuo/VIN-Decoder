@@ -13,6 +13,12 @@
     position: relative;
 }
 
+.searchForm{
+    display: flex;
+    flex-direction: column;
+    border: solid;
+}
+
 .content {
     flex-grow: 1;
     position: relative;
@@ -26,10 +32,11 @@
 
 .addSection {
     flex: 1;
+    flex-direction: row;
 }
 
-.searchSection {
-    flex: 3;
+.results {
+    flex: 4;
 }
 
 .buttonAdd {
@@ -45,7 +52,7 @@
     font-weight: 600;
     justify-content: center;
     line-height: 1.25;
-    margin: 50px 0 0;
+    margin: 50px 0 20px;
     min-height: 3rem;
     padding: calc(.875rem - 1px) calc(1.5rem - 1px);
     position: relative;
