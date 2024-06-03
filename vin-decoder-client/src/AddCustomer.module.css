@@ -30,3 +30,31 @@
     max-width: 400px;
     width: 100%; 
 }
+
+.btnSubmitCustomer{
+    width: 195px;
+    background-color: #394864;
+    color: whitesmoke;
+    border: none;
+    height: 33px;
+}
+
+.btnClearCustomer{
+    width: 195px;
+    background-color: #394864;
+    color: whitesmoke;
+    border: none;
+}
+
+.btnClearCustomer:hover, .btnSubmitCustomer:hover{
+    opacity: 70%;
+}
+
+.frmButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 12px;
+    width: 100%;
+}
+

@@ -144,6 +144,10 @@ const findValue = (results, variable) => {
     return result ? result.Value : 'N/A';
 };
 
+////////////////////////
+///  Vehicle Search  ///
+////////////////////////
+
 const decodeVinBatch = async (vins) => {
     const url = "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/";
     const data = {
@@ -338,23 +342,27 @@ app.delete('/vehicle/:id', async (req, res) => {
     }
 });
 
-// Register endpoint
-app.post('/register', async (req, res) => {
-    const { email, password, firstName, lastName } = req.body;
+//////////////////////
+///  Add Customer  ///
+//////////////////////
+
+app.post('/add-customer', async (req, res) => {
+    const { firstname, lastname, email, address, group } = req.body;
     try {
-        const hashedPassword = await bcrypt.hash(password, 10);
         const result = await pool.query(
-            'INSERT INTO users (email, password, firstName, lastName) VALUES ($1, $2, $3, $4) RETURNING id',
-            [email, hashedPassword, firstName, lastName]
+            'INSERT INTO customers (firstname, lastname, email, address, "group") VALUES ($1, $2, $3, $4, $5) RETURNING id',
+            [firstname, lastname, email, address, group]
         );
-        res.status(201).json({ userId: result.rows[0].id });
+        res.status(201).json({ customerId: result.rows[0].id });
     } catch (error) {
-        console.error('Error registering user:', error);
+        console.error('Error adding customer:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
 
-
+////////////////////////
+///  Login / Logout  ///
+////////////////////////
 
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
@@ -382,6 +390,27 @@ app.post('/logout', (req, res) => {
         res.clearCookie('connect.sid');
         res.status(200).json({ message: 'Logged out successfully' });
     });
+});
+
+
+///////////////////////////
+///  User Registration  ///
+///////////////////////////
+
+// Register endpoint
+app.post('/register', async (req, res) => {
+    const { email, password, firstName, lastName } = req.body;
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const result = await pool.query(
+            'INSERT INTO users (email, password, firstName, lastName) VALUES ($1, $2, $3, $4) RETURNING id',
+            [email, hashedPassword, firstName, lastName]
+        );
+        res.status(201).json({ userId: result.rows[0].id });
+    } catch (error) {
+        console.error('Error registering user:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
 
 

@@ -85,3 +85,11 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public.users
     OWNER to postgres;
 
+CREATE TABLE IF NOT EXISTS public.customers (
+    id SERIAL PRIMARY KEY,
+    firstname VARCHAR(40) NOT NULL,
+    lastname VARCHAR(40) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    address VARCHAR(255),
+    "group" VARCHAR(100)
+);
