@@ -24,7 +24,6 @@ const VinForm = () => {
     EngineBrake: "",
     Engine: "",
     Doors: "",
-    StockNumber: "",
     Fuel: "",
     Title: "",
     FrontAirbags: "",
@@ -34,6 +33,8 @@ const VinForm = () => {
     SeatCushionAirbags: "",
     OtherRestraintInfo: "",
     PlantInfo: "",
+    PurchasePrice: "",
+    SalePrice: "",
   });
   const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
@@ -53,7 +54,6 @@ const VinForm = () => {
         EngineBrake: "",
         Engine: "",
         Doors: "",
-        StockNumber: "",
         Fuel: "",
         Title: "",
         FrontAirbags: "",
@@ -63,6 +63,8 @@ const VinForm = () => {
         SeatCushionAirbags: "",
         OtherRestraintInfo: "",
         PlantInfo: "",
+        PurchasePrice: "",
+        SalePrice: "",
       });
       setResult(null);
       setLogoUrl("");
@@ -78,6 +80,8 @@ const VinForm = () => {
       setResult(response.data);
       fetchLogo(response.data.Make);
 
+      const stockNumber = vin.slice(-6);
+
       setFields({
         Year: response.data.Year || "",
         Make: response.data.Make || "",
@@ -89,7 +93,6 @@ const VinForm = () => {
         EngineBrake: response.data.EngineBrake || "",
         Engine: response.data.Engine || "",
         Doors: response.data.Doors || "",
-        StockNumber: response.data.StockNumber || "",
         Fuel: response.data.Fuel || "",
         Title: response.data.Title || "",
         FrontAirbags: response.data.Airbags?.Front || "",
@@ -99,6 +102,9 @@ const VinForm = () => {
         SeatCushionAirbags: response.data.Airbags?.SeatCushion || "",
         OtherRestraintInfo: response.data.Airbags?.OtherRestraintInfo || "",
         PlantInfo: response.data.PlantInfo || "",
+        StockNumber: stockNumber,
+        PurchasePrice: "",
+        SalePrice: "",
       });
       setShowForm(true);
     } catch (error) {
@@ -156,6 +162,8 @@ const VinForm = () => {
     formData.append("seatCushionAirbags", fields.SeatCushionAirbags);
     formData.append("otherRestraintInfo", fields.OtherRestraintInfo);
     formData.append("plantInfo", fields.PlantInfo);
+    formData.append("purchasePrice", fields.PurchasePrice);
+    formData.append("salePrice", fields.SalePrice);
 
     photos.forEach((photo, index) => {
       formData.append(`photos`, photo);
@@ -329,17 +337,6 @@ const VinForm = () => {
                 />
               </div>
               <div className={styles.formGroup}>
-                <label className={styles.formLabels}>Stock Number:</label>
-                <input
-                  type="text"
-                  value={fields.StockNumber}
-                  onChange={(e) =>
-                    handleFieldChange("StockNumber", e.target.value)
-                  }
-                  className={styles.formInputBox}
-                />
-              </div>
-              <div className={styles.formGroup}>
                 <label className={styles.formLabels}>Fuel:</label>
                 <input
                   type="text"
@@ -434,6 +431,28 @@ const VinForm = () => {
                   value={fields.PlantInfo}
                   onChange={(e) =>
                     handleFieldChange("PlantInfo", e.target.value)
+                  }
+                  className={styles.formInputBox}
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <label className={styles.formLabels}>Purchase Price</label>
+                <input
+                  type="text"
+                  value={fields.PurchasePrice}
+                  onChange={(e) =>
+                    handleFieldChange("PurchasePrice", e.target.value)
+                  }
+                  className={styles.formInputBox}
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <label className={styles.formLabels}>Sale Price:</label>
+                <input
+                  type="text"
+                  value={fields.SalePrice}
+                  onChange={(e) =>
+                    handleFieldChange("SalePrice", e.target.value)
                   }
                   className={styles.formInputBox}
                 />

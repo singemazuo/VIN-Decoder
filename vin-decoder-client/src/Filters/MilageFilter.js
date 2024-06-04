@@ -9,8 +9,19 @@ const MilageFilter = ({minMilage, setMinMilage, maxMilage, setMaxMilage}) => {
         setIsExpanded(!isExpanded);
     }
 
-    const handleMinMilageChange = (e) => setMinMilage(e.target.value);
-    const handleMaxMilageChange = (e) => setMaxMilage(e.target.value);
+    const handleMinMilageChange = (e) => {
+        const value = e.target.value;
+        if (value === '' || /^[0-9\b]+$/.test(value)) {
+            setMinMilage(value);
+        }
+    };
+
+    const handleMaxMilageChange = (e) => {
+        const value = e.target.value;
+        if (value === '' || /^[0-9\b]+$/.test(value)) {
+            setMaxMilage(value);
+        }
+    };
 
     return(
         <div className={styles.milageFilter}>
@@ -21,14 +32,14 @@ const MilageFilter = ({minMilage, setMinMilage, maxMilage, setMaxMilage}) => {
             {isExpanded && (
                 <div className={styles.content}>
                     <input
-                        type="number"
+                        type="text"
                         placeholder="Min"
                         value={minMilage}
                         onChange={handleMinMilageChange}
                         className={styles.input}
                     />
                     <input
-                        type="number"
+                        type="text"
                         placeholder="Max"
                         value={maxMilage}
                         onChange={handleMaxMilageChange}

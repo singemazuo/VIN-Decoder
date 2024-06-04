@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../Navigation/Sidebar";
 import NavigationBar from "../Navigation/NavigationBar";
@@ -22,6 +22,19 @@ const Inventory = () => {
   const [buttonText, setButtonText] = useState("Search All");
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/vehicles");
+        setVehicles(response.data);
+      } catch (error) {
+        console.error("Error fetching vehicles:", error);
+      }
+    };
+
+    fetchVehicles();
+  }, []);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -121,34 +134,46 @@ const Inventory = () => {
                   {buttonText}
                 </button>
               </form>
-              
             </div>
             <div className={styles.results}>
-            <table>
-              <thead>
-                <tr>
-                  <th>Stock Number</th>
-                  <th>Make</th>
-                  <th>Model</th>
-                  <th>Year</th>
-                  <th>VIN</th>
-                  <th>Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
+              <table>
+                <thead>
+                  <tr>
+                    <th className={styles.th}>Stock Number</th>
+                    <th className={styles.th}>Make</th>
+                    <th className={styles.th}>Model</th>
+                    <th className={styles.th}>Year</th>
+                    <th className={styles.th}>Milage</th>
+                    <th className={styles.th}>VIN</th>
+                    <th className={styles.th}>Price</th>
+                    <th className={styles.th}>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {vehicles.map((vehicle) => (
+                    <tr key={vehicle.id}>
+                      <td className={styles.td}>{vehicle.stock_number}</td>
+                      <td className={styles.td}>{vehicle.make}</td>
+                      <td className={styles.td}>{vehicle.model}</td>
+                      <td className={styles.td}>{vehicle.year}</td>
+                      <td className={styles.td}>{vehicle.milage}</td>
+                      <td className={styles.td}>{vehicle.vin}</td>
+                      <td className={styles.td}>{vehicle.price}</td>
+                      <td className={styles.td}>{vehicle.sale_price}</td>
+                      <td className={styles.td}>
+                        <button onClick={() => handleEdit(vehicle.id)}>
+                          Edit
+                        </button>
+                        <button onClick={() => handleDelete(vehicle.id)}>
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
-          
         </div>
       </div>
     </div>

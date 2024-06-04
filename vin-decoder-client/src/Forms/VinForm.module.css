@@ -1,6 +1,7 @@
 .vinContainer {
-    margin: 0 120px 0 330px;
+    margin: 0 auto;
     text-align: left;
+    align-items: center;
     justify-content: center;
     max-width: 800px;
 }

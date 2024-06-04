@@ -9,8 +9,19 @@ const PriceFilter = ({ minPrice, setMinPrice, maxPrice, setMaxPrice }) => {
         setIsExpanded(!isExpanded);
     };
 
-    const handleMinPriceChange = (e) => setMinPrice(e.target.value);
-    const handleMaxPriceChange = (e) => setMaxPrice(e.target.value);
+    const handleMinPriceChange = (e) => {
+        const value = e.target.value;
+        if (value === '' || /^[0-9\b]+$/.test(value)) {
+            setMinPrice(value);
+        }
+    };
+
+    const handleMaxPriceChange = (e) => {
+        const value = e.target.value;
+        if (value === '' || /^[0-9\b]+$/.test(value)) {
+            setMaxPrice(value);
+        }
+    };
 
     return (
         <div className={styles.priceFilter}>
@@ -21,14 +32,14 @@ const PriceFilter = ({ minPrice, setMinPrice, maxPrice, setMaxPrice }) => {
             {isExpanded && (
                 <div className={styles.content}>
                     <input
-                        type="number"
+                        type="text"
                         placeholder="Min"
                         value={minPrice}
                         onChange={handleMinPriceChange}
                         className={styles.input}
                     />
                     <input
-                        type="number"
+                        type="text"
                         placeholder="Max"
                         value={maxPrice}
                         onChange={handleMaxPriceChange}
