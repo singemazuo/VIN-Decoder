@@ -121,9 +121,34 @@ const Inventory = () => {
                   {buttonText}
                 </button>
               </form>
+              
             </div>
-            <div className={styles.results}></div>
+            <div className={styles.results}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Stock Number</th>
+                  <th>Make</th>
+                  <th>Model</th>
+                  <th>Year</th>
+                  <th>VIN</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
           </div>
+          
         </div>
       </div>
     </div>

@@ -29,9 +29,8 @@
     font-weight: 600;
     justify-content: center;
     line-height: 1.25;
-    margin: 40px 0 0;
+    margin: 20px 0 0;
     min-height: 3rem;
-    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
     position: relative;
     text-decoration: none;
     transition: all 250ms;
@@ -39,7 +38,8 @@
     -webkit-user-select: none;
     touch-action: manipulation;
     vertical-align: baseline;
-    width: auto;
+    width: 190px;
+    height: 60px;
     z-index: 1000;
     margin-left: 5rem; 
 }

@@ -26,21 +26,26 @@
 .addSearchSection {
     display: flex;
     margin-left: 235px;
-    justify-content: space-evenly;
 }
 
 .addSection {
-    flex: 1;
+    display: flex;
     flex-direction: row;
-    max-width: 271px;
-    min-width: 270px;
 }
 
 .results {
-    flex: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
 }
 
-
+tr{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
 
 .buttonAdd:hover {
     background-color: rgb(93, 92, 116);
@@ -85,8 +90,8 @@
 }
 
 .svgGrid{
-    width: 31px;
-    height: 31px;
+    width: 30px;
+    height: 30px;
 }
 
 .buttonAdd {
@@ -124,11 +129,15 @@
     border: none;
     display: inline-flex;
     justify-content: center;
+    border: 2px solid #ccc;
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    padding: 9px;
 }
 
 .displayToggle{
     margin-right: 40px;
-    margin-top: 12px;
+    margin-top: 8px;
 }
 
 .btnGrid{
@@ -137,9 +146,27 @@
     border: none;
     display: inline-flex;
     justify-content: center;
+    border: 2px solid #ccc;
+    border-radius: 0 8px 8px 0;
+    padding: 9px;
+}
+
+.btnGrid:hover{
+    background-color: #ccc;
+}
+
+.btnList:hover{
+    background-color: #ccc;
 }
 
 .topButtons{
     display: flex;
     justify-content: space-between;
+}
+
+.tableContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10px;
 }
