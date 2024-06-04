@@ -4,7 +4,7 @@ import Sidebar from "../Navigation/Sidebar";
 import NavigationBar from "../Navigation/NavigationBar";
 import CarMakeDropdown from "../Filters/CarMakeDropdown";
 import YearDropdown from "../Filters/YearDropdown";
-import PriceFilter from "../Filters/PriceFilter"; 
+import PriceFilter from "../Filters/PriceFilter";
 import MilageFilter from "../Filters/MilageFilter";
 import YearFilter from "../Filters/YearFilter";
 import { useNavigate } from "react-router-dom";
@@ -26,17 +26,20 @@ const Inventory = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get("http://localhost:5000/search_vehicles", {
-        params: {
-          make: make || null,
-          model: model || null,
-          year: year || null,
-          minPrice: minPrice || null,
-          maxPrice: maxPrice || null,
-          minMilage: minMilage || null,
-          maxMilage: maxMilage || null
-        },
-      });
+      const response = await axios.get(
+        "http://localhost:5000/search_vehicles",
+        {
+          params: {
+            make: make || null,
+            model: model || null,
+            year: year || null,
+            minPrice: minPrice || null,
+            maxPrice: maxPrice || null,
+            minMilage: minMilage || null,
+            maxMilage: maxMilage || null,
+          },
+        }
+      );
       setVehicles(response.data);
     } catch (error) {
       console.error("Error searching vehicles:", error);
@@ -57,7 +60,7 @@ const Inventory = () => {
   };
 
   const handleAddVehicle = () => {
-    navigate('/vin-form');
+    navigate("/vin-form");
   };
 
   return (
@@ -66,13 +69,31 @@ const Inventory = () => {
         <NavigationBar />
         <div className={styles.content}>
           <Sidebar />
+          <div className={styles.topButtons}>
+            <button className={styles.buttonAdd} onClick={handleAddVehicle}>
+              <img src="/add.svg" alt="Add" className={styles.addIcon} />
+              Add Vehicle
+            </button>
+            <div className={styles.displayToggle}>
+              <button className={styles.btnList}>
+                <img
+                  src="../icons/list.svg"
+                  alt="list"
+                  className={styles.svgList}
+                ></img>
+              </button>
+              <button className={styles.btnGrid}>
+                <img
+                  src="../icons/grid.svg"
+                  alt="grid"
+                  className={styles.svgGrid}
+                ></img>
+              </button>
+            </div>
+          </div>
+          <hr></hr>
           <div className={styles.addSearchSection}>
             <div className={styles.addSection}>
-              <button className={styles.buttonAdd} onClick={handleAddVehicle}>
-                <img src="/add.svg" alt="Add" className={styles.addIcon} />
-                Add Vehicle
-              </button>
-
               <form onSubmit={handleSearch} className={styles.searchForm}>
                 <div className={styles.searchContainer}>
                   <CarMakeDropdown
@@ -82,10 +103,7 @@ const Inventory = () => {
                     setModel={setModel}
                     className={styles.makeModelDropdown}
                   />
-                  <YearFilter
-                  
-                  
-                  />
+                  <YearFilter />
                   <PriceFilter
                     minPrice={minPrice}
                     setMinPrice={setMinPrice}
@@ -104,9 +122,7 @@ const Inventory = () => {
                 </button>
               </form>
             </div>
-            <div className={styles.results}>
-
-            </div>
+            <div className={styles.results}></div>
           </div>
         </div>
       </div>

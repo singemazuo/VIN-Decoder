@@ -40,32 +40,7 @@
     flex: 4;
 }
 
-.buttonAdd {
-    align-items: center;
-    background-color: #FFFFFF;
-    border: 2px solid rgb(110, 109, 136);
-    border-radius: 3rem;
-    box-sizing: border-box;
-    color: rgb(93, 92, 116);
-    cursor: pointer;
-    display: inline-flex;
-    font-size: 16px;
-    font-weight: 600;
-    justify-content: center;
-    line-height: 1.25;
-    margin: 50px 0 20px;
-    min-height: 3rem;
-    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
-    position: relative;
-    text-decoration: none;
-    transition: all 250ms;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: baseline;
-    width: auto;
-    z-index: 1000; 
-}
+
 
 .buttonAdd:hover {
     background-color: rgb(93, 92, 116);
@@ -102,4 +77,69 @@
 
 .btnSearchFilter:hover{
     background-color: #b3afafe0
+}
+
+.svgList{
+    width: 30px;
+    height: 30px;
+}
+
+.svgGrid{
+    width: 31px;
+    height: 31px;
+}
+
+.buttonAdd {
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 2px solid rgb(110, 109, 136);
+    border-radius: 3rem;
+    box-sizing: border-box;
+    color: rgb(93, 92, 116);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 17px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    margin-left: 280px;
+    margin-bottom: 20px;
+    width: 180px;
+    height: 60px;
+    z-index: 1000; 
+}
+
+.btnList{
+    align-items: center;
+    background-color: #FFFFFF;
+    border: none;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.displayToggle{
+    margin-right: 40px;
+    margin-top: 12px;
+}
+
+.btnGrid{
+    align-items: center;
+    background-color: #FFFFFF;
+    border: none;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.topButtons{
+    display: flex;
+    justify-content: space-between;
 }
