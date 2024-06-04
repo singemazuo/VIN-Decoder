@@ -1,6 +1,8 @@
-/* PriceFilter.module.css */
+.yearFilter{
+    margin: 10px 0;
+}
 
-.header {
+.header{
     display: flex;
     justify-content: space-between;
     background-color: #f8f9fa;
@@ -10,22 +12,17 @@
     border-radius: 4px;
 }
 
-.content {
+.content{
     padding: 10px;
     border: 1px solid #ccc;
     border-top: none;
     border-radius: 0 0 4px 4px;
 }
 
-.input {
+.input{
     width: 48%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-right: 2%;
-    margin-top: 10px;
-}
 
-.input:last-of-type {
-    margin-right: 0;
 }

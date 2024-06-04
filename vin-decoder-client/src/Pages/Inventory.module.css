@@ -16,7 +16,6 @@
 .searchForm{
     display: flex;
     flex-direction: column;
-    border: solid;
 }
 
 .content {
@@ -92,4 +91,15 @@
     font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial', sans-serif;
     font-size: 18px;
     color: #60666d;
+}
+
+.btnSearchFilter{
+    padding: 10px;
+    border: 1px solid #ccc8c8;
+    border-radius: 4px;
+    background-color: #fdfbfbc5
+}
+
+.btnSearchFilter:hover{
+    background-color: #b3afafe0
 }

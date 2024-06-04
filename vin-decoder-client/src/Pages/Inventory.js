@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Sidebar from "./Navigation/Sidebar";
-import NavigationBar from "./Navigation/NavigationBar";
-import CarMakeDropdown from "./Filters/CarMakeDropdown";
-import YearDropdown from "./Filters/YearDropdown";
-import PriceFilter from "./Filters/PriceFilter"; 
-import MilageFilter from "./Filters/MilageFilter";
-
+import Sidebar from "../Navigation/Sidebar";
+import NavigationBar from "../Navigation/NavigationBar";
+import CarMakeDropdown from "../Filters/CarMakeDropdown";
+import YearDropdown from "../Filters/YearDropdown";
+import PriceFilter from "../Filters/PriceFilter"; 
+import MilageFilter from "../Filters/MilageFilter";
+import YearFilter from "../Filters/YearFilter";
 import { useNavigate } from "react-router-dom";
 import styles from "./Inventory.module.css";
 
@@ -82,10 +82,9 @@ const Inventory = () => {
                     setModel={setModel}
                     className={styles.makeModelDropdown}
                   />
-                  <YearDropdown
-                    year={year}
-                    setYear={setYear}
-                    className={styles.yearDropdown}
+                  <YearFilter
+                  
+                  
                   />
                   <PriceFilter
                     minPrice={minPrice}
@@ -100,7 +99,7 @@ const Inventory = () => {
                     setMaxMilage={setMaxMilage}
                   />
                 </div>
-                <button type="submit" className={styles.button7}>
+                <button type="submit" className={styles.btnSearchFilter}>
                   {buttonText}
                 </button>
               </form>

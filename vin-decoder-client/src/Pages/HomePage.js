@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './HomePage.module.css';
-import Sidebar from './Navigation/Sidebar';
-import NavigationBar from './Navigation/NavigationBar';
-import CarMakeDropdown from './Filters/CarMakeDropdown';
-import YearDropdown from './Filters/YearDropdown';
+import Sidebar from '../Navigation/Sidebar';
+import NavigationBar from '../Navigation/NavigationBar';
+import CarMakeDropdown from '../Filters/CarMakeDropdown';
+import YearDropdown from '../Filters/YearDropdown';
 import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {

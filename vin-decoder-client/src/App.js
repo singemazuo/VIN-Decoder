@@ -1,18 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './HomePage';
+import HomePage from './Pages/HomePage';
 import VinForm from './Forms/VinForm';
 import Account from './Auth/Account';
 import Login from './Auth/Login';
 import EditForm from './Forms/EditForm';
-import PrivateRoute from './PrivateRoute';
+import PrivateRoute from './Auth/PrivateRoute';
 import { AuthProvider } from './Auth/AuthContext';
-import Inventory from './Inventory';
+import Inventory from './Pages/Inventory';
 import Register from './Auth/Register';
-import AddCustomer from './AddCustomer';
+import AddCustomer from './Forms/AddCustomer';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Customer from './Customer';
+import Customer from './Pages/Customer';
 
 const App = () => {
     return (
