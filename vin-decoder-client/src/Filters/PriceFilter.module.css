@@ -1,4 +1,8 @@
 /* PriceFilter.module.css */
+.priceFilter {
+    margin: 10px 0;
+    width: 200px; 
+}
 
 .header {
     display: flex;
@@ -8,6 +12,7 @@
     cursor: pointer;
     border: 1px solid #ccc;
     border-radius: 4px;
+    width: 100%;
 }
 
 .content {
@@ -15,10 +20,11 @@
     border: 1px solid #ccc;
     border-top: none;
     border-radius: 0 0 4px 4px;
+    width: 100%;
 }
 
 .input {
-    width: 48%;
+    width: calc(50% - 6px);
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
