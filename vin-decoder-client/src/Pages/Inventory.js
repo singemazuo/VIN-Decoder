@@ -9,6 +9,7 @@ import MilageFilter from "../Filters/MilageFilter";
 import YearFilter from "../Filters/YearFilter";
 import { useNavigate } from "react-router-dom";
 import styles from "./Inventory.module.css";
+import { max } from "pg/lib/defaults";
 
 const Inventory = () => {
   const [make, setMake] = useState("");
@@ -18,6 +19,8 @@ const Inventory = () => {
   const [maxPrice, setMaxPrice] = useState("");
   const [minMilage, setMinMilage] = useState("");
   const [maxMilage, setMaxMilage] = useState("");
+  const [minYear, setMinYear] = useState("");
+  const [maxYear, setMaxYear] = useState("");
   const [vehicles, setVehicles] = useState([]);
   const [buttonText, setButtonText] = useState("Search All");
 
@@ -64,15 +67,16 @@ const Inventory = () => {
     <div className={styles.container}>
       <div className={styles.mainContent}>
         <NavigationBar />
+        <button className={styles.buttonAdd} onClick={handleAddVehicle}>
+                <img src="/add.svg" alt="Add" className={styles.addIcon} />
+                Add Vehicle
+              </button>
+              <hr></hr>
         <div className={styles.content}>
           <Sidebar />
           <div className={styles.addSearchSection}>
             <div className={styles.addSection}>
-              <button className={styles.buttonAdd} onClick={handleAddVehicle}>
-                <img src="/add.svg" alt="Add" className={styles.addIcon} />
-                Add Vehicle
-              </button>
-
+              
               <form onSubmit={handleSearch} className={styles.searchForm}>
                 <div className={styles.searchContainer}>
                   <CarMakeDropdown
@@ -83,8 +87,10 @@ const Inventory = () => {
                     className={styles.makeModelDropdown}
                   />
                   <YearFilter
-                  
-                  
+                    minYear={minYear}
+                    setMinYear={setMinYear}
+                    maxYear={maxYear}
+                    setMaxYear={setMaxYear}
                   />
                   <PriceFilter
                     minPrice={minPrice}

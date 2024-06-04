@@ -25,7 +25,8 @@
 
 .addSearchSection {
     display: flex;
-    margin-left: 235px;
+    margin-left: 250px;
+    margin-top: 50px;
     justify-content: space-evenly;
 }
 
@@ -34,6 +35,11 @@
     flex-direction: row;
     max-width: 271px;
     min-width: 270px;
+}
+
+.searchForm{
+border: 1px solid #ccc;
+border-radius: 4px;
 }
 
 .results {
@@ -49,11 +55,11 @@
     color: rgb(93, 92, 116);
     cursor: pointer;
     display: inline-flex;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
     justify-content: center;
     line-height: 1.25;
-    margin: 50px 0 20px;
+    margin: 20px 0 35px 300px;
     min-height: 3rem;
     padding: calc(.875rem - 1px) calc(1.5rem - 1px);
     position: relative;
@@ -63,7 +69,8 @@
     -webkit-user-select: none;
     touch-action: manipulation;
     vertical-align: baseline;
-    width: auto;
+    width: 180px;
+    height: 55px;
     z-index: 1000; 
 }
 
