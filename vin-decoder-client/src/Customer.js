@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './Customer.module.css';
-import Sidebar from './Sidebar';
-import NavigationBar from './NavigationBar';
+import Sidebar from './Navigation/Sidebar';
+import NavigationBar from './Navigation/NavigationBar';
 import { useNavigate } from 'react-router-dom';
 
 const Customer = () => {

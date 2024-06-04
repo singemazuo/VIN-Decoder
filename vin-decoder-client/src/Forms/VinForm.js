@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styles from "./VinForm.module.css";
-import NavigationBar from "./NavigationBar";
-import Sidebar from "./Sidebar";
-import PhotoUpload from "./PhotoUpload";
+import NavigationBar from "../Navigation/NavigationBar";
+import Sidebar from "../Navigation/Sidebar";
+import PhotoUpload from "../PhotoUpload";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 

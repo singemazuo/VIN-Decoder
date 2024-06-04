@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './EditForm.module.css';
-import Sidebar from './Sidebar';
-import PhotoUpload from './PhotoUpload';
+import Sidebar from '../Navigation/Sidebar';
+import PhotoUpload from '../PhotoUpload';
 
 const EditForm = () => {
     const [vin, setVin] = useState('');

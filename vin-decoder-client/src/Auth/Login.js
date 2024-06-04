@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useAuth } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
-import Sidebar from './Sidebar';
-import NavigationBar from './NavigationBar';
+import Sidebar from '../Navigation/Sidebar';
+import NavigationBar from '../Navigation/NavigationBar';
 
 const Login = () => {
     const [username, setUsername] = useState('');

@@ -1,6 +1,6 @@
 import React from "react";
-import NavigationBar from "./NavigationBar";
-import Sidebar from "./Sidebar";
+import NavigationBar from "../Navigation/NavigationBar";
+import Sidebar from "../Navigation/Sidebar";
 import { useAuth } from "./AuthContext";
 import styles from "./Account.module.css";
 

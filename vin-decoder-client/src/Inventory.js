@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Sidebar from "./Sidebar";
-import NavigationBar from "./NavigationBar";
-import CarMakeDropdown from "./CarMakeDropdown";
-import YearDropdown from "./YearDropdown";
-import PriceFilter from "./PriceFilter"; // Import the new PriceFilter component
+import Sidebar from "./Navigation/Sidebar";
+import NavigationBar from "./Navigation/NavigationBar";
+import CarMakeDropdown from "./Filters/CarMakeDropdown";
+import YearDropdown from "./Filters/YearDropdown";
+import PriceFilter from "./Filters/PriceFilter"; 
+import MilageFilter from "./Filters/MilageFilter";
+
 import { useNavigate } from "react-router-dom";
 import styles from "./Inventory.module.css";
 
@@ -14,8 +16,11 @@ const Inventory = () => {
   const [year, setYear] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [minMilage, setMinMilage] = useState("");
+  const [maxMilage, setMaxMilage] = useState("");
   const [vehicles, setVehicles] = useState([]);
   const [buttonText, setButtonText] = useState("Search All");
+
   const navigate = useNavigate();
 
   const handleSearch = async (e) => {
@@ -28,6 +33,8 @@ const Inventory = () => {
           year: year || null,
           minPrice: minPrice || null,
           maxPrice: maxPrice || null,
+          minMilage: minMilage || null,
+          maxMilage: maxMilage || null
         },
       });
       setVehicles(response.data);
@@ -86,7 +93,12 @@ const Inventory = () => {
                     maxPrice={maxPrice}
                     setMaxPrice={setMaxPrice}
                   />
-                  {/* Add other filters here */}
+                  <MilageFilter
+                    minMilage={minMilage}
+                    setMinMilage={setMinMilage}
+                    maxMilage={maxMilage}
+                    setMaxMilage={setMaxMilage}
+                  />
                 </div>
                 <button type="submit" className={styles.button7}>
                   {buttonText}
@@ -94,7 +106,7 @@ const Inventory = () => {
               </form>
             </div>
             <div className={styles.results}>
-                
+
             </div>
           </div>
         </div>
