@@ -139,7 +139,7 @@ const Inventory = () => {
               <table>
                 <thead>
                   <tr>
-                    <th className={styles.th}>Stock Number</th>
+                    <th className={styles.thStock}>Stock Number</th>
                     <th className={styles.th}>Make</th>
                     <th className={styles.th}>Model</th>
                     <th className={styles.th}>Year</th>

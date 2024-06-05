@@ -183,3 +183,7 @@
     background-color: #f2f2f2;
     font-weight: bold;
 }
+
+.thStock{
+    border-bottom: 1px solid #ddd;
+}

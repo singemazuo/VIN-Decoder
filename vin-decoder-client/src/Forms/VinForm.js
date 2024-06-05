@@ -35,6 +35,8 @@ const VinForm = () => {
     PlantInfo: "",
     PurchasePrice: "",
     SalePrice: "",
+    saleDate: "",
+    isSold: ""
   });
   const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
@@ -65,6 +67,8 @@ const VinForm = () => {
         PlantInfo: "",
         PurchasePrice: "",
         SalePrice: "",
+        saleDate: "",
+        isSold: ""
       });
       setResult(null);
       setLogoUrl("");
@@ -103,8 +107,10 @@ const VinForm = () => {
         OtherRestraintInfo: response.data.Airbags?.OtherRestraintInfo || "",
         PlantInfo: response.data.PlantInfo || "",
         StockNumber: stockNumber,
-        PurchasePrice: "",
-        SalePrice: "",
+        PurchasePrice: response.data.PurchasePrice || "",
+        SalePrice: response.data.SalePrice || "",
+        SaleDate: response.data.SaleDate || "",
+        IsSold: response.data.IsSold || ""
       });
       setShowForm(true);
     } catch (error) {
@@ -164,6 +170,8 @@ const VinForm = () => {
     formData.append("plantInfo", fields.PlantInfo);
     formData.append("purchasePrice", fields.PurchasePrice);
     formData.append("salePrice", fields.SalePrice);
+    formData.append("saleDate", fields.SaleDate);
+    formData.append("isSold", fields.IsSold)
 
     photos.forEach((photo, index) => {
       formData.append(`photos`, photo);

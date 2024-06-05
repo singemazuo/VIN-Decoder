@@ -168,7 +168,8 @@ app.post('/submit_vehicle', upload.array('photos'), async (req, res) => {
         vin, year, make, model, transmission, weight,
         exteriorColor, interiorColor, engineBrake, engine,
         doors, stockNumber, fuel, title, frontAirbags, kneeAirbags,
-        sideAirbags, curtainAirbags, seatCushionAirbags, otherRestraintInfo, plantInfo
+        sideAirbags, curtainAirbags, seatCushionAirbags, otherRestraintInfo, 
+        plantInfo, purchasePrice, salePirce, isSold, saleDate
     } = req.body;
 
     try {
@@ -177,15 +178,20 @@ app.post('/submit_vehicle', upload.array('photos'), async (req, res) => {
             await client.query('BEGIN');
             const vehicleQueryText = `
                 INSERT INTO vehicles(
-                    vin, year, make, model, transmission, weight, exterior_color, interior_color, engine_brake, engine, doors, stock_number, fuel, title, front_airbags, knee_airbags, side_airbags, curtain_airbags, seat_cushion_airbags, other_restraint_info, plant_info
-                ) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21) RETURNING id`;
-            const vehicleValues = [vin, year, make, model, transmission, weight, exteriorColor, interiorColor, engineBrake, engine, doors, stockNumber, fuel, title, frontAirbags, kneeAirbags, sideAirbags, curtainAirbags, seatCushionAirbags, otherRestraintInfo, plantInfo];
+                    vin, year, make, model, transmission, weight, exterior_color, interior_color, 
+                    engine_brake, engine, doors, stock_number, fuel, title, front_airbags, knee_airbags, 
+                    side_airbags, curtain_airbags, seat_cushion_airbags, other_restraint_info, plant_info,
+                    purchase_price, sale_price, is_sold, sale_date
+                ) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25) RETURNING id`;
+            const vehicleValues = [vin, year, make, model, transmission, weight, exteriorColor, interiorColor, engineBrake, 
+                engine, doors, stockNumber, fuel, title, frontAirbags, kneeAirbags, sideAirbags, curtainAirbags, 
+                seatCushionAirbags, otherRestraintInfo, plantInfo, purchasePrice, salePirce, isSold, saleDate];
             const vehicleResult = await client.query(vehicleQueryText, vehicleValues);
             const vehicleId = vehicleResult.rows[0].id;
 
             const photoInsertPromises = req.files.map(file => {
                 const photoQueryText = 'INSERT INTO photos(vehicle_id, photo_url) VALUES($1, $2)';
-                const photoValues = [vehicleId, `/uploads/${file.filename}`]; // Construct the correct URL
+                const photoValues = [vehicleId, `/uploads/${file.filename}`];
                 return client.query(photoQueryText, photoValues);
             });
 
@@ -292,7 +298,8 @@ app.put('/vehicle/:id', upload.array('photos'), async (req, res) => {
         vin, year, make, model, transmission, weight,
         exteriorColor, interiorColor, engineBrake, engine,
         doors, stockNumber, fuel, title, frontAirbags, kneeAirbags,
-        sideAirbags, curtainAirbags, seatCushionAirbags, otherRestraintInfo, plantInfo
+        sideAirbags, curtainAirbags, seatCushionAirbags, otherRestraintInfo, 
+        plantInfo, purchasePrice, salePirce
     } = req.body;
 
     try {
@@ -301,9 +308,9 @@ app.put('/vehicle/:id', upload.array('photos'), async (req, res) => {
             await client.query('BEGIN');
             const vehicleQueryText = `
                 UPDATE vehicles SET
-                    vin = $1, year = $2, make = $3, model = $4, transmission = $5, weight = $6, exterior_color = $7, interior_color = $8, engine_brake = $9, engine = $10, doors = $11, stock_number = $12, fuel = $13, title = $14, front_airbags = $15, knee_airbags = $16, side_airbags = $17, curtain_airbags = $18, seat_cushion_airbags = $19, other_restraint_info = $20, plant_info = $21
-                WHERE id = $22`;
-            const vehicleValues = [vin, year, make, model, transmission, weight, exteriorColor, interiorColor, engineBrake, engine, doors, stockNumber, fuel, title, frontAirbags, kneeAirbags, sideAirbags, curtainAirbags, seatCushionAirbags, otherRestraintInfo, plantInfo, id];
+                    vin = $1, year = $2, make = $3, model = $4, transmission = $5, weight = $6, exterior_color = $7, interior_color = $8, engine_brake = $9, engine = $10, doors = $11, stock_number = $12, fuel = $13, title = $14, front_airbags = $15, knee_airbags = $16, side_airbags = $17, curtain_airbags = $18, seat_cushion_airbags = $19, other_restraint_info = $20, plant_info = $21, purchase_price = $22, sale_price = $23
+                WHERE id = $24`;
+            const vehicleValues = [vin, year, make, model, transmission, weight, exteriorColor, interiorColor, engineBrake, engine, doors, stockNumber, fuel, title, frontAirbags, kneeAirbags, sideAirbags, curtainAirbags, seatCushionAirbags, otherRestraintInfo, plantInfo, purchasePrice, salePirce, id];
             await client.query(vehicleQueryText, vehicleValues);
 
             await client.query('DELETE FROM photos WHERE vehicle_id = $1', [id]);

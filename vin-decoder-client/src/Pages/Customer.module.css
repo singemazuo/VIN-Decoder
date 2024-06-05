@@ -9,7 +9,7 @@
 }
 
 .customerPage {
-    margin-left: 235px;
+    margin-left: 255px;
 }
 
 .customerTop {
@@ -70,7 +70,6 @@
 .customerTable th, .customerTable td {
     padding: 12px 15px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
 }
 
 .customerTable th {
@@ -91,16 +90,56 @@
     margin-right: 5px;
     padding: 5px 10px;
     border: none;
-    background-color: #b7babd;
+    background-color: transparent;
     color: white;
     cursor: pointer;
     border-radius: 3px;
 }
 
 .customerTable td button:hover {
-    background-color: #4567ac;
+    background-color: rgb(200, 211, 148); 
 }
 
 .hr {
     margin-top: 40px;
+}
+
+.editIcon, .deleteIcon{
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    margin-bottom: 5px;
+}
+
+.btnEdit, .btnDelete{
+    background-color: transparent;
+    border: none; 
+    cursor: pointer;
+    margin: 0 5px; 
+}
+
+.btnEdit:hover{
+    background-color: rgb(66, 61, 110); 
+
+}
+
+.btnDelete:hover{
+    background-color: rgb(139, 55, 55); 
+
+}
+
+
+
+
+
+.actionIcons {
+    background-color: transparent;
+
+    display: flex;
+    align-items: center;
+}
+
+.actionTitle{
+    display: flex;
+    justify-content: space-evenly;
 }
