@@ -1,6 +1,6 @@
 /* Sidebar.module.css */
 .sidebar {
-    width: 235px;
+    width: 255px;
     height: 100vh;
     background-color: #2e3b55;
     color: #fff;
@@ -34,7 +34,7 @@
 .nav ul li a {
     color: #fff;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 19px;
     display: flex;
     align-items: center;
 }
@@ -53,4 +53,9 @@
     background-color: #1e2a45;
     padding: 10px;
     border-radius: 5px;
+}
+
+.icon{
+    height: 40px;
+    width: 40px;
 }

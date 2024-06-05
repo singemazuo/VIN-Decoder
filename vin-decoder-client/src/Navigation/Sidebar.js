@@ -19,7 +19,7 @@ const Sidebar = () => {
 
                     <li>
                         <NavLink to="/inventory" activeClassName={styles.active}>
-                            <span className={styles.icon}>🛍️</span> Inventory
+                            <span className={styles.icon}><img src='./icons/CarInventory_white.svg' alt='carinv'></img></span> Inventory
                         </NavLink>
                     </li>
                     <li>

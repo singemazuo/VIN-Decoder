@@ -8,14 +8,16 @@
 }
 
 .navWrapper{
+    font-size: 17px;
+
 }
 
 .userImage {
-    width: 30px;
-    height: 30px; 
+    width: 40px;
+    height: 40px; 
     border-radius: 50%; 
     margin-right: 8px;
-    margin-top: 7px;
+    margin-top: 3px;
 }
 
 .accountLink:hover{
@@ -23,6 +25,8 @@
 }
 .accountLink{
     color: rgb(36, 35, 35);
+    font-size: 17px;
+
 }
 
 .navLink{

@@ -25,7 +25,7 @@
 
 .addSearchSection {
     display: flex;
-    margin-left: 235px;
+    margin-left: 255px;
 }
 
 .addSection {
@@ -117,8 +117,9 @@
     -webkit-user-select: none;
     touch-action: manipulation;
     vertical-align: baseline;
-    margin-left: 280px;
-    margin-bottom: 20px;
+    margin-left: 300px;
+    margin-bottom: 19px;
+    margin-top: 2px;
     width: 180px;
     height: 60px;
     z-index: 1000; 
