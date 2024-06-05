@@ -169,7 +169,7 @@ app.post('/submit_vehicle', upload.array('photos'), async (req, res) => {
         exteriorColor, interiorColor, engineBrake, engine,
         doors, stockNumber, fuel, title, frontAirbags, kneeAirbags,
         sideAirbags, curtainAirbags, seatCushionAirbags, otherRestraintInfo, 
-        plantInfo, purchasePrice, salePirce, isSold, saleDate
+        plantInfo, purchasePrice, salePrice, milage
     } = req.body;
 
     try {
@@ -181,11 +181,13 @@ app.post('/submit_vehicle', upload.array('photos'), async (req, res) => {
                     vin, year, make, model, transmission, weight, exterior_color, interior_color, 
                     engine_brake, engine, doors, stock_number, fuel, title, front_airbags, knee_airbags, 
                     side_airbags, curtain_airbags, seat_cushion_airbags, other_restraint_info, plant_info,
-                    purchase_price, sale_price, is_sold, sale_date
-                ) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25) RETURNING id`;
-            const vehicleValues = [vin, year, make, model, transmission, weight, exteriorColor, interiorColor, engineBrake, 
+                    purchase_price, is_sold, milage
+                ) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24) RETURNING id`;
+            const vehicleValues = [
+                vin, year, make, model, transmission, weight, exteriorColor, interiorColor, engineBrake, 
                 engine, doors, stockNumber, fuel, title, frontAirbags, kneeAirbags, sideAirbags, curtainAirbags, 
-                seatCushionAirbags, otherRestraintInfo, plantInfo, purchasePrice, salePirce, isSold, saleDate];
+                seatCushionAirbags, otherRestraintInfo, plantInfo, purchasePrice, false, milage
+            ];
             const vehicleResult = await client.query(vehicleQueryText, vehicleValues);
             const vehicleId = vehicleResult.rows[0].id;
 

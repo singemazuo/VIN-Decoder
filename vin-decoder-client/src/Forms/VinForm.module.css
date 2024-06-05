@@ -1,5 +1,5 @@
 .vinContainer {
-    margin: 0 auto auto 600px;
+    margin: 0 auto auto 640px;
     text-align: left;
     align-items: center;
     justify-content: center;
@@ -205,31 +205,61 @@
     z-index: -1;
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 1800px) {
     .vinContainer {
-        margin: 0 auto auto 450px;
+        margin: 0 auto auto 560px;
         max-width: 800px;
     }
 }
 
+@media (max-width: 1550px) {
+    .vinContainer {
+        margin: 0 150px auto 500px;
+        max-width: 800px;
+        min-width: 200px;
+    }
+}
+
+
+@media (max-width: 1450px) {
+    .vinContainer {
+        margin: 0 150px auto 450px;
+        max-width: 800px;
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 1350px) {
+    .vinContainer {
+        margin: 0 150px auto 400px;
+        max-width: 800px;
+        min-width: 200px;
+    }
+}
 
 @media (max-width: 1200px) {
     .vinContainer {
-        margin: 0 auto auto 300px;
-        max-width: 600px;
+        margin: 0 150px auto 400px;
+        max-width: 800px;
+        min-width: 200px;
     }
 }
+
 
 @media (max-width: 1000px) {
     .vinContainer {
-        margin: 0 auto auto 250px;
-        max-width: 500;
+        margin: 0 150px auto 400px;
+        max-width: 800px;
+        min-width: 200px;
     }
 }
 
+
 @media (max-width: 800px) {
     .vinContainer {
-        margin: 0 auto auto 200px;
-        max-width: 400px;
+        margin: 0 100px auto 350px;
+        max-width: 800px;
+        min-width: 200px;
     }
 }
+

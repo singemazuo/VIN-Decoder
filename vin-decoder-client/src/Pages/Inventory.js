@@ -20,6 +20,7 @@ const Inventory = () => {
   const [maxMilage, setMaxMilage] = useState("");
   const [vehicles, setVehicles] = useState([]);
   const [buttonText, setButtonText] = useState("Search All");
+  const [isDescending, setIsDescending] = useState(true); // Add state for sorting order
 
   const navigate = useNavigate();
 
@@ -76,6 +77,18 @@ const Inventory = () => {
     navigate("/vin-form");
   };
 
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("en-CA", {
+      style: "currency",
+      currency: "CAD",
+      currencyDisplay: "symbol",
+    }).format(price);
+  };
+
+  const handleToggleSort = () => {
+    setIsDescending(!isDescending);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.mainContent}>
@@ -87,6 +100,31 @@ const Inventory = () => {
               <img src="/add.svg" alt="Add" className={styles.addIcon} />
               Add Vehicle
             </button>
+            <div className={styles.filter}>
+              <img 
+                src="../icons/filter.svg"
+                className={styles.iconFilter}
+                alt="filter"
+              ></img>
+              <select className={styles.filterSelect}>
+                <option>Stock</option>
+                <option>Make</option>
+                <option>Model</option>
+                <option>Year</option>
+                <option>Milage</option>
+                <option>VIN</option>
+                <option>Price</option>
+              </select>
+              <button className={styles.btnArrow} onClick={handleToggleSort}>
+                <img
+                  src="../icons/arrow.svg"
+                  alt="arrow"
+                  className={`${styles.iconArrow} ${
+                    isDescending ? "" : styles.rotated
+                  }`}
+                ></img>
+              </button>
+            </div>
             <div className={styles.displayToggle}>
               <button className={styles.btnList}>
                 <img
@@ -104,7 +142,7 @@ const Inventory = () => {
               </button>
             </div>
           </div>
-          <hr></hr>
+          <hr className={styles.hr}></hr>
           <div className={styles.addSearchSection}>
             <div className={styles.addSection}>
               <form onSubmit={handleSearch} className={styles.searchForm}>
@@ -158,14 +196,31 @@ const Inventory = () => {
                       <td className={styles.td}>{vehicle.year}</td>
                       <td className={styles.td}>{vehicle.milage}</td>
                       <td className={styles.td}>{vehicle.vin}</td>
-                      <td className={styles.td}>{vehicle.price}</td>
-                      <td className={styles.td}>{vehicle.sale_price}</td>
                       <td className={styles.td}>
-                        <button onClick={() => handleEdit(vehicle.id)}>
-                          Edit
+                        {formatPrice(vehicle.purchase_price)}
+                      </td>
+                      <td className={styles.td}>
+                        <button
+                          className={styles.btnEdit}
+                          onClick={() => handleEdit(vehicle.id)}
+                          title="Edit"
+                        >
+                          <img
+                            src="./icons/edit.svg"
+                            className={styles.editIcon}
+                            alt="edit"
+                          ></img>
                         </button>
-                        <button onClick={() => handleDelete(vehicle.id)}>
-                          Delete
+                        <button
+                          className={styles.btnDelete}
+                          onClick={() => handleDelete(vehicle.id)}
+                          title="Delete"
+                        >
+                          <img
+                            src="./icons/delete.svg"
+                            className={styles.deleteIcon}
+                            alt="Delete"
+                          ></img>
                         </button>
                       </td>
                     </tr>

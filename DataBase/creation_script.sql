@@ -30,9 +30,14 @@ CREATE TABLE IF NOT EXISTS public.vehicles
     seat_cushion_airbags character varying(255) COLLATE pg_catalog."default",
     other_restraint_info character varying(255) COLLATE pg_catalog."default",
     plant_info character varying(100) COLLATE pg_catalog."default",
+    purchase_price numeric,
+    sale_price numeric,
+    is_sold boolean DEFAULT false,
+    sale_date date,
     CONSTRAINT vehicles_pkey PRIMARY KEY (id),
     CONSTRAINT vehicles_vin_key UNIQUE (vin)
-)
+);
+
 
 TABLESPACE pg_default;
 

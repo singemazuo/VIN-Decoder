@@ -34,10 +34,10 @@ const VinForm = () => {
     OtherRestraintInfo: "",
     PlantInfo: "",
     PurchasePrice: "",
-    SalePrice: "",
-    saleDate: "",
-    isSold: ""
-  });
+    isSold: false,
+    Milage: ""
+});
+
   const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
 
@@ -66,9 +66,8 @@ const VinForm = () => {
         OtherRestraintInfo: "",
         PlantInfo: "",
         PurchasePrice: "",
-        SalePrice: "",
-        saleDate: "",
-        isSold: ""
+        isSold: false,
+        Milage: ""
       });
       setResult(null);
       setLogoUrl("");
@@ -108,9 +107,8 @@ const VinForm = () => {
         PlantInfo: response.data.PlantInfo || "",
         StockNumber: stockNumber,
         PurchasePrice: response.data.PurchasePrice || "",
-        SalePrice: response.data.SalePrice || "",
-        SaleDate: response.data.SaleDate || "",
-        IsSold: response.data.IsSold || ""
+        isSold: false,
+        Milage: response.data.Milage || ""
       });
       setShowForm(true);
     } catch (error) {
@@ -169,9 +167,8 @@ const VinForm = () => {
     formData.append("otherRestraintInfo", fields.OtherRestraintInfo);
     formData.append("plantInfo", fields.PlantInfo);
     formData.append("purchasePrice", fields.PurchasePrice);
-    formData.append("salePrice", fields.SalePrice);
-    formData.append("saleDate", fields.SaleDate);
-    formData.append("isSold", fields.IsSold)
+    formData.append("isSold", fields.isSold);
+    formData.append("milage", fields.Milage);
 
     photos.forEach((photo, index) => {
       formData.append(`photos`, photo);
@@ -188,7 +185,7 @@ const VinForm = () => {
         }
       );
       console.log("Submit Response:", response.data);
-      navigate("/");
+      navigate("/inventory");
     } catch (error) {
       console.error("Error submitting vehicle data:", error);
     }
@@ -272,6 +269,15 @@ const VinForm = () => {
                   className={styles.formInputBox}
                 />
               </div>
+              <div className={styles.formGroup}>
+                <label className={styles.formLabels}>Milage:</label>
+                    <input
+                        type="text"
+                        value={fields.Milage}
+                        onChange={(e) => handleFieldChange("Milage", e.target.value)}
+                        className={styles.formInputBox}
+                    />
+                </div>
               <div className={styles.formGroup}>
                 <label className={styles.formLabels}>Transmission:</label>
                 <input
@@ -452,19 +458,10 @@ const VinForm = () => {
                     handleFieldChange("PurchasePrice", e.target.value)
                   }
                   className={styles.formInputBox}
+                  required
                 />
               </div>
-              <div className={styles.formGroup}>
-                <label className={styles.formLabels}>Sale Price:</label>
-                <input
-                  type="text"
-                  value={fields.SalePrice}
-                  onChange={(e) =>
-                    handleFieldChange("SalePrice", e.target.value)
-                  }
-                  className={styles.formInputBox}
-                />
-              </div>
+              
               <hr />
               <PhotoUpload onPhotosChange={handlePhotosChange} />
               <button type="submit" className={styles.button6}>

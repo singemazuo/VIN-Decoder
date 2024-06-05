@@ -10,6 +10,8 @@ import { AuthProvider } from './Auth/AuthContext';
 import Inventory from './Pages/Inventory';
 import Register from './Auth/Register';
 import AddCustomer from './Forms/AddCustomer';
+import Reports from './Pages/Reports';
+import Orders from './Pages/Orders';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Customer from './Pages/Customer';
@@ -27,6 +29,8 @@ const App = () => {
                         <Route path="/vin-form" element={<VinForm />} />
                         <Route path='/edit-form' element={<EditForm/>}/>
                         <Route path="/register" element={<Register/>}/>
+                        <Route path="/reports" element={<Reports/>}/>
+                        <Route path="/orders" element={<Orders/>}/>
                         <Route path="/account" element={
                             <PrivateRoute>
                                 <Account />

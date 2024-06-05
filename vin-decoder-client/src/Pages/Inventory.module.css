@@ -182,8 +182,105 @@
 .th {
     background-color: #f2f2f2;
     font-weight: bold;
+    
 }
 
-.thStock{
+tbody tr:nth-child(even) {
+    background-color: #f0e9e9;
+}
+
+.thStock {
+    background-color: #f2f2f2;
     border-bottom: 1px solid #ddd;
+}
+
+.hr{
+    position: relative;
+    z-index: -1;
+}
+
+.editIcon, .deleteIcon{
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    margin-bottom: 5px;
+    
+}
+
+.btnEdit, .btnDelete{
+    background-color: transparent;
+    border: none; 
+    cursor: pointer;
+    margin: 0 5px; 
+    padding: 3px 5px;
+
+}
+
+.btnEdit:hover{
+    background-color: rgb(180, 175, 224); 
+    border-radius: 8px;
+    padding: 3px 5px;
+}
+
+.btnDelete:hover{
+    background-color: rgb(218, 154, 154); 
+    border-radius: 8px;
+    padding: 3px 5px;
+}
+
+.iconFilter{
+    margin-top: 11px;
+    height: 20px;
+    width: 20px;
+}
+
+.filter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: transparent;
+    font-weight: 600;
+    height: 50px;
+    margin-top: 10px;
+    margin-left: 300px;
+}
+
+
+
+.iconArrow {
+    height: 22px;
+    width: 22px;
+    transition: transform 0.3s ease;
+    background-color: transparent;
+
+}
+
+.btnArrow{
+    background-color: transparent;
+    border: none;
+    border: 2px solid #ccc;
+    padding: 2px 8px 2px 8px;
+    border-radius: 0 10px 10px 0;
+}
+
+.filterSelect{
+    display: flex;
+    background-color: transparent;
+    border-left: 2px solid #ccc;
+    font-weight: 600;
+    padding-bottom: 2px;
+
+}
+
+.filterSelect:hover{
+    cursor: pointer;
+    background-color: #ccc;
+}
+
+.btnArrow:hover{
+    background-color: #ccc;
+}
+
+.iconArrow.rotated {
+    transform: rotate(180deg);
 }
