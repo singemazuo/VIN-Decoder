@@ -486,6 +486,49 @@ app.post('/register', async (req, res) => {
     }
 });
 
+//////////////////////////////////
+///  Get Sales Data (Monthly)  ///
+//////////////////////////////////
+
+app.get('/sales_data', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT 
+                EXTRACT(MONTH FROM sale_date) AS month, 
+                SUM(sale_price) AS revenue, 
+                SUM(sale_price - purchase_price) AS profit 
+            FROM vehicles 
+            WHERE sale_date >= NOW() - INTERVAL '1 year' 
+            GROUP BY EXTRACT(MONTH FROM sale_date) 
+            ORDER BY month;
+        `);
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error fetching sales data:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+////////////////////////////////
+///  Get Sales Data (Count)  ///
+////////////////////////////////
+
+app.get('/vehicles_sold_past_year', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT COUNT(*) 
+            FROM vehicles 
+            WHERE sale_date > current_date - interval '1 year' 
+            AND is_sold = TRUE
+        `);
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error('Error fetching vehicles sold in the past year:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
 
 // Middleware to protect routes
 const authMiddleware = (req, res, next) => {

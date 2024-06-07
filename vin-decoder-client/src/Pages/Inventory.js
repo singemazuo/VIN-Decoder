@@ -20,7 +20,7 @@ const Inventory = () => {
   const [maxMilage, setMaxMilage] = useState("");
   const [vehicles, setVehicles] = useState([]);
   const [buttonText, setButtonText] = useState("Search All");
-  const [isDescending, setIsDescending] = useState(true); // Add state for sorting order
+  const [isDescending, setIsDescending] = useState(true); 
 
   const navigate = useNavigate();
 
