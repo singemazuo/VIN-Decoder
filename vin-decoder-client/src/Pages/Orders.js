@@ -7,7 +7,7 @@ const Orders = () => {
 
     return (
         <>
-                <div className={styles.sideBar}>
+        <div className={styles.sideBar}>
             <Sidebar/>
         </div>
         <div className={styles.navBar}>

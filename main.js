@@ -508,6 +508,10 @@ app.get('/revenue_data', async (req, res) => {
     }
 });
 
+////////////////////////////
+///  Get Monthly Profit  ///
+////////////////////////////
+
 app.get('/profit_data', async (req, res) => {
     try {
         const result = await pool.query(`
@@ -525,6 +529,45 @@ app.get('/profit_data', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+////////////////////////////
+///  Get Average profit  ///
+////////////////////////////
+
+app.get('/get_average_profit', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT ROUND(AVG(sale_price - purchase_price), 2) AS average_profit
+            FROM vehicles
+            WHERE sale_date > NOW() - INTERVAL '1 year' AND is_sold = true;
+        `);
+        const averageProfit = result.rows[0].average_profit;
+        res.json({ average_profit: averageProfit });
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+////////////////////////////
+///  Get Average profit  ///
+////////////////////////////
+
+app.get('/get_average_sale', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT ROUND(AVG(sale_price), 2) AS average_sale
+            FROM vehicles
+            WHERE sale_date > NOW() - INTERVAL '1 year' AND is_sold = true;
+        `);
+        const averageSale = result.rows[0].average_sale;
+        res.json({ average_sale: averageSale });
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 
 ////////////////////////////////
 ///  Get Sales Data (Count)  ///

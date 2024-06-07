@@ -50,12 +50,12 @@ const Sidebar = () => {
                             {isCalcDropdownOpen && (
                                 <ul className={styles.dropdownMenu}>
                                     <li>
-                                        <NavLink to="/calculators/loan" activeClassName={styles.active}>
+                                        <NavLink to="/loan" activeClassName={styles.active}>
                                             Loan
                                         </NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to="/calculators/lease" activeClassName={styles.active}>
+                                        <NavLink to="/lease" activeClassName={styles.active}>
                                             Lease
                                         </NavLink>
                                     </li>

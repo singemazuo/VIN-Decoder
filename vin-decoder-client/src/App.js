@@ -15,6 +15,8 @@ import Orders from './Pages/Orders';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Customer from './Pages/Customer';
+import LoanCalc from './Pages/LoanCalc';
+import LeaseCalc from './Pages/LeaseCalc';
 
 const App = () => {
     return (
@@ -31,6 +33,9 @@ const App = () => {
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/reports" element={<Reports/>}/>
                         <Route path="/orders" element={<Orders/>}/>
+                        <Route path="/loan" element={<LoanCalc/>}/>
+                        <Route path="/lease" element={<LeaseCalc/>}/>
+
                         <Route path="/account" element={
                             <PrivateRoute>
                                 <Account />

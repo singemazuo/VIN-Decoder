@@ -12,6 +12,7 @@ const HomePage = () => {
   const [revenueData, setRevenueData] = useState(null);
   const [profitData, setProfitData] = useState(null);
   const [vehiclesSold, setVehiclesSold] = useState(null);
+  const [averageProfit, setAverageProfit] = useState(null);
 
   useEffect(() => {
     const fetchVehiclesSold = async () => {
@@ -24,6 +25,18 @@ const HomePage = () => {
     };
 
     fetchVehiclesSold();
+  }, []);
+
+  useEffect(() => {
+    const fetchAverageProfit = async () => {
+        try {
+            const response = await axios.get("http://localhost:5000/get_average_profit");
+            setAverageProfit(response.data.average_profit);
+                } catch (error) {
+            console.error("Error fetching average profit:", error);
+        }
+    };
+    fetchAverageProfit();
   }, []);
 
   useEffect(() => {
@@ -128,8 +141,8 @@ const HomePage = () => {
         </div>
         <div className={styles.annualSales}>
           <div className={styles.annualNumbers}>
-            <text>$Total</text>
             <text><strong>Vehicles Sold: {vehiclesSold} </strong></text>
+            <text><strong>Average Profit: ${averageProfit}</strong></text>
             <button className={styles.btnViewYearly}>View Yearly Report</button>
           </div>
           <div className={styles.annualGraph}>

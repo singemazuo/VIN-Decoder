@@ -14,8 +14,8 @@
 
 .monthlyNumbers, .annualNumbers{
  display: flex;
- height: 100%;
- width: 200px;
+ height: 420px;
+ width: 230px;
  min-width: 180px;
  height: 250px;
  flex-direction: column;
@@ -23,6 +23,7 @@
  border: solid 2px #ccc;
  border-radius: 10px;
  background-color: #eeecec;
+ padding-bottom: 10px;
 }
 
 .mainContent{
@@ -30,25 +31,36 @@
     height: 90vh;
     flex-direction: column;
     justify-content: space-around;
-    margin-right: 10rem;
+    margin-right: 0.5rem;
 }
 
 .btnViewMonthly, .btnViewYearly{
-    background-color: #e77094;
+    background-color: #d1577c;
     border: none;
     border-radius: 20px;
     padding: 8px 0;
     margin: 0 8px;
+    color: white;
+    font-weight: 600;
+}
+
+.btnViewMonthly:hover, .btnViewYearly:hover{
+    background-color: #a70d3b;
+   
 }
 
 .annualSales{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    
 }
 
 .annualGraph {
     width: 500px;
     height: 100%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
   }
   

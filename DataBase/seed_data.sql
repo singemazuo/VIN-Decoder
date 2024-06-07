@@ -64,9 +64,3 @@ INSERT INTO vehicles (vin, year, make, model, transmission, weight, exterior_col
 ('1HGCM82633A123456', 2018, 'Honda', 'Accord', 'Automatic', '1500kg', 'Blue', 'Black', 'NA', '2.4L', 4, 'H12345', 'Gasoline', 'Sedan', 'Front', 'N/A', 'Side', 'Curtain', 'N/A', 'N/A', 'Honda Plant, Tokyo, Japan', 8000, 10000, TRUE, '2024-05-10', 40000),
 ('1HGCM82633A123457', 2017, 'Toyota', 'Camry', 'Automatic', '1400kg', 'Red', 'Gray', 'NA', '2.5L', 4, 'T12345', 'Gasoline', 'Sedan', 'Front', 'N/A', 'Side', 'Curtain', 'N/A', 'N/A', 'Toyota Plant, Nagoya, Japan', 7500, 9500, TRUE, '2024-05-15', 45000),
 ('1HGCM82633A123458', 2016, 'Ford', 'Fusion', 'Automatic', '1600kg', 'Black', 'Black', 'NA', '2.0L', 4, 'F12345', 'Gasoline', 'Sedan', 'Front', 'N/A', 'Side', 'Curtain', 'N/A', 'N/A', 'Ford Plant, Michigan, USA', 7000, 9000, TRUE, '2024-05-20', 50000);
-
--- Insert 2 vehicles for April
-INSERT INTO vehicles (vin, year, make, model, transmission, weight, exterior_color, interior_color, engine_brake, engine, doors, stock_number, fuel, title, front_airbags, knee_airbags, side_airbags, curtain_airbags, seat_cushion_airbags, other_restraint_info, plant_info, purchase_price, sale_price, is_sold, sale_date, milage) VALUES
-('1HGCM82633A123459', 2019, 'Nissan', 'Altima', 'Automatic', '1450kg', 'White', 'Beige', 'NA', '2.5L', 4, 'N12345', 'Gasoline', 'Sedan', 'Front', 'N/A', 'Side', 'Curtain', 'N/A', 'N/A', 'Nissan Plant, Yokohama, Japan', 8500, 10500, TRUE, '2024-04-10', 35000),
-('1HGCM82633A123460', 2020, 'Chevrolet', 'Malibu', 'Automatic', '1550kg', 'Gray', 'Black', 'NA', '2.0L', 4, 'C12345', 'Gasoline', 'Sedan', 'Front', 'N/A', 'Side', 'Curtain', 'N/A', 'N/A', 'Chevrolet Plant, Detroit, USA', 9000, 11000, TRUE, '2024-04-20', 30000);
-
