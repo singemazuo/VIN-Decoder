@@ -60,3 +60,47 @@
     height: 40px;
     width: 40px;
 }
+
+
+.dropdown {
+    position: relative;
+}
+
+.dropdownToggle {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #fff;
+    font-size: 20px;
+}
+
+.dropdownToggle:hover {
+    color: #acaab9;
+    opacity: 80%;
+}
+
+.dropdownMenu {
+    list-style: none;
+    display: flex;
+    margin-left: 60px;
+    flex-direction: column;
+    justify-content: flex-end;    
+}
+
+
+
+.dropdownMenu li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.dropdownMenu li a:hover {
+    color: #acaab9;
+    opacity: 80%;
+}
+
+.dropdownMenu li a.active {
+    background-color: #1e2a45;
+    border-radius: 5px;
+}

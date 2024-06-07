@@ -9,19 +9,47 @@ import Sidebar from "../Navigation/Sidebar";
 import NavigationBar from "../Navigation/NavigationBar";
 
 const HomePage = () => {
-  const [salesData, setSalesData] = useState(null);
+  const [revenueData, setRevenueData] = useState(null);
+  const [profitData, setProfitData] = useState(null);
+  const [vehiclesSold, setVehiclesSold] = useState(null);
 
   useEffect(() => {
-    const fetchSalesData = async () => {
+    const fetchVehiclesSold = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/sales_data");
-        setSalesData(response.data);
+        const response = await axios.get("http://localhost:5000/vehicles_sold_past_year");
+        setVehiclesSold(response.data.count);
+      } catch (error) {
+        console.error("Error fetching vehicles sold in the past year:", error);
+      }
+    };
+
+    fetchVehiclesSold();
+  }, []);
+
+  useEffect(() => {
+    const fetchRevenueData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/revenue_data");
+        setRevenueData(response.data);
       } catch (error) {
         console.error("Error fetching sales data:", error);
       }
     };
 
-    fetchSalesData();
+    fetchRevenueData();
+  }, []);
+
+  useEffect(() => {
+    const fetchProfitData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/profit_data");
+        setProfitData(response.data);
+      } catch (error) {
+        console.error("Error fetching sales data:", error);
+      }
+    };
+
+    fetchProfitData();
   }, []);
 
   const getMonthName = (monthNumber) => {
@@ -32,10 +60,9 @@ const HomePage = () => {
     return monthNames[monthNumber - 1];
   };
 
-  const prepareChartData = (data) => {
+  const prepareRevenueChartData = (data) => {
     const labels = data.map((item) => getMonthName(item.month));
     const revenueData = data.map((item) => item.revenue);
-    const profitData = data.map((item) => item.profit);
 
     return {
       labels,
@@ -44,7 +71,18 @@ const HomePage = () => {
           label: "Revenue",
           data: revenueData,
           backgroundColor: "rgba(88, 131, 196, 0.65)",
-        },
+        }
+      ],
+    };
+  };
+
+  const prepareProfitChartData = (data) => {
+    const labels = data.map((item) => getMonthName(item.month));
+    const profitData = data.map((item) => item.profit);
+
+    return {
+      labels,
+      datasets: [
         {
           label: "Profit",
           data: profitData,
@@ -57,6 +95,16 @@ const HomePage = () => {
   const chartOptions = {
     maintainAspectRatio: false,
     responsive: true,
+  };
+
+  const profitChartOptions = {
+    ...chartOptions,
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 15000,
+      },
+    },
   };
 
   return (
@@ -81,12 +129,17 @@ const HomePage = () => {
         <div className={styles.annualSales}>
           <div className={styles.annualNumbers}>
             <text>$Total</text>
-            <text>#Sold</text>
+            <text><strong>Vehicles Sold: {vehiclesSold} </strong></text>
             <button className={styles.btnViewYearly}>View Yearly Report</button>
           </div>
           <div className={styles.annualGraph}>
-            {salesData && (
-              <Bar data={prepareChartData(salesData)} options={chartOptions} />
+            {revenueData && (
+              <Bar data={prepareRevenueChartData(revenueData)} options={chartOptions} />
+            )}
+          </div>
+          <div className={styles.annualGraph}>
+            {profitData && (
+              <Bar data={prepareProfitChartData(profitData)} options={profitChartOptions} />
             )}
           </div>
         </div>

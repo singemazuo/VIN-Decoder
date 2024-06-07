@@ -1,9 +1,15 @@
 // Sidebar.js
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Sidebar.module.css'; 
 
 const Sidebar = () => {
+    const [isCalcDropdownOpen, setIsCalcDropdownOpen] = useState(false);
+
+    const toggleCalcDropdown = () => {
+        setIsCalcDropdownOpen(!isCalcDropdownOpen);
+    };
+
     return (
         <div className={styles.sidebar}>
             <div className={styles.logo}>
@@ -16,7 +22,6 @@ const Sidebar = () => {
                             <span className={styles.icon}>🏠</span> Dashboard
                         </NavLink>
                     </li>
-
                     <li>
                         <NavLink to="/inventory" activeClassName={styles.active}>
                             <span className={styles.icon}><img src='./icons/CarInventory_white.svg' alt='carinv'></img></span> Inventory
@@ -36,6 +41,27 @@ const Sidebar = () => {
                         <NavLink to="/orders" activeClassName={styles.active}>
                             <span className={styles.icon}>📦</span> Orders
                         </NavLink>
+                    </li>
+                    <li>
+                        <div className={styles.dropdown}>
+                            <div className={styles.dropdownToggle} onClick={toggleCalcDropdown}>
+                                <span className={styles.icon}>🖩</span> Calculators
+                            </div>
+                            {isCalcDropdownOpen && (
+                                <ul className={styles.dropdownMenu}>
+                                    <li>
+                                        <NavLink to="/calculators/loan" activeClassName={styles.active}>
+                                            Loan
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/calculators/lease" activeClassName={styles.active}>
+                                            Lease
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                            )}
+                        </div>
                     </li>
                     <li>
                         <NavLink to="/settings" activeClassName={styles.active}>
