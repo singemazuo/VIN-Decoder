@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
-import VehicleMakeChart from "../Charts/VehicleMakeChart";
 import styles from "./HomePage.module.css";
 import Sidebar from "../Navigation/Sidebar";
 import NavigationBar from "../Navigation/NavigationBar";
@@ -143,14 +142,17 @@ const HomePage = () => {
         <NavigationBar />
       </div>
       <div className={styles.content}>
-        <div className={styles.sideContent}>
-          <button className={styles.btnViewMonthly}>View Monthly Report</button>
-          <button className={styles.btnViewYearly}>View Annual Report</button>
-        </div>
         <div className={styles.mainContent}>
-
-
           <div className={styles.annualSales}>
+            <div className={styles.reportButtons}>
+              <button className={styles.btnViewMonthly}>
+                View Monthly Report
+              </button>
+              <button className={styles.btnViewYearly}>
+                View Annual Report
+              </button>
+            </div>
+
             <div className={styles.annualGraph}>
               {revenueData && (
                 <Bar
@@ -168,17 +170,8 @@ const HomePage = () => {
               )}
             </div>
           </div>
-          <div className={styles.monthlySales}>
-            <div className={styles.monthlyNumbers}>
-              <text>$Total</text>
-              <text>#Sold</text>
-            </div>
-            <div className={styles.monthlyGraph}></div>
-          </div>
           <div className={styles.annualGrid}>
-            <div>
-                <VehicleMakeChart />
-            </div>
+            <div></div>
             <div className={styles.annualNumbers}>
               <text>
                 <strong>{vehiclesSold} </strong>
@@ -195,6 +188,14 @@ const HomePage = () => {
               </text>
             </div>
           </div>
+          <div className={styles.monthlySales}>
+            <div className={styles.monthlyNumbers}>
+              <text>$Total</text>
+              <text>#Sold</text>
+            </div>
+            <div className={styles.monthlyGraph}></div>
+          </div>
+
         </div>
       </div>
     </>

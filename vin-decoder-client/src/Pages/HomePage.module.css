@@ -1,6 +1,3 @@
-.mainContent{
-    margin-left: 255px;
-}
 
 .sideBar{
     position: relative;
@@ -21,25 +18,17 @@
  flex-direction: column;
  justify-content: space-evenly;
  border: solid 2px #ccc;
- border-radius: 10px;
- background-color: #eeecec;
+ border-radius: 20px;
+ background-color: white;
  padding-bottom: 10px;
-}
-
-.mainContent{
-    display: flex;
-    height: 90vh;
-    flex-direction: column;
-    justify-content: space-around;
-    margin-right: 0.5rem;
 }
 
 .btnViewMonthly, .btnViewYearly{
     background-color: #d1577c;
     border: none;
     border-radius: 20px;
-    padding: 8px 0;
-    margin: 0 8px;
+    padding: 8px 10px;
+    margin: 0 17px;
     color: white;
     font-weight: 600;
 }
@@ -49,18 +38,54 @@
    
 }
 
+.content{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(231, 236, 240);
+    height: 100vh;
+}
+
+.sideContent{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-left: 255px;
+    min-width: 200px;
+    width: 100%;
+}
+
+.mainContent{
+    display: flex;
+    flex: 6;
+    flex-direction: column;
+    margin-left: 255px;
+}
+
 .annualSales{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    
 }
 
-.annualGraph {
+.monthlySales{
+    display: flex;
+    flex-direction: row;
+}
+
+.annualGrid{
+    display: flex;
+    flex-direction: row;
+}
+
+.reportButtons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.annualGraph{
+    background-color: white;
+    border: solid 2px #ccc;
+    border-radius: 20px;
+    height: 240px;
     width: 500px;
-    height: 100%;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 10px;
-  }
-  
+}
