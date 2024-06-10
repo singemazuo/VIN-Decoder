@@ -1,14 +1,14 @@
-.sideBar{
+.sideBar {
     position: relative;
-    z-index: 1000;  
-}
-
-.navBar{
+    z-index: 1000;
+  }
+  
+  .navBar {
     position: relative;
     z-index: 100;
-}
-
-.container {
+  }
+  
+  .container {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -17,70 +17,73 @@
     align-items: center;
     height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
-    color: #383197;
+    color: #000000;
     padding-left: 255px;
-}
-
-.leaseForm {
+  }
+  
+  .loanForm {
+    margin-top: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     border-radius: 20px;
     padding: 20px 0 25px 0;
     padding-left: 255;
-    background-color: #d4cece;
-}
-
-.leaseButtons {
+    background-color: #e2d9d9;
+  }
+  
+  .leaseButtons {
     border: none;
     background: transparent;
     display: flex;
     flex-direction: row;
     width: 100%;
-}
-
-.btnClear, .btnCalculate {
+  }
+  
+  .btnClear, .btnCalculate {
     border: 1px black solid;
     padding: 5px 5px 5px 5px;
     background: transparent;
     width: 50%;
-}
-
-.leaseInput {
+  }
+  
+  .leaseInput {
     width: 100%;
-}
-
-.formGroup {
+  }
+  
+  .formGroup {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
-}
-
-.formGroup label {
-    margin-bottom: 5px;
-    color: #606060;
-}
-
-.formGroup input {
-    height: 30px;
-    margin-bottom: 10px;
-    padding: 5px;
-    border-radius: 4px;
-    border: 1px solid #cccccc;
-    background-color: #ffffff;
+    width: 100%;
+  }
+  
+  .formGroup label {
     color: #000000;
-}
-
-.buttons {
+  }
+  
+  .formGroup input[type="range"] {
+    width: 90%;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  .formGroup output {
+    margin-top: 10px;
+    margin-left: 20px;
+    text-align: left;
+    align-self: flex-start;  }
+  
+  .buttons {
     display: flex;
     justify-content: space-around;
     width: 100%;
-    gap: 4px;
-}
-
-.button {
+    gap: 1px;
+  }
+  
+  .button {
     border: 1px solid #ccc;
     border-radius: 6px;
     width: 48%;
@@ -88,14 +91,17 @@
     background-color: #ffffff;
     color: #000000;
     cursor: pointer;
-}
-
-.button:hover {
+    margin: 0 20px;
+  }
+  
+  .button:hover {
     background-color: #e0e0e0;
-}
-
-.paymentTable {
+  }
+  
+  .paymentTable {
     text-align: center;
     margin-top: 20px;
     color: #000000;
-}
+    margin-bottom: 30px;
+  }
+  

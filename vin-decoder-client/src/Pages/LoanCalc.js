@@ -93,7 +93,7 @@ const LoanCalc = () => {
       </div>
       <div className={styles.container}>
         <h1>Loan Payment Calculator</h1>
-        <form id="loanForm" onSubmit={handleSubmit} onReset={handleReset}>
+        <form className={styles.loanForm} onSubmit={handleSubmit} onReset={handleReset}>
           <div className={styles.formGroup}>
             <label htmlFor="price">Price of your new vehicle ($) (excluding Tax):</label>
             <input
@@ -193,8 +193,8 @@ const LoanCalc = () => {
             <output>{formData.interestRate}%</output>
           </div>
           <div className={styles.buttons}>
-            <button type="submit">Calculate</button>
-            <button type="reset">Reset</button>
+            <button className={styles.button} type="submit">Calculate</button>
+            <button className={styles.button} type="reset">Reset</button>
           </div>
         </form>
         {result && (
