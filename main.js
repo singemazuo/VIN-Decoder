@@ -588,6 +588,24 @@ app.get('/vehicles_sold_past_year', async (req, res) => {
     }
 });
 
+////////////////////////////////
+///  Get Vehcile Make Data   ///
+////////////////////////////////
+
+app.get('/vehicle-make-distribution', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT LOWER(make) AS make, COUNT(*) AS count
+            FROM vehicles
+            GROUP BY LOWER(make);
+        `);
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error fetching vehicle make distribution:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 
 // Middleware to protect routes
