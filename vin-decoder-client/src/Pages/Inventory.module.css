@@ -284,3 +284,7 @@ tbody tr:nth-child(even) {
 .iconArrow.rotated {
     transform: rotate(180deg);
 }
+
+.btnList.active, .btnGrid.active {
+    background-color: #ccc;
+}

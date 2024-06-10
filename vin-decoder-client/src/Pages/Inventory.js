@@ -20,7 +20,8 @@ const Inventory = () => {
   const [maxMilage, setMaxMilage] = useState("");
   const [vehicles, setVehicles] = useState([]);
   const [buttonText, setButtonText] = useState("Search All");
-  const [isDescending, setIsDescending] = useState(true); 
+  const [isDescending, setIsDescending] = useState(true);
+  const [activeView, setActiveView] = useState(localStorage.getItem("activeView") || "list"); 
 
   const navigate = useNavigate();
 
@@ -36,6 +37,11 @@ const Inventory = () => {
 
     fetchVehicles();
   }, []);
+
+  const handleViewChange = (view) => {
+    setActiveView(view);
+    localStorage.setItem("activeView", view);
+  };
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -126,14 +132,20 @@ const Inventory = () => {
               </button>
             </div>
             <div className={styles.displayToggle}>
-              <button className={styles.btnList}>
+            <button
+                className={`${styles.btnList} ${activeView === "list" ? styles.active : ""}`}
+                onClick={() => handleViewChange("list")}
+              >
                 <img
                   src="../icons/list.svg"
                   alt="list"
                   className={styles.svgList}
                 ></img>
               </button>
-              <button className={styles.btnGrid}>
+              <button
+                className={`${styles.btnGrid} ${activeView === "grid" ? styles.active : ""}`}
+                onClick={() => handleViewChange("grid")}
+              >
                 <img
                   src="../icons/grid.svg"
                   alt="grid"
