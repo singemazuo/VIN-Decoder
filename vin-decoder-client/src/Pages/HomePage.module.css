@@ -1,102 +1,141 @@
-
-.sideBar{
+.sideBar {
     position: relative;
     z-index: 1000;
-}
-
-.navBar{
+  }
+  
+  .navBar {
     position: relative;
     z-index: 100;
-}
-
-.monthlyNumbers, .annualNumbers{
- display: flex;
- height: 420px;
- width: 230px;
- min-width: 180px;
- height: 250px;
- flex-direction: column;
- justify-content: space-evenly;
- border: solid 2px #ccc;
- border-radius: 20px;
- background-color: white;
- padding-bottom: 10px;
-}
-
-.btnViewMonthly, .btnViewYearly{
+  }
+  
+  .monthlyNumbers,
+  .annualNumbers {
+    display: flex;
+    height: 175px;
+    width: 210px;
+    min-width: 180px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: solid 2px #ccc;
+    border-radius: 20px;
+    background-color: white;
+    padding: 10px;
+    margin: 10px;
+    position: relative;
+  }
+  
+  .title {
+    margin: 0;
+    align-self: flex-start;
+  }
+  
+  .centeredNumbers {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    width: 100%;
+  }
+  
+  .btnViewMonthly, .btnViewYearly , .btnRefresh{
     background-color: #c95376;
     border: none;
-    border-radius: 20px;
-    padding: 9px 13px;
+    border-radius: 22px;
+    padding: 12px 13px;
     margin: 0 17px;
     color: white;
     font-weight: 600;
-}
+  }
 
-.btnViewMonthly:hover, .btnViewYearly:hover{
+  .btnViewMonthly{
+    margin-top: 18px;
+  }
+  
+  .btnViewMonthly:hover,
+  .btnViewYearly:hover {
     background-color: #a70d3b;
-   
-}
-
-.content{
+  }
+  
+  .content {
     display: flex;
     flex-direction: row;
     background-color: rgb(231, 236, 240);
     height: 100vh;
-}
-
-.sideContent{
+  }
+  
+  .sideContent {
     display: flex;
     flex-direction: column;
     flex: 1;
     margin-left: 255px;
     min-width: 200px;
     width: 100%;
-}
-
-.mainContent{
+  }
+  
+  .mainContent {
     display: flex;
     flex: 6;
     flex-direction: column;
     margin-left: 255px;
-}
-
-.annualSales{
+  }
+  
+  .annualSales {
     display: flex;
     flex-direction: row;
-}
-
-.monthlySales{
+  }
+  
+  .monthlySales {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-}
-
-.annualGrid{
+    align-items: flex-start;
+  }
+  
+  .annualGrid {
     display: flex;
     flex-direction: row;
-}
-
-.reportButtons{
+  }
+  
+  .reportButtons {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-}
-
-.annualGraph{
+  }
+  
+  .annualGraph {
     background-color: white;
     border: solid 2px #ccc;
     border-radius: 20px;
     height: 240px;
     width: 500px;
     padding: 8px;
-}
-.chartContainer {
+  }
+  
+  .chartContainer {
     width: 450px;
     max-width: 600px;
-    height: 300px;
-    margin: auto;
+    height: 285px;
+    margin: 10px;
     background-color: white;
     border: solid 2px #ccc;
     border-radius: 20px;
-}
+  }
+  
+  .hex {
+    color: #8d8f97;
+  }
+  
+  .difference{
+    margin-right: 10px;
+    margin-top: 6px;
+  }
+
+  .refreshIcon{
+    width: 18px;
+    height: 18px;
+    margin-bottom: 2px;
+  }
+
+ 

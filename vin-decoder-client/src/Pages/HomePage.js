@@ -12,6 +12,8 @@ const HomePage = () => {
   const [profitData, setProfitData] = useState(null);
   const [vehiclesSold, setVehiclesSold] = useState(null);
   const [averageProfit, setAverageProfit] = useState(null);
+  const [vehiclesSoldCount, setVehiclesSoldCount] = useState(0);
+  const [salesDifference, setSalesDifference] = useState(null);
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
@@ -20,10 +22,56 @@ const HomePage = () => {
         data: [],
         backgroundColor: [],
         hoverBackgroundColor: [],
-        cutout: "50%", 
+        cutout: "50%",
       },
     ],
   });
+
+  const colors = [
+    "#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a",
+    "#ffee65", "#beb9db", "#fdcce5", "#8d8f97", "#D4F0F0",
+    "#8FCACA", "#CCE2CB", "#B6CFB6", "#97C1A9", "#FCB9AA",
+    "#FFDBCC", "#ECEAEA", "#A2E1DB", "#55BCBD", "#CBAACB",
+    "#8FCACA", "#ECEAEA", "#FFCCB6", "#FF968A",
+  ];
+
+  const getColors = (count) => {
+    let resultColors = [];
+    for (let i = 0; i < count; i++) {
+      resultColors.push(colors[i % colors.length]);
+    }
+    return resultColors;
+  };
+
+  useEffect(() => {
+    const fetchVehiclesSoldThisMonth = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/vehicles-sold-this-month"
+        );
+        setVehiclesSoldCount(response.data.count);
+      } catch (error) {
+        console.error("Error fetching vehicles sold this month:", error);
+      }
+    };
+
+    fetchVehiclesSoldThisMonth();
+  }, []);
+
+  useEffect(() => {
+    const fetchSalesDifference = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/vehicle-sales-difference"
+        );
+        setSalesDifference(response.data);
+      } catch (error) {
+        console.error("Error fetching sales difference:", error);
+      }
+    };
+
+    fetchSalesDifference();
+  }, []);
 
   useEffect(() => {
     const fetchVehicleMakeDistribution = async () => {
@@ -37,37 +85,17 @@ const HomePage = () => {
         const makes = data.map((item) => item.make);
         const counts = data.map((item) => item.count);
 
+        const chartColors = getColors(makes.length);
+
         setChartData({
           labels: makes,
           datasets: [
             {
               label: "Vehicle Make Distribution",
               data: counts,
-              backgroundColor: [
-                "#FF6384",
-                "#36A2EB",
-                "#FFCE56",
-                "#FF9F40",
-                "#4BC0C0",
-                "#9966FF",
-                "#FF6384",
-                "#36A2EB",
-                "#FFCE56",
-                "#FF9F40",
-              ],
-              hoverBackgroundColor: [
-                "#FF6384",
-                "#36A2EB",
-                "#FFCE56",
-                "#FF9F40",
-                "#4BC0C0",
-                "#9966FF",
-                "#FF6384",
-                "#36A2EB",
-                "#FFCE56",
-                "#FF9F40",
-              ],
-              cutout: "50%", 
+              backgroundColor: chartColors,
+              hoverBackgroundColor: chartColors,
+              cutout: "50%",
             },
           ],
         });
@@ -136,18 +164,8 @@ const HomePage = () => {
 
   const getMonthName = (monthNumber) => {
     const monthNames = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "June",
-      "July",
-      "Aug",
-      "Sept",
-      "Oct",
-      "Nov",
-      "Dec",
+      "Jan", "Feb", "Mar", "Apr", "May", "June",
+      "July", "Aug", "Sept", "Oct", "Nov", "Dec",
     ];
     return monthNames[monthNumber - 1];
   };
@@ -189,7 +207,7 @@ const HomePage = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: "top",
       },
     },
   };
@@ -199,7 +217,7 @@ const HomePage = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: "top",
       },
     },
     scales: {
@@ -215,9 +233,27 @@ const HomePage = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'right',
+        position: "right",
       },
     },
+  };
+
+  const getDifferenceTextStyle = () => {
+    if (salesDifference && salesDifference.percentage_difference > 0) {
+      return { color: "green" };
+    } else if (salesDifference && salesDifference.percentage_difference < 0) {
+      return { color: "red" };
+    } else {
+      return {};
+    }
+  };
+
+  const formatPercentageDifference = (difference) => {
+    if (difference > 0) {
+      return `+${difference.toFixed(2)}%`;
+    } else {
+      return `${difference.toFixed(2)}%`;
+    }
   };
 
   return (
@@ -232,11 +268,11 @@ const HomePage = () => {
         <div className={styles.mainContent}>
           <div className={styles.annualSales}>
             <div className={styles.reportButtons}>
-              <button className={styles.btnViewMonthly}>
-                View Monthly Report
-              </button>
               <button className={styles.btnViewYearly}>
                 View Annual Report
+              </button>
+              <button className={styles.btnRefresh}>
+                <img className={styles.refreshIcon} src="../icons/refresh.svg" alt="refresh"></img> Refresh Reports
               </button>
             </div>
 
@@ -276,11 +312,20 @@ const HomePage = () => {
             </div>
           </div>
           <div className={styles.monthlySales}>
+            <div className={styles.monthlyButton}>
             <div className={styles.monthlyNumbers}>
-              <text>$Total</text>
-              <text>#Sold</text>
+              <p className={styles.title}>Sold this month</p>
+              <div className={styles.centeredNumbers}>
+                <h1><strong>{vehiclesSoldCount}</strong></h1>
+                <h4 className={styles.difference} style={getDifferenceTextStyle()}>
+                  {salesDifference ? formatPercentageDifference(salesDifference.percentage_difference) : null}
+                </h4>
+              </div>
             </div>
-            <div className={styles.monthlyGraph}></div>
+            <button className={styles.btnViewMonthly}>
+                View Monthly Report
+              </button>
+            </div>
             <div className={styles.chartContainer}>
               <Pie data={chartData} options={pieChartOptions} />
             </div>

@@ -606,6 +606,63 @@ app.get('/vehicle-make-distribution', async (req, res) => {
     }
 });
 
+/////////////////////////////////////
+///  Get Vehcile Sold This Month  ///
+/////////////////////////////////////
+
+app.get('/vehicles-sold-this-month', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT COUNT(*) AS count
+            FROM vehicles
+            WHERE date_trunc('month', sale_date) = date_trunc('month', current_date);
+        `);
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error('Error fetching vehicles sold this month:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+////////////////////////////////////
+///  Monthly Vehicle Difference  ///
+////////////////////////////////////
+
+app.get('/vehicle-sales-difference', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            WITH current_month AS (
+                SELECT COUNT(*) AS sold_this_month
+                FROM vehicles
+                WHERE is_sold = TRUE
+                  AND sale_date >= date_trunc('month', current_date)
+                  AND sale_date < date_trunc('month', current_date + interval '1 month')
+            ),
+            previous_month AS (
+                SELECT COUNT(*) AS sold_last_month
+                FROM vehicles
+                WHERE is_sold = TRUE
+                  AND sale_date >= date_trunc('month', current_date - interval '1 month')
+                  AND sale_date < date_trunc('month', current_date)
+            )
+            SELECT 
+                cm.sold_this_month,
+                pm.sold_last_month,
+                (cm.sold_this_month - pm.sold_last_month) AS difference,
+                CASE 
+                    WHEN pm.sold_last_month = 0 THEN NULL
+                    ELSE (cm.sold_this_month - pm.sold_last_month) / pm.sold_last_month::float * 100
+                END AS percentage_difference
+            FROM 
+                current_month cm,
+                previous_month pm;
+        `);
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error('Error fetching vehicle sales difference:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 
 // Middleware to protect routes
