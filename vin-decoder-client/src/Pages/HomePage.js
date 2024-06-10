@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
-
+import VehicleMakeChart from "../Charts/VehicleMakeChart";
 import styles from "./HomePage.module.css";
 import Sidebar from "../Navigation/Sidebar";
 import NavigationBar from "../Navigation/NavigationBar";
@@ -17,7 +17,9 @@ const HomePage = () => {
   useEffect(() => {
     const fetchVehiclesSold = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/vehicles_sold_past_year");
+        const response = await axios.get(
+          "http://localhost:5000/vehicles_sold_past_year"
+        );
         setVehiclesSold(response.data.count);
       } catch (error) {
         console.error("Error fetching vehicles sold in the past year:", error);
@@ -29,12 +31,14 @@ const HomePage = () => {
 
   useEffect(() => {
     const fetchAverageProfit = async () => {
-        try {
-            const response = await axios.get("http://localhost:5000/get_average_profit");
-            setAverageProfit(response.data.average_profit);
-                } catch (error) {
-            console.error("Error fetching average profit:", error);
-        }
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/get_average_profit"
+        );
+        setAverageProfit(response.data.average_profit);
+      } catch (error) {
+        console.error("Error fetching average profit:", error);
+      }
     };
     fetchAverageProfit();
   }, []);
@@ -67,8 +71,18 @@ const HomePage = () => {
 
   const getMonthName = (monthNumber) => {
     const monthNames = [
-      "Jan", "Feb", "Mar", "Apr", "May", "June",
-      "July", "Aug", "Sept", "Oct", "Nov", "Dec"
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "June",
+      "July",
+      "Aug",
+      "Sept",
+      "Oct",
+      "Nov",
+      "Dec",
     ];
     return monthNames[monthNumber - 1];
   };
@@ -84,7 +98,7 @@ const HomePage = () => {
           label: "Revenue",
           data: revenueData,
           backgroundColor: "rgba(88, 131, 196, 0.65)",
-        }
+        },
       ],
     };
   };
@@ -128,32 +142,58 @@ const HomePage = () => {
       <div className={styles.navBar}>
         <NavigationBar />
       </div>
-      <div className={styles.mainContent}>
-        <div className={styles.monthlySales}>
-          <div className={styles.monthlyNumbers}>
-            <text>$Total</text>
-            <text>#Sold</text>
-            <button className={styles.btnViewMonthly}>
-              View Monthly Report
-            </button>
-          </div>
-          <div className={styles.monthlyGraph}></div>
+      <div className={styles.content}>
+        <div className={styles.sideContent}>
+          <button className={styles.btnViewMonthly}>View Monthly Report</button>
+          <button className={styles.btnViewYearly}>View Annual Report</button>
         </div>
-        <div className={styles.annualSales}>
-          <div className={styles.annualNumbers}>
-            <text><strong>Vehicles Sold: {vehiclesSold} </strong></text>
-            <text><strong>Average Profit: ${averageProfit}</strong></text>
-            <button className={styles.btnViewYearly}>View Yearly Report</button>
+        <div className={styles.mainContent}>
+
+
+          <div className={styles.annualSales}>
+            <div className={styles.annualGraph}>
+              {revenueData && (
+                <Bar
+                  data={prepareRevenueChartData(revenueData)}
+                  options={chartOptions}
+                />
+              )}
+            </div>
+            <div className={styles.annualGraph}>
+              {profitData && (
+                <Bar
+                  data={prepareProfitChartData(profitData)}
+                  options={profitChartOptions}
+                />
+              )}
+            </div>
           </div>
-          <div className={styles.annualGraph}>
-            {revenueData && (
-              <Bar data={prepareRevenueChartData(revenueData)} options={chartOptions} />
-            )}
+          <div className={styles.monthlySales}>
+            <div className={styles.monthlyNumbers}>
+              <text>$Total</text>
+              <text>#Sold</text>
+            </div>
+            <div className={styles.monthlyGraph}></div>
           </div>
-          <div className={styles.annualGraph}>
-            {profitData && (
-              <Bar data={prepareProfitChartData(profitData)} options={profitChartOptions} />
-            )}
+          <div className={styles.annualGrid}>
+            <div>
+                <VehicleMakeChart />
+            </div>
+            <div className={styles.annualNumbers}>
+              <text>
+                <strong>{vehiclesSold} </strong>
+              </text>
+            </div>
+            <div className={styles.annualNumbers}>
+              <text>
+                <strong>${averageProfit}</strong>
+              </text>
+            </div>
+            <div className={styles.annualNumbers}>
+              <text>
+                <strong>${averageProfit}</strong>
+              </text>
+            </div>
           </div>
         </div>
       </div>
