@@ -568,6 +568,25 @@ app.get('/get_average_sale', async (req, res) => {
     }
 });
 
+/////////////////////////////
+///  Get Average Revenue  ///
+/////////////////////////////
+
+app.get('/get_average_revenue', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT ROUND(AVG(sale_price), 2) AS average_revenue
+            FROM vehicles
+            WHERE sale_date > NOW() - INTERVAL '1 year' AND is_sold = true;
+        `);
+        const averageRevenue = result.rows[0].average_revenue;
+        res.json({ average_revenue: averageRevenue });
+    } catch (error) {
+        console.error('Error fetching average revenue:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 
 ////////////////////////////////
 ///  Get Sales Data (Count)  ///

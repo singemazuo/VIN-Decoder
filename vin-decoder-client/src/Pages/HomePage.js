@@ -14,6 +14,8 @@ const HomePage = () => {
   const [averageProfit, setAverageProfit] = useState(null);
   const [vehiclesSoldCount, setVehiclesSoldCount] = useState(0);
   const [salesDifference, setSalesDifference] = useState(null);
+  const [averageRevenue, setAverageRevenue] = useState(null);
+
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
@@ -42,6 +44,19 @@ const HomePage = () => {
     }
     return resultColors;
   };
+
+  useEffect(() => {
+    const fetchAverageRevenue = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/get_average_revenue");
+        setAverageRevenue(response.data.average_revenue);
+      } catch (error) {
+        console.error("Error fetching average revenue:", error);
+      }
+    };
+    fetchAverageRevenue();
+  }, []);
+  
 
   useEffect(() => {
     const fetchVehiclesSoldThisMonth = async () => {
@@ -307,7 +322,7 @@ const HomePage = () => {
             </div>
             <div className={styles.annualNumbers}>
               <text>
-                <strong>${averageProfit}</strong>
+                <strong>${averageRevenue}</strong>
               </text>
             </div>
           </div>
