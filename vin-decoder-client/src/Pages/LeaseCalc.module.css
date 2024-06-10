@@ -1,65 +1,89 @@
-.container{
-    margin: 0 0 0 255px;
-    padding: 0;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #000000;
+/* Neumorphism styles */
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+
+.container {
+  background: #EEEEEE;
+  width: 320px;
+  padding: 32px 16px;
+  border-radius: .5em;
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 2, .3);
+  margin: 20px auto ;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #000000;
+  position: relative;
+  margin-top: 20px;
+
+left: 110px;}
+
+.leaseForm {
+    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 20px;
+  padding: 20px;
+  background-color: #EEEEEE;
+  box-shadow: 6px 6px 16px 0 rgba(209, 205, 199, .5), -6px -6px 16px 0 rgba(255, 255, 255, .5);
 }
 
-.leaseForm{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 400px;
-    border-radius: 20px;
-    padding: 20px 0 25px 0 ;
-    padding-left: 255;
-    background-color: #d4cece;
+.sideBar {
+  position: absolute;
+  z-index: 1000;
+  width: 255px; 
 }
 
-.sideBar{
-    position: relative;
-    z-index: 1000;  
-}
-.navBar{
-    position: relative;
-    z-index: 100;
+.navBar {
+  position: relative;
+  z-index: 100;
 }
 
-.leaseButtons{
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    gap: 4px;
+.leaseButtons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  gap: 4px;
 }
 
-.btnClear, .btnCalculate{
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    width: 48%;
-    padding: 10px;
-    background-color: #ffffff;
-    color: #000000;
-    cursor: pointer;
+.btnClear,
+.btnCalculate {
+  border: none;
+  border-radius: 50px;
+  width: 48%;
+  padding: 10px;
+  background-color: #E0E0E0;
+box-shadow: 8px 8px 20px 0 rgba(179, 175, 169, .7), -8px -8px 20px 0 rgba(255, 255, 255, .7);
+
+  color: #000000;
+  cursor: pointer;
 }
 
-.btnClear:hover, .btnCalculate:hover{
-    background-color: #c7bebe;
-    color: #000000;
-    cursor: pointer;
+.btnClear:hover,
+.btnCalculate:hover {
+  background-color: #c7bebe;
 }
 
-.leaseInput{
-    height: 30px;
-    margin-bottom: 10px;
-    padding: 5px;
-    border-radius: 4px;
-    border: 1px solid #cccccc;
-    background-color: #ffffff;
-    color: #000000;
+.leaseInput {
+  height: 30px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 50px;
+  border: none;
+  background-color: #EEEEEE;
+  box-shadow: inset 6px 6px 16px 0 rgba(209, 205, 199, .5), inset -6px -6px 16px 0 rgba(255, 255, 255, .5);
+  color: #000000;
+}
+
+.result {
+  margin-top: 20px;
+  text-align: center;
+  color: #000000;
+}
+
+.result h2 {
+  font-size: 20pt;
 }

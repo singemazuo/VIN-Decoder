@@ -1,107 +1,132 @@
 .sideBar {
-    position: relative;
-    z-index: 1000;
-  }
-  
-  .navBar {
-    position: relative;
-    z-index: 100;
-  }
-  
-  .container {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #000000;
-    padding-left: 255px;
-  }
-  
-  .loanForm {
-    margin-top: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 500px;
-    border-radius: 20px;
-    padding: 20px 0 25px 0;
-    padding-left: 255;
-    background-color: #e2d9d9;
-  }
-  
-  .leaseButtons {
-    border: none;
-    background: transparent;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-  }
-  
-  .btnClear, .btnCalculate {
-    border: 1px black solid;
-    padding: 5px 5px 5px 5px;
-    background: transparent;
-    width: 50%;
-  }
-  
-  .leaseInput {
-    width: 100%;
-  }
-  
-  .formGroup {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    width: 100%;
-  }
-  
-  .formGroup label {
-    color: #000000;
-  }
-  
-  .formGroup input[type="range"] {
-    width: 90%;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-  
-  .formGroup output {
-    margin-top: 10px;
-    margin-left: 20px;
-    text-align: left;
-    align-self: flex-start;  }
-  
-  .buttons {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    gap: 1px;
-  }
-  
-  .button {
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    width: 48%;
-    padding: 10px;
-    background-color: #ffffff;
-    color: #000000;
-    cursor: pointer;
-    margin: 0 20px;
-  }
-  
-  .button:hover {
-    background-color: #e0e0e0;
-  }
-  
-  .paymentTable {
-    text-align: center;
-    margin-top: 20px;
-    color: #000000;
-    margin-bottom: 30px;
-  }
-  
+  position: relative;
+  z-index: 1000;
+}
+
+.navBar {
+  position: relative;
+  z-index: 100;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  color: #000000;
+  padding-left: 255px;
+  background-color: #F5F5F5;
+}
+
+.loanForm {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 30px;
+  padding: 20px 0 25px 0;
+  background-color: #EEEEEE;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1), -10px -10px 20px rgba(255, 255, 255, 0.7);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.formGroup label {
+  color: #000000;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.formGroup input[type="range"] {
+  width: calc(100% - 40px);
+  margin: 0 20px;
+  -webkit-appearance: none;
+  height: 8px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.formGroup input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2), -3px -3px 5px rgba(255, 255, 255, 0.7);
+}
+
+.formGroup input[type="range"]::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2), -3px -3px 5px rgba(255, 255, 255, 0.7);
+}
+
+.formGroup output {
+  margin-top: 10px;
+  margin-left: 20px;
+  text-align: left;
+  align-self: flex-start;
+  font-weight: bold;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  gap: 10px;
+}
+
+.button {
+  border: none;
+  border-radius: 50px;
+  width: 48%;
+  padding: 15px;
+  background-color: #EEEEEE;
+  box-shadow: 6px 6px 16px rgba(209, 205, 199, 0.5), -6px -6px 16px rgba(255, 255, 255, 0.5);
+  color: #000000;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: #e0e0e0;
+}
+
+.paymentTable {
+  text-align: center;
+  margin-top: 20px;
+  color: #000000;
+  margin-bottom: 30px;
+}
+
+.paymentTable th, .paymentTable td {
+  padding: 10px;
+}
+
+.h1, .h2 {
+  color: #333;
+  font-weight: bold;
+}
+
+.paymentTable#result {
+  margin-top: 20px;
+}
