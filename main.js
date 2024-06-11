@@ -291,6 +291,23 @@ app.get('/vehicles', async (req, res) => {
     }
 });
 
+app.get('/unsold-vehicles', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT v.*, p.photo_url
+            FROM vehicles v
+            LEFT JOIN photos p ON v.id = p.vehicle_id
+            WHERE v.is_sold = false
+            ORDER BY v.make, v.model, v.year
+        `);
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error fetching unsold vehicles:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
 
 ////////////////////////
 ///  Update Vehicle  ///

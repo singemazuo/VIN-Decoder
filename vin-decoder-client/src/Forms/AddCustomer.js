@@ -21,7 +21,6 @@ const AddCustomer = () => {
         e.preventDefault();
         try {
             if (customer) {
-                // Update existing customer
                 await axios.put(`http://localhost:5000/customer/${customer.id}`, {
                     firstname,
                     lastname,
@@ -31,7 +30,6 @@ const AddCustomer = () => {
                     group
                 });
             } else {
-                // Add new customer
                 await axios.post('http://localhost:5000/add-customer', {
                     firstname,
                     lastname,

@@ -1,8 +1,155 @@
-.sideBar{
+/* General styles */
+.sideBar {
     position: relative;
-    z-index: 1000;  
+    z-index: 1000;
 }
-.navBar{
+.navBar {
     position: relative;
     z-index: 100;
+}
+.selectionSection {
+    padding-top: 10px;
+    padding-bottom: 86px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    flex-direction: row;
+    margin-left: 255px;
+    justify-content: space-evenly;
+    margin: 0 0 0 220px;
+}
+.btnPopulate {
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 2px solid rgb(110, 109, 136);
+    border-radius: 3rem;
+    box-sizing: border-box;
+    color: rgb(93, 92, 116);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    min-height: 53px;
+    position: absolute;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: 152px;
+    height: 23px;
+    z-index: 1000;
+    top: 98px;
+    right: 120px;
+}
+.btnPopulate:hover {
+    background-color: rgb(93, 92, 116);
+    color: white;
+    opacity: 80%;
+}
+.editIcon {
+    height: 18px;
+    width: 18px;
+    margin: 1px 3px 0 2px;
+}
+.vehicleSelect {
+    position: absolute;
+    top: 98px;
+    left: 600px;
+}
+.customerSelect {
+    position: absolute;
+    top: 98px;
+    left: 416px;
+}
+.dropdownVehicle, .dropdownCustomer {
+    display: flex;
+    justify-content: center;
+    height: 54px;
+    background: #fff;
+    padding: 0 10px;
+    font-size: 18px;
+    border: 2px solid rgb(93, 92, 116);
+    font-weight: 400;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+    color: rgb(80, 79, 99);
+    font-weight: 600;
+    font-size: 18px;
+}
+.dropdownCustomer {
+    border-right: none;
+    border-radius: 2rem 0 0 2rem;
+}
+.dropdownVehicle {
+    border-radius: 0 2rem 2rem 0;
+}
+@media screen and (max-width: 1200px) {
+    .vehicleSelect {
+        left: 450px;
+    }
+    .customerSelect {
+        left: 265px;
+    }
+}
+@media screen and (max-width: 1000px) {
+    .selectionSection {
+        flex-direction: column;
+        align-items: center;
+    }
+    .customerSelect,
+    .vehicleSelect,
+    .btnPopulate {
+        position: static;
+        margin-bottom: 20px;
+        border-radius: 2rem;
+        padding: 0 20px;
+        border: 2px solid rgb(93, 92, 116);
+    }
+    .btnPopulate {
+        width: 25%;
+        height: 52px;
+        top: auto;
+        right: auto;
+    }
+    .dropdownCustomer, .dropdownVehicle {
+        border-radius: 0 !important; 
+        border: none;
+    }
+}
+
+.select {
+    position: relative;
+}
+
+.select select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    z-index: 1;
+}
+
+.select::after {
+    content: '\25BC'; 
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.select select::-ms-expand {
+    display: none; 
 }
