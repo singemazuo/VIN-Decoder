@@ -32,7 +32,6 @@ const Orders = () => {
             </div>
         </div>
         </>
-
     );
 };
 

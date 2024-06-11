@@ -24,17 +24,17 @@ const Sidebar = () => {
                     </li>
                     <li>
                         <NavLink to="/inventory" activeClassName={styles.active}>
-                            <span className={styles.icon}><img src='./icons/CarInventory_white.svg' alt='carinv'></img></span> Inventory
+                            <span className={styles.icon}>🚗</span> Inventory
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/customers" activeClassName={styles.active}>
-                            <span className={styles.icon}>👤</span> Customers
+                            <span className={styles.icon}>👨‍🔬</span> Customers
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/reports" activeClassName={styles.active}>
-                            <span className={styles.icon}></span> Reports
+                            <span className={styles.icon}>📋</span> Reports
                         </NavLink>
                     </li>
                     <li>
@@ -45,18 +45,18 @@ const Sidebar = () => {
                     <li>
                         <div className={styles.dropdown}>
                             <div className={styles.dropdownToggle} onClick={toggleCalcDropdown}>
-                                <span className={styles.icon}>🖩</span> Calculators
+                                <span className={styles.icon}>&nbsp;🔢</span>&nbsp;&nbsp; Calculators
                             </div>
                             {isCalcDropdownOpen && (
                                 <ul className={styles.dropdownMenu}>
                                     <li>
                                         <NavLink to="/loan" activeClassName={styles.active}>
-                                            Loan
+                                        🏦 Loan
                                         </NavLink>
                                     </li>
                                     <li>
                                         <NavLink to="/lease" activeClassName={styles.active}>
-                                            Lease
+                                        💰 Lease
                                         </NavLink>
                                     </li>
                                 </ul>

@@ -283,14 +283,14 @@ const HomePage = () => {
         <div className={styles.mainContent}>
           <div className={styles.annualSales}>
             <div className={styles.reportButtons}>
+            <button className={styles.btnRefresh}>
+                <img className={styles.refreshIcon} src="../icons/refresh.svg" alt="refresh"></img> Refresh Reports
+              </button>
               <button className={styles.btnViewYearly}>
                 View Annual Report
               </button>
-              <button className={styles.btnRefresh}>
-                <img className={styles.refreshIcon} src="../icons/refresh.svg" alt="refresh"></img> Refresh Reports
-              </button>
-            </div>
 
+            </div>
             <div className={styles.annualGraph}>
               {revenueData && (
                 <Bar
