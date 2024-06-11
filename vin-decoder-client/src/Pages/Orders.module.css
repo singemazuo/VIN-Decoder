@@ -6,3 +6,55 @@
     position: relative;
     z-index: 100;
 }
+
+.header{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #ccc;
+}
+
+
+.buttonAdd {
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 2px solid rgb(110, 109, 136);
+    border-radius: 3rem;
+    box-sizing: border-box;
+    color: rgb(93, 92, 116);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 17px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    margin-left: 300px;
+    margin-bottom: 19px;
+    margin-top: 2px;
+    width: 180px;
+    height: 60px;
+    z-index: 1000; 
+}
+
+.buttonAdd:hover {
+    background-color: rgb(93, 92, 116);
+    color: white;
+    opacity: 80%;
+}
+
+.addIcon{
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    margin-right: 4px;
+}

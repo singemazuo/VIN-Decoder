@@ -282,6 +282,7 @@ app.get('/vehicles', async (req, res) => {
             SELECT v.*, p.photo_url
             FROM vehicles v
             LEFT JOIN photos p ON v.id = p.vehicle_id
+            ORDER BY v.make, v.model, v.year
         `);
         res.json(result.rows);
     } catch (error) {
@@ -289,6 +290,7 @@ app.get('/vehicles', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
 
 ////////////////////////
 ///  Update Vehicle  ///
@@ -390,7 +392,7 @@ app.post('/add-customer', async (req, res) => {
 
 app.get('/customers', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM customers');
+        const result = await pool.query('SELECT * FROM customers ORDER BY lastName ASC');
         res.json(result.rows);
     } catch (error) {
         console.error('Error fetching customers:', error);

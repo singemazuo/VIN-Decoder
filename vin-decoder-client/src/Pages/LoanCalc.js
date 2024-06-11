@@ -76,8 +76,8 @@ const LoanCalc = () => {
       tradeIn: 0,
       loanBalance: 0,
       downPayment: 0,
-      loanDuration: 0,
-      salesTax: 0,
+      loanDuration: 1,
+      salesTax: 15,
       interestRate: 0,
     });
     setResult(null);
@@ -92,7 +92,7 @@ const LoanCalc = () => {
         <NavigationBar />
       </div>
       <div className={styles.container}>
-        <h1>Loan Payment Calculator</h1>
+        <h1 className={styles.h1}>Loan Payment Calculator</h1>
         <form className={styles.loanForm} onSubmit={handleSubmit} onReset={handleReset}>
           <div className={styles.formGroup}>
             <label htmlFor="price">Price of your new vehicle ($) (excluding Tax):</label>
@@ -199,7 +199,7 @@ const LoanCalc = () => {
         </form>
         {result && (
           <>
-            <h2 id="result">Calculation Result</h2>
+            <h2 className={styles.h2} id="result">Calculation Result</h2>
             <table id="paymentTable" className={styles.paymentTable}>
               <thead>
                 <tr>
