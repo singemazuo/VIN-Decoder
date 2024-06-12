@@ -9,8 +9,8 @@
   }
   
   .selectionSection {
-    padding-top: 10px;
-    padding-bottom: 43px;
+    padding-top: 17px;
+    padding-bottom: 38px;
     display: flex;
     flex-direction: row;
     margin-left: 295px;
@@ -22,7 +22,7 @@
     border: 2px solid rgb(110, 109, 136);
     border-radius: 3rem;
     box-sizing: border-box;
-    color: rgb(93, 92, 116);
+    color: rgb(110, 109, 136);
     cursor: pointer;
     display: inline-flex;
     font-size: 16px;
@@ -39,7 +39,7 @@
     vertical-align: baseline;
     width: 152px;
     height: 23px;
-    top: 100px;
+    top: 97px;
     right: 200px;
   }
   .btnPrint{
@@ -65,7 +65,7 @@
     vertical-align: baseline;
     width: 152px;
     height: 23px;
-    top: 100px;
+    top: 97px;
     right: 375px;
   }
   
@@ -83,11 +83,14 @@
   
   .vehicleSelect {
     position: relative;
+    margin-top: 16px;
+
     
   }
   
   .customerSelect {
     position: relative;
+    margin-top: 16px;
   }
   
   .dropdownVehicle,

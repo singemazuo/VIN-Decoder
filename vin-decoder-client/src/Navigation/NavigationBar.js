@@ -30,13 +30,13 @@ const NavigationBar = () => {
             case '/add-customer':
                 return 'Add Customer';
             case '/vin-form':
-                return 'VIN Form';
+                return 'Inventory / Add Vehicle';
             case '/edit-form':
                 return 'Edit Form';
             case '/register':
                 return 'Register';
             case '/create-order':
-                return 'Create Order';
+                return 'Orders / Create Order';
             case '/account':
                 return 'Account';
             case '/login':
