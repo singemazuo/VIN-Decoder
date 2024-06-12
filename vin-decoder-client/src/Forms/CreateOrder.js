@@ -9,6 +9,20 @@ const CreateOrder = () => {
   const [customers, setCustomers] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState("");
   const [selectedVehicle, setSelectedVehicle] = useState("");
+  const [formData, setFormData] = useState({
+    buyerName: "",
+    buyerAddress: "",
+    sellerName: "",
+    sellerAddress: "",
+    make: "",
+    model: "",
+    bodyType: "",
+    year: "",
+    color: "",
+    milage: "",
+    vin: "",
+    salePrice: "",
+  });
 
   useEffect(() => {
     const fetchCustomers = async () => {
@@ -22,7 +36,9 @@ const CreateOrder = () => {
 
     const fetchVehicles = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/unsold-vehicles");
+        const response = await axios.get(
+          "http://localhost:5000/unsold-vehicles"
+        );
         setVehicles(response.data);
       } catch (error) {
         console.error("Error fetching vehicles:", error);
@@ -32,6 +48,40 @@ const CreateOrder = () => {
     fetchCustomers();
     fetchVehicles();
   }, []);
+
+  useEffect(() => {
+    if (selectedCustomer) {
+      const customer = customers.find(
+        (c) => c.id === parseInt(selectedCustomer)
+      );
+      if (customer) {
+        setFormData((prevData) => ({
+          ...prevData,
+          buyerName: `${customer.firstname} ${customer.lastname}`,
+          buyerAddress: customer.address,
+        }));
+      }
+    }
+  }, [selectedCustomer, customers]);
+
+  useEffect(() => {
+    if (selectedVehicle) {
+      const vehicle = vehicles.find((v) => v.id === parseInt(selectedVehicle));
+      if (vehicle) {
+        setFormData((prevData) => ({
+          ...prevData,
+          make: vehicle.make,
+          model: vehicle.model,
+          bodyType: vehicle.body_type,
+          year: vehicle.year,
+          color: vehicle.exterior_color,
+          milage: vehicle.milage,
+          vin: vehicle.vin,
+          salePrice: "",
+        }));
+      }
+    }
+  }, [selectedVehicle, vehicles]);
 
   return (
     <>
@@ -67,7 +117,7 @@ const CreateOrder = () => {
             onChange={(e) => setSelectedVehicle(e.target.value)}
             required
             className={styles.dropdownVehicle}
-            >
+          >
             <option value="" disabled>
               Select a vehicle
             </option>
@@ -78,12 +128,81 @@ const CreateOrder = () => {
             ))}
           </select>
         </div>
-        <button className={styles.btnPopulate}>
-        <img src="./icons/edit2.svg" alt="edit" className={styles.editIcon} />
-            Populate form</button>
+        <button className={styles.btnPrint}>
+          <img
+            src="./icons/print.svg"
+            alt="edit"
+            className={styles.editIcon}
+          />
+          Clear form
+        </button>
+        <button className={styles.btnClear}>
+          <img
+            src="./icons/eraser.svg"
+            alt="edit"
+            className={styles.editIcon}
+          />
+          Clear form
+        </button>
       </div>
-      <div className={styles.orderForm}>
-            
+      <div className={styles.orderSection}>
+        <div className={styles.orderForm}>
+          <h2>MOTOR VEHICLE BILL OF SALE</h2>
+          <br />
+          <p>
+            1. THE PARTIES. This transaction is made in the City/Town of{" "}
+            <input className={styles.inputTown} />,{" "}
+          </p>
+          <p>
+            Province of{" "}
+            <input
+              className={styles.inputProv}
+              placeholder="        Enter province"
+            />
+            on ____________________, 20____ by and between:
+          </p>
+          <p>
+            Buyer: {formData.buyerName} with a mailing address of&nbsp;
+            {formData.buyerAddress} (“Buyer”), and agrees to purchase the
+            Vehicle from:
+          </p>
+          <p>
+            Seller: {formData.sellerName} with a mailing address of
+            {formData.sellerAddress} (“Seller”), and agrees to sell the Vehicle
+            to the Buyer under the following terms:
+          </p>
+          <br />
+          <h3>2. VEHICLE DESCRIPTION.</h3>
+          <p>
+            Make: {formData.make} Model: {formData.model} Body Type:{" "}
+            {formData.bodyType}
+          </p>
+          <p>
+            Year: {formData.year} Color: {formData.color} Odometer:{" "}
+            {formData.milage} Miles
+          </p>
+          <p>Vehicle Identification Number (VIN): {formData.vin}</p>
+          <br />
+          <h3>3. THE EXCHANGE.</h3>
+          <p>
+            The Seller agrees to transfer ownership and possession of the
+            Vehicle for: (check one)
+          </p>
+          <p>
+            <input type="checkbox" /> - Cash &emsp;&emsp;
+            <input type="checkbox" /> - Check &emsp;&emsp;
+            <input type="checkbox" /> - E-Transfer&emsp;&emsp;
+            <input type="checkbox" /> - Debit/Credit{" "}
+          </p>
+          <p>
+            The Buyer agrees to pay $
+            <input
+              className={styles.inputPrice}
+              placeholder=" Enter Sale Price"
+            />{" "}
+            to the Seller.
+          </p>
+        </div>
       </div>
     </>
   );

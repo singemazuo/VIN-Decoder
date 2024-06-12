@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './Pages/HomePage';
 import VinForm from './Forms/VinForm';
 import Account from './Auth/Account';
+import Settings from './Pages/Settings';
 import Login from './Auth/Login';
 import EditForm from './Forms/EditForm';
 import PrivateRoute from './Auth/PrivateRoute';
@@ -31,6 +32,7 @@ const App = () => {
                         <Route path="/customers" element={<Customer/>}/>
                         <Route path="/vin-form" element={<VinForm />} />
                         <Route path='/edit-form' element={<EditForm/>}/>
+                        <Route path='/settings' element={<Settings/>}/>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/reports" element={<Reports/>}/>
                         <Route path="/orders" element={<Orders/>}/>

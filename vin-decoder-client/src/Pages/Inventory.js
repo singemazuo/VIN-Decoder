@@ -21,22 +21,30 @@ const Inventory = () => {
   const [vehicles, setVehicles] = useState([]);
   const [buttonText, setButtonText] = useState("Search All");
   const [isDescending, setIsDescending] = useState(true);
-  const [activeView, setActiveView] = useState(localStorage.getItem("activeView") || "list"); 
+  const [activeView, setActiveView] = useState(localStorage.getItem("activeView") || "list");
+  const [filter, setFilter] = useState("all"); 
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchVehicles = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/vehicles");
-        setVehicles(response.data);
-      } catch (error) {
-        console.error("Error fetching vehicles:", error);
-      }
-    };
+  const fetchVehicles = async () => {
+    let endpoint = "http://localhost:5000/vehicles";
+    if (filter === "sold") {
+      endpoint = "http://localhost:5000/sold-vehicles";
+    } else if (filter === "unsold") {
+      endpoint = "http://localhost:5000/unsold-vehicles";
+    }
 
+    try {
+      const response = await axios.get(endpoint);
+      setVehicles(response.data);
+    } catch (error) {
+      console.error("Error fetching vehicles:", error);
+    }
+  };
+
+  useEffect(() => {
     fetchVehicles();
-  }, []);
+  }, [filter]);
 
   const handleViewChange = (view) => {
     setActiveView(view);
@@ -106,6 +114,11 @@ const Inventory = () => {
               <img src="/add.svg" alt="Add" className={styles.addIcon} />
               Add Vehicle
             </button>
+            <div className={styles.soldFilter}>
+              <button className={`${styles.btnAll} ${filter === 'all' ? styles.active : ''}`} onClick={() => setFilter('all')}>All</button>
+              <button className={`${styles.btnSold} ${filter === 'sold' ? styles.active : ''}`} onClick={() => setFilter('sold')}>Sold</button>
+              <button className={`${styles.btnUnsold} ${filter === 'unsold' ? styles.active : ''}`} onClick={() => setFilter('unsold')}>Unsold</button>
+            </div>
             <div className={styles.filter}>
               <img 
                 src="../icons/filter.svg"

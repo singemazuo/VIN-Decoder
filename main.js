@@ -275,7 +275,11 @@ app.get('/vehicle/:id', async (req, res) => {
     }
 });
 
-// Endpoint to list all vehicles
+
+//////////////////////////
+///  Get All Vehicles  ///
+//////////////////////////
+
 app.get('/vehicles', async (req, res) => {
     try {
         const result = await pool.query(`
@@ -290,6 +294,10 @@ app.get('/vehicles', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+/////////////////////////////
+///  Get Unsold Vehicles  ///
+/////////////////////////////
 
 app.get('/unsold-vehicles', async (req, res) => {
     try {
@@ -307,7 +315,25 @@ app.get('/unsold-vehicles', async (req, res) => {
     }
 });
 
+///////////////////////////
+///  Get Sold Vehicles  ///
+///////////////////////////
 
+app.get('/sold-vehicles', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT v.*, p.photo_url
+            FROM vehicles v
+            LEFT JOIN photos p ON v.id = p.vehicle_id
+            WHERE v.is_sold = true
+            ORDER BY v.make, v.model, v.year
+        `);
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error fetching unsold vehicles:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
 
 ////////////////////////
 ///  Update Vehicle  ///

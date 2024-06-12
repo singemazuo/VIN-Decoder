@@ -119,8 +119,9 @@
     vertical-align: baseline;
     margin-left: 300px;
     margin-bottom: 19px;
-    margin-top: 2px;
+    margin-top: 4px;
     width: 180px;
+    min-width: 180px;
     height: 60px;
     z-index: 1000; 
 }
@@ -138,8 +139,9 @@
 }
 
 .displayToggle {
-    margin-right: 40px;
-    margin-top: 8px;
+    position: absolute;
+    top: 8px;
+    right: 100px;
 }
 
 .btnGrid {
@@ -229,30 +231,35 @@ tbody tr:nth-child(even) {
 }
 
 .iconFilter{
-    margin-top: 11px;
-    height: 20px;
-    width: 20px;
+    height: 54px;
+    width: 48px;
+    border: 2px solid #ccc;
+    border-right: none;
+    border-radius: 10px 0 0 10px ;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
 .filter{
     display: flex;
+    position: absolute;
     flex-direction: row;
     justify-content: space-around;
     background-color: transparent;
     font-weight: 600;
-    height: 50px;
-    margin-top: 10px;
-    margin-left: 300px;
+    height: 54px;
+    top: 8px;
+    right: 240px;
 }
 
 
 
 .iconArrow {
     height: 22px;
-    width: 22px;
+    width: 28px;
     transition: transform 0.3s ease;
     background-color: transparent;
-
+    border-right: none;
 }
 
 .btnArrow{
@@ -266,8 +273,9 @@ tbody tr:nth-child(even) {
 .filterSelect{
     display: flex;
     background-color: transparent;
-    border-left: 2px solid #ccc;
+    border: 2px solid #ccc;
     font-weight: 600;
+    border-right: none;
     padding-bottom: 2px;
 
 }
@@ -287,4 +295,50 @@ tbody tr:nth-child(even) {
 
 .btnList.active, .btnGrid.active {
     background-color: #ccc;
+}
+
+.btnUnsold, .btnSold, .btnAll{
+    background-color: transparent;
+    border-radius: 10px;
+    width: 90px;
+    border: none;
+    height: 38px;
+    font-size: 16px;
+    font-weight: 550;
+    margin: 5px;
+    margin-top: 6px;
+}
+
+.btnUnsold:hover, .btnSold:hover, .btnAll:hover{
+    background-color: #969494;
+    border: 2px solid #969494;
+    color: white;
+}
+
+.soldFilter{
+    border: 2px solid #ccc;
+    height: 56px;
+    border-radius: 14px;
+    width: 304px;
+    position: absolute;
+    top: 8px;
+    right: 715px;
+}
+
+.btnAll.active, .btnSold.active, .btnUnsold.active {
+    background-color: #ccc;
+    border: 2px solid #ccc;
+    color: black;
+}
+
+@media only screen and (max-width: 1650px) {
+    .soldFilter{
+        right: 550px;
+    }
+}
+
+@media only screen and (max-width: 1450px) {
+    .soldFilter{
+        right: 450px;
+    }
 }

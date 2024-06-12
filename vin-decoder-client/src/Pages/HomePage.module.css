@@ -38,6 +38,21 @@
     flex: 1;
     width: 100%;
   }
+
+  .soldTotal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    width: 100%;
+    padding-right:2px ;  
+}
+
+.annualIncrease{
+  margin-left: 35px; 
+  color: green;
+ }
   
   .btnViewMonthly, .btnViewYearly , .btnRefresh{
     background-color: #c95376;

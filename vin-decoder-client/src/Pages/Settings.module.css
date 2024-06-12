@@ -1,0 +1,14 @@
+.sideBar {
+    position: relative;
+    z-index: 1000;
+  }
+  
+  .navBar {
+    position: relative;
+    z-index: 100;
+  }
+  
+  .title{
+    margin-left: 255px;
+    margin-top: 50px;
+  }

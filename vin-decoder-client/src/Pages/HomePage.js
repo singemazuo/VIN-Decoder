@@ -311,9 +311,12 @@ const HomePage = () => {
           <div className={styles.annualGrid}>
             <div></div>
             <div className={styles.annualNumbers}>
-              <text>
-                <strong>{vehiclesSold} </strong>
-              </text>
+            <p className={styles.title}>Sold this year</p>
+
+              <h1 className={styles.soldTotal}>
+                <strong>{vehiclesSold}&nbsp; </strong>
+              </h1>
+              <h4 className={styles.annualIncrease}>+14.50%</h4>
             </div>
             <div className={styles.annualNumbers}>
               <text>
