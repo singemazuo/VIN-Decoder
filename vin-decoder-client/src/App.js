@@ -25,7 +25,6 @@ const App = () => {
     return (
         <AuthProvider>
             <Router>
-                <Sidebar />
                 <div className="App">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
