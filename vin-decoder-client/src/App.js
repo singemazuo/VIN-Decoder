@@ -13,6 +13,7 @@ import Register from './Auth/Register';
 import AddCustomer from './Forms/AddCustomer';
 import Reports from './Pages/Reports';
 import Orders from './Pages/Orders';
+import Sidebar from './Navigation/Sidebar';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Customer from './Pages/Customer';
@@ -24,21 +25,22 @@ const App = () => {
     return (
         <AuthProvider>
             <Router>
+                <Sidebar />
                 <div className="App">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/inventory" element={<Inventory />} />
-                        <Route path='/add-customer' element={<AddCustomer />}/>
-                        <Route path="/customers" element={<Customer/>}/>
+                        <Route path='/add-customer' element={<AddCustomer />} />
+                        <Route path="/customers" element={<Customer />} />
                         <Route path="/vin-form" element={<VinForm />} />
-                        <Route path='/edit-form' element={<EditForm/>}/>
-                        <Route path='/settings' element={<Settings/>}/>
-                        <Route path="/register" element={<Register/>}/>
-                        <Route path="/reports" element={<Reports/>}/>
-                        <Route path="/orders" element={<Orders/>}/>
-                        <Route path="/loan" element={<LoanCalc/>}/>
-                        <Route path="/lease" element={<LeaseCalc/>}/>
-                        <Route path="/create-order" element={<CreateOrder/>}/>
+                        <Route path='/edit-form' element={<EditForm />} />
+                        <Route path='/settings' element={<Settings />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/reports" element={<Reports />} />
+                        <Route path="/orders" element={<Orders />} />
+                        <Route path="/loan" element={<LoanCalc />} />
+                        <Route path="/lease" element={<LeaseCalc />} />
+                        <Route path="/create-order" element={<CreateOrder />} />
                         <Route path="/account" element={
                             <PrivateRoute>
                                 <Account />

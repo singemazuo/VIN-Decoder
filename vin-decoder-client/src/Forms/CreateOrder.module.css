@@ -10,12 +10,10 @@
   
   .selectionSection {
     padding-top: 10px;
-    padding-bottom: 86px;
-    border-bottom: 1px solid #ccc;
+    padding-bottom: 43px;
     display: flex;
     flex-direction: row;
-    margin-left: 255px;
-    margin: 0 0 0 220px;
+    margin-left: 295px;
   }
   
   .btnClear {
@@ -32,7 +30,7 @@
     justify-content: center;
     line-height: 1.25;
     min-height: 53px;
-    position: relative;
+    position: absolute;
     text-decoration: none;
     transition: all 250ms;
     user-select: none;
@@ -41,6 +39,8 @@
     vertical-align: baseline;
     width: 152px;
     height: 23px;
+    top: 100px;
+    right: 200px;
   }
   .btnPrint{
     align-items: center;
@@ -56,7 +56,7 @@
     justify-content: center;
     line-height: 1.25;
     min-height: 53px;
-    position: relative;
+    position: absolute;
     text-decoration: none;
     transition: all 250ms;
     user-select: none;
@@ -65,6 +65,8 @@
     vertical-align: baseline;
     width: 152px;
     height: 23px;
+    top: 100px;
+    right: 375px;
   }
   
   .btnClear:hover {
@@ -81,6 +83,7 @@
   
   .vehicleSelect {
     position: relative;
+    
   }
   
   .customerSelect {
@@ -116,12 +119,17 @@
   
   .inputProv,
   .inputPrice,
-  .inputTown {
+  .inputTown,
+  .inputYear,
+  .inputDate {
     border: none;
     border-bottom: 1px solid black;
   }
   
-  .inputPrice {
+  .inputYear{
+    width: 25px;
+  }
+  .inputPrice,.inputDate {
     width: 120px;
   }
   
@@ -131,10 +139,13 @@
     padding: 30px;
     max-width: 800px;
     width: 100%;
+    margin-left: 200px;
+    margin-top: 40px;
     background-color: #fff;
   }
   
   .orderSection {
+    border-top: 1px solid #CCC;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -143,34 +154,24 @@
     box-sizing: border-box;
   }
   
-  @media screen and (max-width: 1200px) {
-    .vehicleSelect {
-      left: 450px;
-    }
-    .customerSelect {
-      left: 265px;
-    }
-  }
-  
-  @media screen and (max-width: 1000px) {
+
+  @media screen and (max-width: 1250px) {
     .selectionSection {
       flex-direction: column;
       align-items: center;
     }
     .customerSelect,
     .vehicleSelect,
-    .btnPopulate {
-      position: static;
-      margin-bottom: 20px;
+    .btnClear,
+    .btnPrint {
+      position: relative;
       border-radius: 2rem;
       padding: 0 20px;
       border: 2px solid rgb(93, 92, 116);
-    }
-    .btnPopulate {
-      width: 25%;
-      height: 52px;
-      top: auto;
-      right: auto;
+      display: flex;
+      justify-content: center; 
+      width: 100%;
+      max-width: 400px; 
     }
     .dropdownCustomer,
     .dropdownVehicle {

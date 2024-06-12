@@ -20,10 +20,11 @@
   color: #000000;
   padding-left: 255px;
   background-color: #F5F5F5;
+  padding-top: 20px;
 }
 
 .loanForm {
-  margin-top: 5px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,6 +126,10 @@
 .h1, .h2 {
   color: #333;
   font-weight: bold;
+}
+
+.h2{
+  margin-top: 20px;
 }
 
 .paymentTable#result {

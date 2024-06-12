@@ -134,7 +134,7 @@ const CreateOrder = () => {
             alt="edit"
             className={styles.editIcon}
           />
-          Clear form
+          Print form
         </button>
         <button className={styles.btnClear}>
           <img
@@ -151,7 +151,7 @@ const CreateOrder = () => {
           <br />
           <p>
             1. THE PARTIES. This transaction is made in the City/Town of{" "}
-            <input className={styles.inputTown} />,{" "}
+            <input className={styles.inputTown} placeholder="           Enter Town"/>,{" "}
           </p>
           <p>
             Province of{" "}
@@ -159,7 +159,7 @@ const CreateOrder = () => {
               className={styles.inputProv}
               placeholder="        Enter province"
             />
-            on ____________________, 20____ by and between:
+            on <input placeholder="     Enter Date" className={styles.inputDate}></input>, 20<input placeholder="YY" className={styles.inputYear}></input> by and between:
           </p>
           <p>
             Buyer: {formData.buyerName} with a mailing address of&nbsp;
@@ -172,18 +172,21 @@ const CreateOrder = () => {
             to the Buyer under the following terms:
           </p>
           <br />
-          <h3>2. VEHICLE DESCRIPTION.</h3>
+          <h3>2. VEHICLE DESCRIPTION</h3>
           <p>
-            Make: {formData.make} Model: {formData.model} Body Type:{" "}
+            Make: {formData.make} <br></br>
+            Model: {formData.model} <br></br>
+            Body Type:{" "}<br></br>
             {formData.bodyType}
           </p>
           <p>
-            Year: {formData.year} Color: {formData.color} Odometer:{" "}
-            {formData.milage} Miles
+            Year: {formData.year} <br></br>
+            Color: {formData.color} <br></br>
+            Odometer:{formData.milage} km
           </p>
           <p>Vehicle Identification Number (VIN): {formData.vin}</p>
           <br />
-          <h3>3. THE EXCHANGE.</h3>
+          <h3>3. Payment</h3>
           <p>
             The Seller agrees to transfer ownership and possession of the
             Vehicle for: (check one)
