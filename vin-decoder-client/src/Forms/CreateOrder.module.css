@@ -13,7 +13,7 @@
     padding-bottom: 38px;
     display: flex;
     flex-direction: row;
-    margin-left: 295px;
+    margin-left: 360px;
   }
   
   .btnClear {
@@ -22,10 +22,10 @@
     border: 2px solid rgb(110, 109, 136);
     border-radius: 3rem;
     box-sizing: border-box;
-    color: rgb(110, 109, 136);
+    color: rgb(93, 92, 116);
     cursor: pointer;
     display: inline-flex;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
     justify-content: center;
     line-height: 1.25;
@@ -40,7 +40,7 @@
     width: 152px;
     height: 23px;
     top: 97px;
-    right: 200px;
+    right: 120px;
   }
   .btnPrint{
     align-items: center;
@@ -51,7 +51,7 @@
     color: rgb(93, 92, 116);
     cursor: pointer;
     display: inline-flex;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
     justify-content: center;
     line-height: 1.25;
@@ -66,7 +66,7 @@
     width: 152px;
     height: 23px;
     top: 97px;
-    right: 375px;
+    right: 290px;
   }
   
   .btnClear:hover {

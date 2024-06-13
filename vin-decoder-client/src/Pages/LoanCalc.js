@@ -9,8 +9,8 @@ const LoanCalc = () => {
     tradeIn: 0,
     loanBalance: 0,
     downPayment: 0,
-    loanDuration: 0,
-    salesTax: 0,
+    loanDuration: 1,
+    salesTax: 0.1,
     interestRate: 0,
   });
 
@@ -156,7 +156,7 @@ const LoanCalc = () => {
               type="range"
               id="loanDuration"
               name="loanDuration"
-              min="12"
+              min="1"
               max="96"
               step="1"
               value={formData.loanDuration}
@@ -170,7 +170,7 @@ const LoanCalc = () => {
               type="range"
               id="salesTax"
               name="salesTax"
-              min="0"
+              min="0.1"
               max="20"
               step="0.1"
               value={formData.salesTax}
