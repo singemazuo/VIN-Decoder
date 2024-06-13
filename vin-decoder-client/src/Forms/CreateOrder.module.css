@@ -74,11 +74,28 @@
     color: white;
     opacity: 80%;
   }
+
+  .btnPrint:hover {
+    background-color: rgb(93, 92, 116);
+    color: white;
+    opacity: 80%;
+  }
   
+.textbox{
+  width: 600px;
+  height: 150px;
+}
+
   .editIcon {
     height: 18px;
     width: 18px;
     margin: 1px 3px 0 2px;
+  }
+  
+  .printIcon {
+    height: 19px;
+    width: 19px;
+    margin: 3px 4px 0 2px;
   }
   
   .vehicleSelect {
@@ -157,6 +174,25 @@
     box-sizing: border-box;
   }
   
+  .signatures{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border: none;
+    margin-top: 15px;
+  }
+
+  .buyerInput, .sellerInput{
+    border: none;
+    border-bottom: 1px solid black;
+  }
+
+  .sellerSignature, .buyerSignature{
+    display: flex;
+    flex-direction: column;
+    border: none;
+  }
+
 
   @media screen and (max-width: 1250px) {
     .selectionSection {

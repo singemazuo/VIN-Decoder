@@ -4,35 +4,54 @@ import Sidebar from '../Navigation/Sidebar';
 import NavigationBar from '../Navigation/NavigationBar';
 
 const LeaseCalc = () => {
+  const [formData, setFormData] = useState({
+    capitalizedCost: 0,
+    residualValue: 0,
+    apr: 0,
+    term: 1,
+    salesTaxRate: 0.1,
+    downPayment: 0,
+    fees: 0,
+  });
+
   const [result, setResult] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: parseFloat(value),
+    });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const form = event.target;
+    const { capitalizedCost, residualValue, apr, term, salesTaxRate, downPayment, fees } = formData;
 
-    const capitalizedCost = parseFloat(form.capitalizedCost.value);
-    const residualValue = parseFloat(form.residualValue.value);
-    const apr = parseFloat(form.apr.value) / 100;
-    const term = parseInt(form.term.value);
-    const salesTaxRate = parseFloat(form.salesTaxRate.value) / 100;
-    const downPayment = parseFloat(form.downPayment.value);
-    const fees = parseFloat(form.fees.value);
-
-    const monthlyInterestRate = apr / 12;
+    const monthlyInterestRate = apr / 100 / 12;
     const depreciationFee = (capitalizedCost - residualValue) / term;
     const interestFee = (capitalizedCost + residualValue) * monthlyInterestRate;
     const monthlyPayment = depreciationFee + interestFee;
 
     const totalCost = (monthlyPayment * term) + downPayment + fees;
-    const totalCostWithTax = totalCost + (totalCost * salesTaxRate);
+    const totalCostWithTax = totalCost + (totalCost * salesTaxRate / 100);
 
     setResult({
-      monthlyPayment: monthlyPayment.toFixed(2),
-      totalCostWithTax: totalCostWithTax.toFixed(2),
+      monthlyPayment: isNaN(monthlyPayment) ? '0.00' : monthlyPayment.toFixed(2),
+      totalCostWithTax: isNaN(totalCostWithTax) ? '0.00' : totalCostWithTax.toFixed(2),
     });
   };
 
   const handleReset = () => {
+    setFormData({
+      capitalizedCost: 0,
+      residualValue: 0,
+      apr: 0,
+      term: 1,
+      salesTaxRate: 15,
+      downPayment: 0,
+      fees: 0,
+    });
     setResult(null);
   };
 
@@ -45,39 +64,101 @@ const LeaseCalc = () => {
         <NavigationBar />
       </div>
       <div className={styles.container}>
-        <h3>Lease Payment Calculator</h3>
+        <h1 className={styles.h1}>Lease Payment Calculator</h1>
         <form className={styles.leaseForm} onSubmit={handleSubmit} onReset={handleReset}>
-          <label htmlFor="capitalizedCost">Capitalized Cost ($):</label>
-          <input className={styles.leaseInput} type="text" id="capitalizedCost" name="capitalizedCost" required /><br />
-
-          <label htmlFor="residualValue">Residual Value ($):</label>
-          <input className={styles.leaseInput} type="text" id="residualValue" name="residualValue" required /><br />
-
-          <label htmlFor="apr">APR (%):</label>
-          <input className={styles.leaseInput} type="text" id="apr" name="apr" required /><br />
-
-          <label htmlFor="term">Term (months):</label>
-          <input className={styles.leaseInput} type="text" id="term" name="term" required /><br />
-
-          <label htmlFor="salesTaxRate">Sales Tax Rate (%):</label>
-          <input className={styles.leaseInput} type="text" id="salesTaxRate" name="salesTaxRate" required /><br />
-
-          <label htmlFor="downPayment">Down Payment ($):</label>
-          <input className={styles.leaseInput} type="text" id="downPayment" name="downPayment" required /><br />
-
-          <label htmlFor="fees">Fees ($):</label>
-          <input className={styles.leaseInput} type="text" id="fees" name="fees" required /><br />
-
-          <div className={styles.leaseButtons}>
-            <button className={styles.btnCalculate} type="submit">Calculate</button>
-            <button className={styles.btnClear} type="reset">Clear</button>
+          <div className={styles.formGroup}>
+            <label htmlFor="capitalizedCost">Capitalized Cost ($):</label>
+            <input
+              type="number"
+              id="capitalizedCost"
+              name="capitalizedCost"
+              value={formData.capitalizedCost}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="residualValue">Residual Value ($):</label>
+            <input
+              type="number"
+              id="residualValue"
+              name="residualValue"
+              value={formData.residualValue}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="apr">APR (%):</label>
+            <input
+              type="number"
+              id="apr"
+              name="apr"
+              value={formData.apr}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="term">Term (months):</label>
+            <input
+              type="number"
+              id="term"
+              name="term"
+              value={formData.term}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="salesTaxRate">Sales Tax Rate (%):</label>
+            <input
+              type="number"
+              id="salesTaxRate"
+              name="salesTaxRate"
+              value={formData.salesTaxRate}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="downPayment">Down Payment ($):</label>
+            <input
+              type="number"
+              id="downPayment"
+              name="downPayment"
+              value={formData.downPayment}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="fees">Fees ($):</label>
+            <input
+              type="number"
+              id="fees"
+              name="fees"
+              value={formData.fees}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.buttons}>
+            <button className={styles.button} type="submit">Calculate</button>
+            <button className={styles.button} type="reset">Clear</button>
           </div>
         </form>
         {result && (
-          <div className={styles.result}>
-            <h2>Monthly Payment: ${result.monthlyPayment}</h2>
-            <h2>Total Cost with Tax: ${result.totalCostWithTax}</h2>
-          </div>
+          <>
+            <h2 className={styles.h2} id="result">Calculation Result</h2>
+            <table id="paymentTable" className={styles.paymentTable}>
+              <thead>
+                <tr>
+                  <th>Monthly Payment</th>
+                  <th>Total Cost with Tax</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>${result.monthlyPayment}</td>
+                  <td>${result.totalCostWithTax}</td>
+                </tr>
+              </tbody>
+            </table>
+          </>
         )}
       </div>
     </>

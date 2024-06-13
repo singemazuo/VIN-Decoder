@@ -132,7 +132,7 @@ const CreateOrder = () => {
           <img
             src="./icons/print.svg"
             alt="edit"
-            className={styles.editIcon}
+            className={styles.printIcon}
           />
           Print form
         </button>
@@ -163,12 +163,12 @@ const CreateOrder = () => {
           </p>
           <p>
             Buyer: {formData.buyerName} with a mailing address of&nbsp;
-            {formData.buyerAddress} (“Buyer”), and agrees to purchase the
+            {formData.buyerAddress}, and agrees to purchase the
             Vehicle from:
           </p>
           <p>
             Seller: {formData.sellerName} with a mailing address of
-            {formData.sellerAddress} (“Seller”), and agrees to sell the Vehicle
+            {formData.sellerAddress}, and agrees to sell the Vehicle
             to the Buyer under the following terms:
           </p>
           <br />
@@ -176,13 +176,10 @@ const CreateOrder = () => {
           <p>
             Make: {formData.make} <br></br>
             Model: {formData.model} <br></br>
-            Body Type:{" "}<br></br>
             {formData.bodyType}
-          </p>
-          <p>
             Year: {formData.year} <br></br>
             Color: {formData.color} <br></br>
-            Odometer:{formData.milage} km
+            Odometer: {formData.milage} km
           </p>
           <p>Vehicle Identification Number (VIN): {formData.vin}</p>
           <br />
@@ -205,6 +202,19 @@ const CreateOrder = () => {
             />{" "}
             to the Seller.
           </p>
+          <p>Additional Comments:</p>
+          <textarea className={styles.textbox} type="text"></textarea>
+          <br></br>
+          <div className={styles.signatures}>
+            <div className={styles.buyerSignature}>
+              <input className={styles.buyerInput}></input>
+              <span>Signature of buyer</span>
+            </div>
+            <div className={styles.sellerSignature}>
+            <input className={styles.sellerInput}></input>
+            <span>Signature of seller</span>
+            </div>
+          </div>
         </div>
       </div>
     </>
