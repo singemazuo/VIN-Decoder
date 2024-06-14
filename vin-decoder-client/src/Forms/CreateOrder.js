@@ -88,7 +88,6 @@ const CreateOrder = () => {
       });
       if (response.status === 201) {
         alert("Order created successfully!");
-        // Optionally clear the form or redirect the user
       }
     } catch (error) {
       console.error("Error creating order:", error);

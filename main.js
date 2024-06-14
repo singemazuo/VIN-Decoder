@@ -632,6 +632,22 @@ app.get('/get_average_revenue', async (req, res) => {
     }
 });
 
+/////////////////////
+///  Get Orders   ///
+/////////////////////
+
+app.get('/get_orders', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT * FROM Orders ORDER BY sale_date ASC
+        `);
+        const orders = result.rows; 
+        res.json(orders); 
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
 
 ////////////////////////////////
 ///  Get Sales Data (Count)  ///

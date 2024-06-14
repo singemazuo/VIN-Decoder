@@ -16,7 +16,6 @@
     margin-top: 30px;
 }
 
-
 .buttonAdd {
     align-items: center;
     background-color: #FFFFFF;
@@ -62,9 +61,63 @@
 
 .tableSection{
     margin-left: 255px;
+    overflow-x: auto;
 }
 
 .orderTable{
     padding-left: 80px;
-    background-color: #ccc;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.orderTable th, .orderTable td {
+    padding: 8px;
+    text-align: center;
+}
+
+.orderTable th{
+    background-color: #f4f4f4;
+}
+
+.orderTable tr:hover {
+    background-color: #ddd;
+}
+
+.orderTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.editIcon, .deleteIcon{
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    margin-bottom: 5px;
+    
+}
+
+.btnEdit, .btnDelete{
+    background-color: transparent;
+    border: none; 
+    cursor: pointer;
+    margin: 0 5px; 
+    padding: 3px 5px;
+}
+
+.editIcon{
+    margin-top: 4px;
+}
+
+.btnEdit:hover{
+    background-color: rgb(180, 175, 224); 
+    border-radius: 8px;
+    padding: 3px 5px;
+    
+}
+
+.btnDelete:hover{
+    background-color: rgb(218, 154, 154); 
+    border-radius: 8px;
+    padding: 3px 5px;
 }
