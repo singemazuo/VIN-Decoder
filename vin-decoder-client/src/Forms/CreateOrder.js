@@ -83,6 +83,18 @@ const CreateOrder = () => {
     }
   }, [selectedVehicle, vehicles]);
 
+  const handlePrint = () => {
+    const printContent = document.getElementById('printableForm');
+    const windowPrint = window.open('', '', 'width=900,height=650');
+    windowPrint.document.write('<html><head><title>Print Form</title>');
+    windowPrint.document.write('<style>@media print { body { -webkit-print-color-adjust: exact; } }</style>'); // Add any styles you need here
+    windowPrint.document.write('</head><body >');
+    windowPrint.document.write(printContent.innerHTML);
+    windowPrint.document.write('</body></html>');
+    windowPrint.document.close();
+    windowPrint.print();
+  };
+
   return (
     <>
       <div className={styles.sideBar}>
@@ -128,7 +140,7 @@ const CreateOrder = () => {
             ))}
           </select>
         </div>
-        <button className={styles.btnPrint}>
+        <button className={styles.btnPrint} onClick={handlePrint}>
           <img
             src="./icons/print.svg"
             alt="edit"
@@ -146,7 +158,7 @@ const CreateOrder = () => {
         </button>
       </div>
       <div className={styles.orderSection}>
-        <div className={styles.orderForm}>
+        <div className={styles.orderForm} id="printableForm">
           <h2>MOTOR VEHICLE BILL OF SALE</h2>
           <br />
           <p>

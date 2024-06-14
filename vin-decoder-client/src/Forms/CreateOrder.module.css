@@ -193,6 +193,20 @@
     border: none;
   }
 
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    #printableForm, #printableForm * {
+      visibility: visible;
+    }
+    #printableForm {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+    }
+  }
 
   @media screen and (max-width: 1250px) {
     .selectionSection {
