@@ -59,3 +59,12 @@
     margin-top: 2px;
     margin-right: 4px;
 }
+
+.tableSection{
+    margin-left: 255px;
+}
+
+.orderTable{
+    padding-left: 80px;
+    background-color: #ccc;
+}

@@ -81,7 +81,7 @@ const Customer = () => {
                                     <td>{customer.address}</td>
                                     <td>{customer.phone}</td>
                                     <td>{customer.group}</td>
-                                    <td className={styles.tdTotalOrders}>{customer.totalOrders || 0}</td>
+                                    <td className={styles.tdTotalOrders}>{customer.total_orders}</td>
                                     <td className={styles.actionIcons}>
                                         <button onClick={() => handleEdit(customer)} className={styles.btnEdit}><img src='./icons/edit.svg' className={styles.editIcon} alt='edit'></img></button>
                                         <button onClick={() => handleDelete(customer)} className={styles.btnDelete}><img src='./icons/delete.svg' className={styles.deleteIcon} alt='delete'></img></button>

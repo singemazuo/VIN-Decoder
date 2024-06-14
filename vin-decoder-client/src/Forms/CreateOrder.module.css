@@ -68,6 +68,34 @@
     top: 97px;
     right: 290px;
   }
+
+  .btnSubit{
+    align-items: center;
+    background-color: #ffffff;
+    border: 2px solid rgb(110, 109, 136);
+    border-radius: 3rem;
+    box-sizing: border-box;
+    color: rgb(93, 92, 116);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 17px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    min-height: 53px;
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: 452px;
+    height: 23px;
+    margin-left: 215px;
+    margin-bottom: 50px;
+    margin-top: 12px;
+  }
   
   .btnClear:hover {
     background-color: rgb(93, 92, 116);
@@ -75,6 +103,11 @@
     opacity: 80%;
   }
 
+.btnSubit:hover {
+    background-color: rgb(93, 92, 116);
+    color: white;
+    opacity: 80%;
+  }
   .btnPrint:hover {
     background-color: rgb(93, 92, 116);
     color: white;

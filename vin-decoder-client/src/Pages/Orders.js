@@ -28,7 +28,29 @@ const Orders = () => {
                 </button>
             </div>
             <div className={styles.orderSection}>
-                
+                <div className={styles.tableSection}>
+                    <table className={styles.orderTable}>
+                        <thead>
+                            <tr>
+                                <th>Buyer</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>    
+                    </table>        
+
+                </div>
             </div>
         </div>
         </>

@@ -728,6 +728,47 @@ app.get('/vehicle-sales-difference', async (req, res) => {
     }
 });
 
+//////////////////////
+///  Create Order  ///
+//////////////////////
+
+app.post('/create-order', async (req, res) => {
+    const { customerId, vehicleId, salePrice } = req.body;
+    const saleDate = new Date();
+
+    try {
+        const client = await pool.connect();
+        try {
+            await client.query('BEGIN');
+
+            // Insert the new order
+            const orderQueryText = 'INSERT INTO orders (customer_id, vehicle_id, sale_price, sale_date) VALUES ($1, $2, $3, $4) RETURNING id';
+            const orderValues = [customerId, vehicleId, salePrice, saleDate];
+            const orderResult = await client.query(orderQueryText, orderValues);
+            const orderId = orderResult.rows[0].id;
+
+            // Update the customer's order count (assuming there's a column to store this)
+            const customerUpdateQueryText = 'UPDATE customers SET total_orders = total_orders + 1 WHERE id = $1';
+            await client.query(customerUpdateQueryText, [customerId]);
+
+            // Update the vehicle's sale date and is_sold status
+            const vehicleUpdateQueryText = 'UPDATE vehicles SET sale_date = $1, is_sold = TRUE WHERE id = $2';
+            await client.query(vehicleUpdateQueryText, [saleDate, vehicleId]);
+
+            await client.query('COMMIT');
+            res.status(201).json({ orderId });
+        } catch (error) {
+            await client.query('ROLLBACK');
+            console.error('Error creating order:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        } finally {
+            client.release();
+        }
+    } catch (error) {
+        console.error('Error connecting to database:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 // Middleware to protect routes
 const authMiddleware = (req, res, next) => {

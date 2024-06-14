@@ -28,7 +28,7 @@ const NavigationBar = () => {
             case '/settings':
                 return 'Settings';
             case '/add-customer':
-                return 'Add Customer';
+                return 'Customers / Add Customer';
             case '/vin-form':
                 return 'Inventory / Add Vehicle';
             case '/edit-form':
