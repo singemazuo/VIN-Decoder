@@ -70,6 +70,10 @@ app.get('/protected', (req, res) => {
 });
 
 
+/////////////////////
+///  VIN Decoder  ///
+/////////////////////
+
 app.post('/decode_vin', async (req, res) => {
     const vin = req.body.vin;
     try {
