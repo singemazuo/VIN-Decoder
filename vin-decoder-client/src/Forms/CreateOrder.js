@@ -95,6 +95,18 @@ const CreateOrder = () => {
     }
   };
 
+  const handlePrint = () => {
+    const printContent = document.getElementById('printableForm').innerHTML;
+    const newWindow = window.open('', '', 'height=500, width=500');
+    newWindow.document.write('<html><head><title>Print Form</title>');
+    newWindow.document.write('<style>body{font-family: Arial, sans-serif;}</style></head><body>');
+    newWindow.document.write(printContent);
+    newWindow.document.write('</body></html>');
+    newWindow.document.close();
+    newWindow.print();
+    newWindow.close();
+  };
+
   return (
     <>
       <div className={styles.sideBar}>
@@ -103,22 +115,6 @@ const CreateOrder = () => {
       <div className={styles.navBar}>
         <NavigationBar />
       </div>
-      <button className={styles.btnPrint}>
-            <img
-              src="./icons/print.svg"
-              alt="edit"
-              className={styles.printIcon}
-            />
-            Print form
-          </button>
-          <button className={styles.btnClear}>
-            <img
-              src="./icons/eraser.svg"
-              alt="edit"
-              className={styles.editIcon}
-            />
-            Clear form
-          </button>
       <form onSubmit={handleSubmit}>
         <div className={styles.selectionSection}>
           <div className={styles.customerSelect}>
@@ -157,7 +153,6 @@ const CreateOrder = () => {
               ))}
             </select>
           </div>
-          
         </div>
         <div className={styles.orderSection}>
           <div className={styles.orderForm} id="printableForm">
@@ -232,21 +227,29 @@ const CreateOrder = () => {
             <br></br>
             <div className={styles.signatures}>
               <div className={styles.buyerSignature}>
-                <input className={styles.buyerInput}></input>
+                <p>_____________________________</p>
                 <span>Signature of buyer</span>
               </div>
               <div className={styles.sellerSignature}>
-                <input className={styles.sellerInput}></input>
+                <p>_____________________________</p>
                 <span>Signature of seller</span>
               </div>
             </div>
           </div>
         </div>
         <button type="submit" className={styles.btnSubit}>
-          <img className={styles.editIcon}
-            src="./icons/check.svg" alt="check">
-              </img>Submit Order</button>
+          <img className={styles.editIcon} src="./icons/check.svg" alt="check"></img>
+          Submit Order
+        </button>
       </form>
+      <button className={styles.btnPrint} onClick={handlePrint}>
+        <img src="./icons/print.svg" alt="edit" className={styles.printIcon} />
+        Print form
+      </button>
+      <button className={styles.btnClear}>
+        <img src="./icons/eraser.svg" alt="edit" className={styles.editIcon} />
+        Clear form
+      </button>
     </>
   );
 };

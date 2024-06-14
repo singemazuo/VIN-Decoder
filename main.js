@@ -639,15 +639,28 @@ app.get('/get_average_revenue', async (req, res) => {
 app.get('/get_orders', async (req, res) => {
     try {
         const result = await pool.query(`
-            SELECT * FROM Orders ORDER BY sale_date ASC
+            SELECT 
+                o.id, 
+                o.sale_price, 
+                o.sale_date,
+                c.firstname AS customer_firstname,
+                c.lastname AS customer_lastname,
+                v.make AS vehicle_make,
+                v.model AS vehicle_model,
+                v.year AS vehicle_year,
+                v.vin AS vehicle_vin
+            FROM Orders o
+            JOIN customers c ON o.customer_id = c.id
+            JOIN vehicles v ON o.vehicle_id = v.id
+            ORDER BY o.sale_date ASC
         `);
-        const orders = result.rows; 
-        res.json(orders); 
+        res.json(result.rows);
     } catch (error) {
         console.error('Error fetching orders:', error);
         res.status(500).json({ error: error.message });
     }
 });
+
 
 ////////////////////////////////
 ///  Get Sales Data (Count)  ///

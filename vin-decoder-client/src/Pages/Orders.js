@@ -80,28 +80,28 @@ const Orders = () => {
                             </tr>
                         </thead>
                         <tbody>
-                           {orders.map(order => (
-                             <tr key={order.id}>
-                                <td>{order.customer_id}</td>
-                                <td>{order.vehicle_id}</td>
-                                <td>{order.vehicle_id}</td>
-                                <td>{order.vehicle_id}</td>
-                                <td>{order.vehicle_id}</td>
-                                <td>{order.sale_price}</td>
-                                <td>{formatDate(order.sale_date)}</td>
-                                <td className={styles.actionIcons}>
-                                    <button onClick={() => handleEdit(order)} 
-                                        className={styles.btnEdit}><img src='./icons/viewOrder.svg' 
-                                        className={styles.editIcon} alt='edit'></img>
-                                    </button>
-                                    <button onClick={() => handleDelete(order)} 
-                                        className={styles.btnDelete}><img src='./icons/delete.svg' 
-                                        className={styles.deleteIcon} alt='delete'></img>
-                                    </button>
-                                </td>
-                            </tr>
-                           ))}
-                        </tbody>    
+                                {orders.map(order => (
+                                    <tr key={order.id}>
+                                        <td>{order.customer_firstname} {order.customer_lastname}</td>
+                                        <td>{order.vehicle_make}</td>
+                                        <td>{order.vehicle_model}</td>
+                                        <td>{order.vehicle_year}</td>
+                                        <td>{order.vehicle_vin}</td>
+                                        <td>{order.sale_price}</td>
+                                        <td>{formatDate(order.sale_date)}</td>
+                                        <td className={styles.actionIcons}>
+                                            <button onClick={() => handleEdit(order)}
+                                                className={styles.btnEdit}><img src='./icons/viewOrder.svg'
+                                                    className={styles.editIcon} alt='edit'></img>
+                                            </button>
+                                            <button onClick={() => handleDelete(order)}
+                                                className={styles.btnDelete}><img src='./icons/delete.svg'
+                                                    className={styles.deleteIcon} alt='delete'></img>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
                     </table>        
                 </div>
             </div>
