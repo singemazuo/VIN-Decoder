@@ -131,12 +131,10 @@
 
 .actionIcons {
     background-color: transparent;
-
     display: flex;
     align-items: center;
 }
 
 .actionTitle{
-    display: flex;
-    justify-content: space-evenly;
+    margin-left: 20px;
 }

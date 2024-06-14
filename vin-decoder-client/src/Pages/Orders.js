@@ -6,6 +6,7 @@ import styles from  "./Orders.module.css";
 import { useNavigate } from 'react-router-dom';
 
 
+
 const Orders = () => {
 
     const [orders, setOrders] = useState([]);
@@ -19,14 +20,15 @@ const Orders = () => {
         navigate('/add-customer', { state: {  } });
     };
 
-    const handleDelete = async (customer) => {
-        const confirmed = window.confirm(`Are you sure you want to delete order?`);
+    const handleDelete = async (order) => {
+        const confirmed = window.confirm(`Are you sure you want to delete the order?`);
         if (!confirmed) return;
-
+    
         try {
-            await axios.delete(``);
+            await axios.delete(`http://localhost:5000/delete_order/${order.id}`);
+            setOrders(orders.filter(o => o.id !== order.id));
         } catch (error) {
-            console.error('Error deleting customer:', error);
+            console.error('Error deleting order:', error);
         }
     };
 

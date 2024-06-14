@@ -275,18 +275,18 @@ app.get('/vehicle/:id', async (req, res) => {
     }
 });
 
-
 //////////////////////////
 ///  Get All Vehicles  ///
 //////////////////////////
 
 app.get('/vehicles', async (req, res) => {
+    const { sortColumn = 'make', sortOrder = 'asc' } = req.query;
     try {
         const result = await pool.query(`
             SELECT v.*, p.photo_url
             FROM vehicles v
             LEFT JOIN photos p ON v.id = p.vehicle_id
-            ORDER BY v.make, v.model, v.year
+            ORDER BY ${sortColumn} ${sortOrder}
         `);
         res.json(result.rows);
     } catch (error) {
@@ -798,6 +798,53 @@ app.post('/create-order', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+//////////////////////
+///  Delete Order  ///
+//////////////////////
+
+app.delete('/delete_order/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const client = await pool.connect();
+        try {
+            await client.query('BEGIN');
+
+            // Get the order details
+            const orderResult = await client.query('SELECT * FROM orders WHERE id = $1', [id]);
+            const order = orderResult.rows[0];
+
+            if (!order) {
+                await client.query('ROLLBACK');
+                res.status(404).json({ error: 'Order not found' });
+                return;
+            }
+
+            // Update the vehicle
+            await client.query('UPDATE vehicles SET is_sold = false, sale_date = NULL, sale_price = NULL WHERE id = $1', [order.vehicle_id]);
+
+            // Update the customer
+            await client.query('UPDATE customers SET total_orders = total_orders - 1 WHERE id = $1', [order.customer_id]);
+
+            // Delete the order
+            await client.query('DELETE FROM orders WHERE id = $1', [id]);
+
+            await client.query('COMMIT');
+            res.status(200).json({ message: 'Order deleted and changes reverted successfully' });
+        } catch (error) {
+            await client.query('ROLLBACK');
+            console.error('Error deleting order:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        } finally {
+            client.release();
+        }
+    } catch (error) {
+        console.error('Error connecting to database:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 // Middleware to protect routes
 const authMiddleware = (req, res, next) => {

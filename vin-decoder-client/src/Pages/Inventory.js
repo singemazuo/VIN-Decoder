@@ -23,6 +23,8 @@ const Inventory = () => {
   const [isDescending, setIsDescending] = useState(true);
   const [activeView, setActiveView] = useState(localStorage.getItem("activeView") || "list");
   const [filter, setFilter] = useState("all"); 
+  const [sortColumn, setSortColumn] = useState("make"); // Default sorting column
+  const [sortOrder, setSortOrder] = useState("asc"); // Default sorting order
 
   const navigate = useNavigate();
 
@@ -35,7 +37,12 @@ const Inventory = () => {
     }
 
     try {
-      const response = await axios.get(endpoint);
+      const response = await axios.get(endpoint, {
+        params: {
+          sortColumn,
+          sortOrder,
+        },
+      });
       setVehicles(response.data);
     } catch (error) {
       console.error("Error fetching vehicles:", error);
@@ -44,7 +51,7 @@ const Inventory = () => {
 
   useEffect(() => {
     fetchVehicles();
-  }, [filter]);
+  }, [filter, sortColumn, sortOrder]);
 
   const handleViewChange = (view) => {
     setActiveView(view);
@@ -65,6 +72,8 @@ const Inventory = () => {
             maxPrice: maxPrice || null,
             minMilage: minMilage || null,
             maxMilage: maxMilage || null,
+            sortColumn,
+            sortOrder,
           },
         }
       );
@@ -100,7 +109,12 @@ const Inventory = () => {
   };
 
   const handleToggleSort = () => {
+    setSortOrder(isDescending ? "asc" : "desc");
     setIsDescending(!isDescending);
+  };
+
+  const handleSortChange = (e) => {
+    setSortColumn(e.target.value);
   };
 
   return (
@@ -125,14 +139,14 @@ const Inventory = () => {
                 className={styles.iconFilter}
                 alt="filter"
               ></img>
-              <select className={styles.filterSelect}>
-                <option>Stock</option>
-                <option>Make</option>
-                <option>Model</option>
-                <option>Year</option>
-                <option>Milage</option>
-                <option>VIN</option>
-                <option>Price</option>
+              <select className={styles.filterSelect} onChange={handleSortChange} value={sortColumn}>
+                <option value="stock_number">Stock</option>
+                <option value="make">Make</option>
+                <option value="model">Model</option>
+                <option value="year">Year</option>
+                <option value="milage">Milage</option>
+                <option value="vin">VIN</option>
+                <option value="price">Price</option>
               </select>
               <button className={styles.btnArrow} onClick={handleToggleSort}>
                 <img
@@ -189,8 +203,7 @@ const Inventory = () => {
                   <MilageFilter
                     minMilage={minMilage}
                     setMinMilage={setMinMilage}
-                    maxMilage={maxMilage}
-                    setMaxMilage={setMaxMilage}
+                    maxMilage={setMaxMilage}
                   />
                 </div>
                 <button type="submit" className={styles.btnSearchFilter}>
@@ -207,7 +220,7 @@ const Inventory = () => {
                     <th className={styles.th}>Model</th>
                     <th className={styles.th}>Year</th>
                     <th className={styles.th}>Milage</th>
-                    <th className={styles.th}>VIN</th>
+                    <th className={styles.th}>&emsp;&emsp;&emsp;&nbsp;VIN</th>
                     <th className={styles.th}>Price</th>
                     <th className={styles.th}>Actions</th>
                   </tr>

@@ -175,6 +175,7 @@
     flex-direction: column;
     justify-content: center;
     margin-top: 10px;
+    
 }
 
 .th, .td {
@@ -187,6 +188,7 @@
     background-color: #f2f2f2;
     font-weight: bold;
     
+    
 }
 
 tbody tr:nth-child(even) {
@@ -196,6 +198,7 @@ tbody tr:nth-child(even) {
 .thStock {
     background-color: #f2f2f2;
     border-bottom: 1px solid #ddd;
+    
 }
 
 .hr{
@@ -325,6 +328,9 @@ tbody tr:nth-child(even) {
     position: absolute;
     top: 8px;
     right: 715px;
+}
+.iconArrow.rotated {
+    transform: rotate(180deg);
 }
 
 .btnAll.active, .btnSold.active, .btnUnsold.active {

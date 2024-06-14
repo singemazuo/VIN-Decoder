@@ -69,7 +69,7 @@ const Customer = () => {
                                 <th>Phone</th>
                                 <th>Group</th>
                                 <th>Orders</th>
-                                <th className={styles.actionTitle}>Action</th>
+                                <th className={styles.actionTitle}> &nbsp;&nbsp;&nbsp; Action</th>
                             </tr>
                         </thead>
                         <tbody>

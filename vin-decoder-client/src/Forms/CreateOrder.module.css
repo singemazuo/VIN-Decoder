@@ -1,268 +1,276 @@
 .sideBar {
-    position: relative;
-    z-index: 1000;
-  }
-  
-  .navBar {
-    position: relative;
-    z-index: 100;
-  }
-  
-  .selectionSection {
-    padding-top: 17px;
-    padding-bottom: 38px;
-    display: flex;
-    flex-direction: row;
-    margin-left: 360px;
-  }
-  
-  .btnClear {
-    align-items: center;
-    background-color: #ffffff;
-    border: 2px solid rgb(110, 109, 136);
-    border-radius: 3rem;
-    box-sizing: border-box;
-    color: rgb(93, 92, 116);
-    cursor: pointer;
-    display: inline-flex;
-    font-size: 17px;
-    font-weight: 600;
-    justify-content: center;
-    line-height: 1.25;
-    min-height: 53px;
-    position: absolute;
-    text-decoration: none;
-    transition: all 250ms;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: baseline;
-    width: 152px;
-    height: 23px;
-    top: 97px;
-    right: 120px;
-  }
-  .btnPrint{
-    align-items: center;
-    background-color: #ffffff;
-    border: 2px solid rgb(110, 109, 136);
-    border-radius: 3rem;
-    box-sizing: border-box;
-    color: rgb(93, 92, 116);
-    cursor: pointer;
-    display: inline-flex;
-    font-size: 17px;
-    font-weight: 600;
-    justify-content: center;
-    line-height: 1.25;
-    min-height: 53px;
-    position: absolute;
-    text-decoration: none;
-    transition: all 250ms;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: baseline;
-    width: 152px;
-    height: 23px;
-    top: 97px;
-    right: 290px;
-  }
+  position: relative;
+  z-index: 1000;
+}
 
-  .btnSubit{
-    align-items: center;
-    background-color: #ffffff;
-    border: 2px solid rgb(110, 109, 136);
-    border-radius: 3rem;
-    box-sizing: border-box;
-    color: rgb(93, 92, 116);
-    cursor: pointer;
-    display: inline-flex;
-    font-size: 17px;
-    font-weight: 600;
-    justify-content: center;
-    line-height: 1.25;
-    min-height: 53px;
-    position: relative;
-    text-decoration: none;
-    transition: all 250ms;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: baseline;
-    width: 452px;
-    height: 23px;
-    margin-left: 215px;
-    margin-bottom: 50px;
-    margin-top: 12px;
-  }
-  
-  .btnClear:hover {
-    background-color: rgb(93, 92, 116);
-    color: white;
-    opacity: 80%;
-  }
+.navBar {
+  position: relative;
+  z-index: 100;
+}
+
+.selectionSection {
+  padding-top: 17px;
+  padding-bottom: 38px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 360px;
+}
+
+.btnClear {
+  align-items: center;
+  background-color: #ffffff;
+  border: 2px solid rgb(110, 109, 136);
+  border-radius: 3rem;
+  box-sizing: border-box;
+  color: rgb(93, 92, 116);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 17px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  min-height: 53px;
+  position: absolute;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: 152px;
+  height: 23px;
+  top: 97px;
+  right: 120px;
+}
+
+.btnPrint {
+  align-items: center;
+  background-color: #ffffff;
+  border: 2px solid rgb(110, 109, 136);
+  border-radius: 3rem;
+  box-sizing: border-box;
+  color: rgb(93, 92, 116);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 17px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  min-height: 53px;
+  position: absolute;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: 152px;
+  height: 23px;
+  top: 97px;
+  right: 290px;
+}
+
+.btnSubit {
+  align-items: center;
+  background-color: #ffffff;
+  border: 2px solid rgb(110, 109, 136);
+  border-radius: 3rem;
+  box-sizing: border-box;
+  color: rgb(93, 92, 116);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 17px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  min-height: 53px;
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: 452px;
+  height: 23px;
+  margin-left: 215px;
+  margin-bottom: 50px;
+  margin-top: 12px;
+}
+
+.btnClear:hover {
+  background-color: rgb(93, 92, 116);
+  color: white;
+  opacity: 80%;
+}
 
 .btnSubit:hover {
-    background-color: rgb(93, 92, 116);
-    color: white;
-    opacity: 80%;
-  }
-  .btnPrint:hover {
-    background-color: rgb(93, 92, 116);
-    color: white;
-    opacity: 80%;
-  }
-  
-.textbox{
+  background-color: rgb(93, 92, 116);
+  color: white;
+  opacity: 80%;
+}
+
+.btnPrint:hover {
+  background-color: rgb(93, 92, 116);
+  color: white;
+  opacity: 80%;
+}
+
+.textbox {
   width: 600px;
   height: 150px;
 }
 
-  .editIcon {
-    height: 18px;
-    width: 18px;
-    margin: 1px 3px 0 2px;
-  }
-  
-  .printIcon {
-    height: 19px;
-    width: 19px;
-    margin: 3px 4px 0 2px;
-  }
-  
-  .vehicleSelect {
-    position: relative;
-    margin-top: 16px;
+.editIcon {
+  height: 18px;
+  width: 18px;
+  margin: 1px 3px 0 2px;
+}
 
-    
+.printIcon {
+  height: 19px;
+  width: 19px;
+  margin: 3px 4px 0 2px;
+}
+
+.vehicleSelect {
+  position: relative;
+  margin-top: 16px;
+}
+
+.customerSelect {
+  position: relative;
+  margin-top: 16px;
+}
+
+.dropdownVehicle,
+.dropdownCustomer {
+  display: flex;
+  justify-content: center;
+  height: 54px;
+  background: #fff;
+  padding: 0 10px;
+  font-size: 18px;
+  border: 2px solid rgb(93, 92, 116);
+  font-weight: 400;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
+  color: rgb(80, 79, 99);
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.dropdownCustomer {
+  border-right: none;
+  border-radius: 2rem 0 0 2rem;
+}
+
+.dropdownVehicle {
+  border-radius: 0 2rem 2rem 0;
+}
+
+.inputProv,
+.inputPrice,
+.inputTown,
+.inputYear,
+.inputDate {
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.inputYear {
+  width: 25px;
+}
+
+.inputPrice,
+.inputDate {
+  width: 120px;
+}
+
+.orderForm {
+  border: 2px solid #ccc;
+  border-radius: 30px;
+  padding: 30px;
+  max-width: 800px;
+  width: 100%;
+  margin-left: 200px;
+  margin-top: 40px;
+  background-color: #fff;
+}
+
+.orderSection {
+  border-top: 1px solid #CCC;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.signatures {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border: none;
+  margin-top: 15px;
+}
+
+.buyerInput,
+.sellerInput {
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.sellerSignature,
+.buyerSignature {
+  display: flex;
+  flex-direction: column;
+  border: none;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
   }
-  
-  .customerSelect {
-    position: relative;
-    margin-top: 16px;
+
+  #printableForm,
+  #printableForm * {
+    visibility: visible;
   }
-  
-  .dropdownVehicle,
-  .dropdownCustomer {
-    display: flex;
-    justify-content: center;
-    height: 54px;
-    background: #fff;
-    padding: 0 10px;
-    font-size: 18px;
-    border: 2px solid rgb(93, 92, 116);
-    font-weight: 400;
-    align-items: center;
-    cursor: pointer;
-    justify-content: space-between;
-    color: rgb(80, 79, 99);
-    font-weight: 600;
-    font-size: 18px;
-  }
-  
-  .dropdownCustomer {
-    border-right: none;
-    border-radius: 2rem 0 0 2rem;
-  }
-  
-  .dropdownVehicle {
-    border-radius: 0 2rem 2rem 0;
-  }
-  
-  .inputProv,
-  .inputPrice,
-  .inputTown,
-  .inputYear,
-  .inputDate {
-    border: none;
-    border-bottom: 1px solid black;
-  }
-  
-  .inputYear{
-    width: 25px;
-  }
-  .inputPrice,.inputDate {
-    width: 120px;
-  }
-  
-  .orderForm {
-    border: 2px solid #ccc;
-    border-radius: 30px;
-    padding: 30px;
-    max-width: 800px;
+
+  #printableForm {
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
-    margin-left: 200px;
-    margin-top: 40px;
-    background-color: #fff;
   }
-  
-  .orderSection {
-    border-top: 1px solid #CCC;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .signatures{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    border: none;
-    margin-top: 15px;
-  }
+}
 
-  .buyerInput, .sellerInput{
-    border: none;
-    border-bottom: 1px solid black;
-  }
-
-  .sellerSignature, .buyerSignature{
-    display: flex;
+@media screen and (max-width: 1250px) {
+  .selectionSection {
     flex-direction: column;
+    align-items: center;
+  }
+
+  .customerSelect,
+  .vehicleSelect,
+  .btnClear,
+  .btnPrint {
+    position: relative;
+    border-radius: 2rem;
+    padding: 0 20px;
+    border: 2px solid rgb(93, 92, 116);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .dropdownCustomer,
+  .dropdownVehicle {
+    border-radius: 0 !important;
     border: none;
   }
-
-  @media print {
-    body * {
-      visibility: hidden;
-    }
-    #printableForm, #printableForm * {
-      visibility: visible;
-    }
-    #printableForm {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-    }
-  }
-
-  @media screen and (max-width: 1250px) {
-    .selectionSection {
-      flex-direction: column;
-      align-items: center;
-    }
-    .customerSelect,
-    .vehicleSelect,
-    .btnClear,
-    .btnPrint {
-      position: relative;
-      border-radius: 2rem;
-      padding: 0 20px;
-      border: 2px solid rgb(93, 92, 116);
-      display: flex;
-      justify-content: center; 
-      width: 100%;
-      max-width: 400px; 
-    }
-    .dropdownCustomer,
-    .dropdownVehicle {
-      border-radius: 0 !important;
-      border: none;
-    }
-  }
-  
+}
