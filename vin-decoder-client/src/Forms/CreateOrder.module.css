@@ -230,6 +230,27 @@
   border: none;
 }
 
+.popup {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: gold;
+  color: black;
+  padding: 15px;
+  border: 2px dashed black;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  z-index: 1000;
+  display: none;
+}
+
+.popup.show {
+  display: inline-block;
+}
+
+
 @media print {
   body * {
     visibility: hidden;

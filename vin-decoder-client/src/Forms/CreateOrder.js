@@ -10,6 +10,8 @@ const CreateOrder = () => {
   const [selectedCustomer, setSelectedCustomer] = useState("");
   const [selectedVehicle, setSelectedVehicle] = useState("");
   const [salePrice, setSalePrice] = useState("");
+  const [popupMessage, setPopupMessage] = useState("");
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [formData, setFormData] = useState({
     buyerName: "",
     buyerAddress: "",
@@ -23,6 +25,14 @@ const CreateOrder = () => {
     milage: "",
     vin: "",
   });
+
+  const showPopup = (message) => {
+    setPopupMessage(message);
+    setIsPopupVisible(true);
+    setTimeout(() => {
+      setIsPopupVisible(false);
+    }, 3000);
+  };
 
   useEffect(() => {
     const fetchCustomers = async () => {
@@ -87,11 +97,11 @@ const CreateOrder = () => {
         salePrice,
       });
       if (response.status === 201) {
-        alert("Order created successfully!");
+        showPopup("Order created successfully!");
       }
     } catch (error) {
       console.error("Error creating order:", error);
-      alert("Failed to create order. Please try again.");
+      showPopup("Failed to create order. Please try again.");
     }
   };
 
@@ -250,6 +260,11 @@ const CreateOrder = () => {
         <img src="./icons/eraser.svg" alt="edit" className={styles.editIcon} />
         Clear form
       </button>
+      {isPopupVisible && (
+        <div className={`${styles.popup} ${isPopupVisible ? styles.show : ""}`} id="aa">
+          {popupMessage}
+        </div>
+      )}
     </>
   );
 };
