@@ -11,7 +11,7 @@ import { AuthProvider } from './Auth/AuthContext';
 import Inventory from './Pages/Inventory';
 import Register from './Auth/Register';
 import AddCustomer from './Forms/AddCustomer';
-import Reports from './Pages/Reports';
+import Marketing from './Pages/Marketing';
 import Orders from './Pages/Orders';
 import Sidebar from './Navigation/Sidebar';
 import './App.css';
@@ -35,7 +35,7 @@ const App = () => {
                         <Route path='/edit-form' element={<EditForm />} />
                         <Route path='/settings' element={<Settings />} />
                         <Route path="/register" element={<Register />} />
-                        <Route path="/reports" element={<Reports />} />
+                        <Route path="/marketing" element={<Marketing />} />
                         <Route path="/orders" element={<Orders />} />
                         <Route path="/loan" element={<LoanCalc />} />
                         <Route path="/lease" element={<LeaseCalc />} />

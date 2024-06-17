@@ -32,13 +32,13 @@ const Sidebar = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/reports" activeClassName={styles.active}>
-                            <span className={styles.icon}>📋</span> Reports
+                        <NavLink to="/orders" activeClassName={styles.active}>
+                            <span className={styles.icon}>📦</span> Orders
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/orders" activeClassName={styles.active}>
-                            <span className={styles.icon}>📦</span> Orders
+                        <NavLink to="/marketing" activeClassName={styles.active}>
+                            <span className={styles.icon}>📱</span> Marketing
                         </NavLink>
                     </li>
                     <li>

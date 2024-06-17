@@ -17,8 +17,8 @@ const NavigationBar = () => {
                 return 'Inventory';
             case '/customers':
                 return 'Customers';
-            case '/reports':
-                return 'Reports';
+            case '/marketing':
+                return 'Marketing';
             case '/orders':
                 return 'Orders';
             case '/loan':

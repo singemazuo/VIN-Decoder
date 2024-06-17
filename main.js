@@ -10,6 +10,7 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
+const twilio = require('twilio');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = new twilio(accountSid, authToken);
@@ -75,16 +76,20 @@ app.get('/protected', (req, res) => {
 ///  Twilio  ///
 ////////////////
 
-app.post('/send-sms', (req, res) => {
+app.post('/send-sms', async (req, res) => {
     const { to, message } = req.body;
 
-    client.messages.create({
-        body: message,
-        to: to, 
-        from: process.env.TWILIO_PHONE_NUMBER 
-    })
-    .then((message) => res.status(200).json({ messageSid: message.sid }))
-    .catch((error) => res.status(500).json({ error: error.message }));
+    try {
+        const smsResponse = await client.messages.create({
+            body: message,
+            to: to, 
+            from: process.env.TWILIO_PHONE_NUMBER
+        });
+        res.status(200).json({ messageSid: smsResponse.sid });
+    } catch (error) {
+        console.error('Error sending SMS:', error);
+        res.status(500).json({ error: error.message });
+    }
 });
 
 

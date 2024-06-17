@@ -42,6 +42,10 @@ const Customer = () => {
         }
     };
 
+    const handleSmsMarketing = () => {
+        navigate('/marketing');
+    };
+
     return (
         <>
             <div className={styles.sideBar}>
@@ -55,6 +59,10 @@ const Customer = () => {
                     <button className={styles.btnAddCustomer} onClick={handleAddCustomer}>
                         <img src="/add.svg" alt="Add" className={styles.addIcon} />
                         Add Customer
+                    </button>
+                    <button className={styles.btnSmsMarketing} onClick={handleSmsMarketing}>
+                        <img src="icons/smartphone.svg" alt="SMS" className={styles.smsIcon} />
+                        SMS Marketing
                     </button>
                 </div>
                 <hr className={styles.hr}></hr>

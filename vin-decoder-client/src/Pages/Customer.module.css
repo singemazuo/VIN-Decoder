@@ -138,3 +138,42 @@
 .actionTitle{
     margin-left: 20px;
 }
+
+.smsIcon{
+    width: 20px;
+    margin-right: 6px;
+    margin-top: 3px;
+}
+
+.btnSmsMarketing{
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 2px solid rgb(110, 109, 136);
+    border-radius: 3rem;
+    box-sizing: border-box;
+    color: rgb(93, 92, 116);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 20px 0 0;
+    min-height: 3rem;
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: 190px;
+    height: 60px;
+    z-index: 1000;
+    margin-left: 5rem; 
+}
+.btnSmsMarketing:hover{
+    background-color: rgb(93, 92, 116);
+    color: white;
+    opacity: 80%;
+}
