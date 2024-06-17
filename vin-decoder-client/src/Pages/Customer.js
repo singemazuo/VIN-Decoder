@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const Customer = () => {
     const navigate = useNavigate();
     const [customers, setCustomers] = useState([]);
+    const [selectedCustomers, setSelectedCustomers] = useState([]);
 
     useEffect(() => {
         const fetchCustomers = async () => {
@@ -42,8 +43,21 @@ const Customer = () => {
         }
     };
 
+    const handleSelectCustomer = (customerId) => {
+        setSelectedCustomers(prevState => {
+            if (prevState.includes(customerId)) {
+                return prevState.filter(id => id !== customerId);
+            } else {
+                return [...prevState, customerId];
+            }
+        });
+    };
+
     const handleSmsMarketing = () => {
-        navigate('/marketing');
+        const selectedNumbers = customers
+            .filter(customer => selectedCustomers.includes(customer.id))
+            .map(customer => customer.phone);
+        navigate('/marketing', { state: { phoneNumbers: selectedNumbers } });
     };
 
     return (
@@ -83,7 +97,13 @@ const Customer = () => {
                         <tbody>
                             {customers.map(customer => (
                                 <tr key={customer.id}>
-                                    <td><input type="checkbox" /></td>
+                                    <td>
+                                        <input 
+                                            type="checkbox" 
+                                            onChange={() => handleSelectCustomer(customer.id)} 
+                                            checked={selectedCustomers.includes(customer.id)}
+                                        />
+                                    </td>
                                     <td>{`${customer.firstname} ${customer.lastname}`}</td>
                                     <td>{customer.email}</td>
                                     <td>{customer.address}</td>

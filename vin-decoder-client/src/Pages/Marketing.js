@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NavigationBar from "../Navigation/NavigationBar";
 import Sidebar from "../Navigation/Sidebar";
 import styles from "./Marketing.module.css";
+import { useLocation } from "react-router-dom";
 
 const Marketing = () => {
+  const location = useLocation();
+  const initialPhoneNumbers = location.state?.phoneNumbers || [];
   const [message, setMessage] = useState("");
-  const [phoneNumbers, setPhoneNumbers] = useState([]);
+  const [phoneNumbers, setPhoneNumbers] = useState(initialPhoneNumbers);
   const [phoneNumber, setPhoneNumber] = useState("");
 
   const handleSendSMS = async () => {
@@ -74,6 +77,9 @@ const Marketing = () => {
             <button onClick={handleSendSMS} className={styles.sendButton}>
               Send SMS
             </button>
+            <button onClick={handleSendSMS} className={styles.sendButton}>
+              Clear{" "}
+            </button>
           </div>
         </div>
 
@@ -103,6 +109,7 @@ const Marketing = () => {
             </div>
             <div className={styles.phoneNumbersList}></div>
             <button className={styles.sendButton}>Send Email</button>
+            <button className={styles.sendButton}>Clear</button>
           </div>
         </div>
       </div>
