@@ -10,7 +10,9 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
-
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = new twilio(accountSid, authToken);
 
 const app = express();
 app.use(cors({
@@ -67,6 +69,22 @@ app.get('/protected', (req, res) => {
         return res.status(401).json({ error: 'Unauthorized' });
     }
     res.json({ isAuthenticated: true, firstName: req.session.firstName });
+});
+
+////////////////
+///  Twilio  ///
+////////////////
+
+app.post('/send-sms', (req, res) => {
+    const { to, message } = req.body;
+
+    client.messages.create({
+        body: message,
+        to: to, 
+        from: process.env.TWILIO_PHONE_NUMBER 
+    })
+    .then((message) => res.status(200).json({ messageSid: message.sid }))
+    .catch((error) => res.status(500).json({ error: error.message }));
 });
 
 
