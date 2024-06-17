@@ -1,1 +1,2 @@
-SELECT * FROM vehicles
+
+SELECT * FROM Orders ORDER BY sale_date ASC
