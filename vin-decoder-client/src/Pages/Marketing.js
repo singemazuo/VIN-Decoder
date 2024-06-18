@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import NavigationBar from "../Navigation/NavigationBar";
 import Sidebar from "../Navigation/Sidebar";
@@ -33,6 +33,10 @@ const Marketing = () => {
       setPhoneNumbers([...phoneNumbers, phoneNumber]);
       setPhoneNumber("");
     }
+  };
+
+  const handleRemoveNumber = (numberToRemove) => {
+    setPhoneNumbers(phoneNumbers.filter((number) => number !== numberToRemove));
   };
 
   return (
@@ -71,39 +75,39 @@ const Marketing = () => {
               {phoneNumbers.map((number, index) => (
                 <div key={index} className={styles.phoneNumberItem}>
                   {number}
+                  <button
+                    className={styles.closeButton}
+                    onClick={() => handleRemoveNumber(number)}
+                  >
+                    &times;
+                  </button>
                 </div>
               ))}
             </div>
             <button onClick={handleSendSMS} className={styles.sendButton}>
               Send SMS
             </button>
-            <button onClick={handleSendSMS} className={styles.sendButton}>
-              Clear{" "}
+            <button onClick={() => setPhoneNumbers([])} className={styles.sendButton}>
+              Clear
             </button>
           </div>
         </div>
-
         <div className={styles.emailWrapper}>
           <img
             className={styles.marketingIcons}
             src="./icons/email.svg"
             alt="email"
           ></img>
-
           <div className={styles.sendEmailContainer}>
             <h2>Send Email</h2>
             <textarea
               className={styles.textarea}
               placeholder="Enter your message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
             />
             <div className={styles.phoneNumberInput}>
               <input
                 type="text"
                 placeholder="Add email"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
               />
               <button>Add</button>
             </div>
