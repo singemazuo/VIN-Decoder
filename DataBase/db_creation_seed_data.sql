@@ -1,3 +1,5 @@
+-- CREATE DATABASE vehicle_db
+
 -- Drop existing tables if they exist
 DROP TABLE IF EXISTS public.photos CASCADE;
 DROP TABLE IF EXISTS public.vehicles CASCADE;

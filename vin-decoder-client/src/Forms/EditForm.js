@@ -358,7 +358,10 @@ const EditForm = () => {
                         <hr />
                         {/* PhotoUpload component to handle photo uploads */}
                         <PhotoUpload onPhotosChange={handlePhotosChange} />
+                        <div className={styles.buttonWrapper}>
                         <button type="submit" className={styles.button6}>Submit Vehicle Data</button>
+
+                        </div>
                     </form>
                 </div>
             )}

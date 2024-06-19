@@ -21,8 +21,10 @@ const PhotoUpload = ({ onPhotosChange }) => {
 
     return (
         <div className="photo-upload-container">
-            <label htmlFor="photo-upload">Upload Vehicle Photos:</label>
-            <br></br>
+            <label htmlFor="photo-upload">
+                 ^ Upload Vehicle Photos:
+            </label>
+            <br />
             <input
                 type="file"
                 id="photo-upload"

@@ -141,6 +141,8 @@ const Marketing = () => {
           </div>
         </div>
       </div>
+      <p className={styles.disclaimer}>*Only verified phone numbers can be messaged with twilio trial account*</p>
+
     </>
   );
 };

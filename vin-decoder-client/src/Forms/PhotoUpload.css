@@ -5,6 +5,7 @@
 
 #photo-upload {
     margin: 10px 0;
+
 }
 
 .photo-preview {
@@ -39,4 +40,28 @@
 
 .photo-item button:hover {
     background: rgb(216, 27, 27);
+}
+
+.photo-upload-container input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.photo-upload-container label {
+    background-color: #4e5e80;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.photo-upload-container label:hover {
+    background-color: #3e4e70;
+}
+
+.photo-upload-container label img#upload {
+    width: 20px !important;
+    height: 20px !important;
 }
