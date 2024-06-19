@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS public.vehicles
     sale_price numeric,
     is_sold boolean DEFAULT false,
     sale_date date,
+    mileage INTEGER,
     CONSTRAINT vehicles_pkey PRIMARY KEY (id),
     CONSTRAINT vehicles_vin_key UNIQUE (vin)
 );
