@@ -1,3 +1,5 @@
+// Data of car makes and models
+
 export const carData = {
     "AC": ["Model 1", "Model 2"],
     "Acura": ["ILX", "MDX", "NSX", "RDX", "RLX", "TLX"],
