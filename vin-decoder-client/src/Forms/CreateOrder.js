@@ -5,6 +5,7 @@ import styles from "./CreateOrder.module.css";
 import axios from "axios";
 
 const CreateOrder = () => {
+  // State variables to manage data and form inputs
   const [vehicles, setVehicles] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState("");
@@ -26,6 +27,7 @@ const CreateOrder = () => {
     vin: "",
   });
 
+  // Function to show a popup message
   const showPopup = (message) => {
     setPopupMessage(message);
     setIsPopupVisible(true);
@@ -34,6 +36,7 @@ const CreateOrder = () => {
     }, 3000);
   };
 
+  // Fetch customers and vehicles data from the server
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
@@ -57,6 +60,7 @@ const CreateOrder = () => {
     fetchVehicles();
   }, []);
 
+  // Update form data when a customer is selected
   useEffect(() => {
     if (selectedCustomer) {
       const customer = customers.find((c) => c.id === parseInt(selectedCustomer));
@@ -70,6 +74,7 @@ const CreateOrder = () => {
     }
   }, [selectedCustomer, customers]);
 
+  // Update form data when a vehicle is selected
   useEffect(() => {
     if (selectedVehicle) {
       const vehicle = vehicles.find((v) => v.id === parseInt(selectedVehicle));
@@ -88,6 +93,7 @@ const CreateOrder = () => {
     }
   }, [selectedVehicle, vehicles]);
 
+  // Handle form submission to create an order
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -105,6 +111,7 @@ const CreateOrder = () => {
     }
   };
 
+  // Handle printing the order form
   const handlePrint = () => {
     const printContent = document.getElementById('printableForm').innerHTML;
     const newWindow = window.open('', '', 'height=500, width=500');
@@ -119,12 +126,15 @@ const CreateOrder = () => {
 
   return (
     <>
+      {/* Sidebar component */}
       <div className={styles.sideBar}>
         <Sidebar />
       </div>
+      {/* Navigation bar component */}
       <div className={styles.navBar}>
         <NavigationBar />
       </div>
+      {/* Order creation form */}
       <form onSubmit={handleSubmit}>
         <div className={styles.selectionSection}>
           <div className={styles.customerSelect}>
@@ -164,6 +174,7 @@ const CreateOrder = () => {
             </select>
           </div>
         </div>
+        {/* Order form details */}
         <div className={styles.orderSection}>
           <div className={styles.orderForm} id="printableForm">
             <h2>MOTOR VEHICLE BILL OF SALE</h2>
@@ -247,19 +258,23 @@ const CreateOrder = () => {
             </div>
           </div>
         </div>
+        {/* Submit order button */}
         <button type="submit" className={styles.btnSubit}>
           <img className={styles.editIcon} src="./icons/check.svg" alt="check"></img>
           Submit Order
         </button>
       </form>
+      {/* Print form button */}
       <button className={styles.btnPrint} onClick={handlePrint}>
         <img src="./icons/print.svg" alt="edit" className={styles.printIcon} />
         Print form
       </button>
+      {/* Clear form button */}
       <button className={styles.btnClear}>
         <img src="./icons/eraser.svg" alt="edit" className={styles.editIcon} />
         Clear form
       </button>
+      {/* Popup message */}
       {isPopupVisible && (
         <div className={`${styles.popup} ${isPopupVisible ? styles.show : ""}`} id="aa">
           {popupMessage}

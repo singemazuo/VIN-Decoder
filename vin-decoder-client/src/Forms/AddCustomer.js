@@ -6,9 +6,9 @@ import NavigationBar from '../Navigation/NavigationBar';
 import { useNavigate, useLocation } from "react-router-dom";
 
 const AddCustomer = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
-    const customer = location.state ? location.state.customer : null;
+    const location = useLocation(); 
+    const navigate = useNavigate(); 
+    const customer = location.state ? location.state.customer : null; 
 
     const [firstname, setFirstname] = useState(customer ? customer.firstname : '');
     const [lastname, setLastname] = useState(customer ? customer.lastname : '');
@@ -17,10 +17,12 @@ const AddCustomer = () => {
     const [group, setGroup] = useState(customer ? customer.group : '');
     const [phone, setPhone] = useState(customer ? customer.phone : '');
 
+    // Handle form submission
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent default form submission behavior
         try {
             if (customer) {
+                // If editing an existing customer, send a PUT request to update
                 await axios.put(`http://localhost:5000/customer/${customer.id}`, {
                     firstname,
                     lastname,
@@ -30,6 +32,7 @@ const AddCustomer = () => {
                     group
                 });
             } else {
+                // If adding a new customer, send a POST request to create
                 await axios.post('http://localhost:5000/add-customer', {
                     firstname,
                     lastname,
@@ -39,14 +42,15 @@ const AddCustomer = () => {
                     group
                 });
             }
-            navigate('/customers');
+            navigate('/customers'); // Navigate back to the customers page
         } catch (error) {
-            console.error('Error saving customer:', error);
+            console.error('Error saving customer:', error); 
         }
     };
 
+    // Handle clearing the form fields
     const handleClear = (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
         setFirstname('');
         setLastname('');
         setEmail('');
@@ -57,12 +61,15 @@ const AddCustomer = () => {
 
     return (
         <>
+            {/* Sidebar component */}
             <div className={styles.sideBar}>
                 <Sidebar />
             </div>
+            {/* Navigation bar component */}
             <div className={styles.navBar}>
                 <NavigationBar />
             </div>
+            {/* Main content for adding or editing a customer */}
             <div className={styles.addCustomerPage}>
                 <h1>{customer ? 'Edit Customer' : 'Add Customer'}</h1>
                 <form className={styles.frmAddCustomer} onSubmit={handleSubmit}>
@@ -79,6 +86,7 @@ const AddCustomer = () => {
                     <input value={phone} onChange={(e) => setPhone(e.target.value)} />
                     <label className={styles.lblCustomer}>Group</label>
                     <input value={group} onChange={(e) => setGroup(e.target.value)} />
+                    {/* Buttons for submitting or clearing the form */}
                     <div className={styles.frmButtons}>
                         <button className={styles.btnSubmitCustomer} type='submit'>Submit</button>
                         <button className={styles.btnClearCustomer} onClick={handleClear}>Clear</button>

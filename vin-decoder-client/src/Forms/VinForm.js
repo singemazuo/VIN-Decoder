@@ -9,8 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 const VinForm = () => {
-  const [vin, setVin] = useState("");
-  const [result, setResult] = useState(null);
+  const [vin, setVin] = useState(""); 
+  const [result, setResult] = useState(null); 
   const [logoUrl, setLogoUrl] = useState("");
   const [photos, setPhotos] = useState([]);
   const [fields, setFields] = useState({
@@ -36,14 +36,16 @@ const VinForm = () => {
     PurchasePrice: "",
     isSold: false,
     Milage: ""
-});
+  });
 
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(false); 
   const navigate = useNavigate();
 
+  // Handle VIN submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!vin.trim()) {
+      // Clear form if VIN is empty
       console.log("VIN is empty, clearing form fields");
       setFields({
         Year: "",
@@ -76,15 +78,16 @@ const VinForm = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/decode_vin", {
-        vin,
-      });
+      // Send VIN to backend for decoding
+      const response = await axios.post("http://localhost:5000/decode_vin", { vin });
       console.log("API Response:", response.data);
       setResult(response.data);
       fetchLogo(response.data.Make);
 
+      // Generate stock number from VIN
       const stockNumber = vin.slice(-6);
 
+      // Update form fields with decoded data
       setFields({
         Year: response.data.Year || "",
         Make: response.data.Make || "",
@@ -117,13 +120,12 @@ const VinForm = () => {
     }
   };
 
+  // Fetch car make logo
   const fetchLogo = async (make) => {
     try {
       console.log("Fetching logo for make:", make);
       const formattedMake = make.toLowerCase();
-      const logoResponse = await axios.get(
-        `https://logo.clearbit.com/${formattedMake}.com`
-      );
+      const logoResponse = await axios.get(`https://logo.clearbit.com/${formattedMake}.com`);
       setLogoUrl(logoResponse.config.url);
     } catch (error) {
       console.error("Error fetching logo for make:", make, error);
@@ -131,6 +133,7 @@ const VinForm = () => {
     }
   };
 
+  // Handle form field changes
   const handleFieldChange = (field, value) => {
     setFields({
       ...fields,
@@ -138,10 +141,12 @@ const VinForm = () => {
     });
   };
 
+  // Handle photo changes
   const handlePhotosChange = (photos) => {
     setPhotos(photos);
   };
 
+  // Handle form submission to backend
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -170,11 +175,13 @@ const VinForm = () => {
     formData.append("isSold", fields.isSold);
     formData.append("milage", fields.Milage);
 
+    // Append photos to form data
     photos.forEach((photo, index) => {
       formData.append(`photos`, photo);
     });
 
     try {
+      // Send form data to backend
       const response = await axios.post(
         "http://localhost:5000/submit_vehicle",
         formData,
@@ -191,6 +198,7 @@ const VinForm = () => {
     }
   };
 
+  // Show form for manual entry
   const handleEnterManually = () => {
     setShowForm(true);
   };

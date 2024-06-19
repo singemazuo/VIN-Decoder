@@ -9,6 +9,7 @@ const NavigationBar = () => {
     const location = useLocation();
     const currentPath = location.pathname;
 
+    // Function to map URL path to a display in the top navbar
     const getLocationName = (path) => {
         switch (path) {
             case '/':
@@ -53,6 +54,7 @@ const NavigationBar = () => {
             <Navbar className={styles.customNav}>
                 <Container>
                     <Nav className="ms-auto">
+                        {/* Display the current navigation location */}
                         <p className={styles.location}>Home / {navlocation}</p>
                         <img src="/images/user.png" alt="User" className={styles.userImage} />
                         <Nav.Link href="/account" className={styles.accountLink}>Account</Nav.Link>

@@ -1,4 +1,3 @@
-// EditForm.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -7,6 +6,7 @@ import Sidebar from '../Navigation/Sidebar';
 import PhotoUpload from './PhotoUpload';
 
 const EditForm = () => {
+    // State variables to manage the form data and component state
     const [vin, setVin] = useState('');
     const [result, setResult] = useState(null);
     const [logoUrl, setLogoUrl] = useState('');
@@ -37,6 +37,7 @@ const EditForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    // Effect to fetch vehicle data when the component is mounted or the location changes
     useEffect(() => {
         const fetchVehicle = async (id) => {
             try {
@@ -82,6 +83,7 @@ const EditForm = () => {
         }
     }, [location]);
 
+    // Handle form submission to update vehicle data
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();
@@ -126,6 +128,7 @@ const EditForm = () => {
         }
     };
 
+    // Fetch logo for the given make
     const fetchLogo = async (make) => {
         try {
             console.log('Fetching logo for make:', make);
@@ -138,6 +141,7 @@ const EditForm = () => {
         }
     };
 
+    // Handle changes in form fields
     const handleFieldChange = (field, value) => {
         setFields({
             ...fields,
@@ -145,22 +149,27 @@ const EditForm = () => {
         });
     };
 
+    // Handle changes in photos
     const handlePhotosChange = (photos) => {
         setPhotos(photos);
     };
 
     return (
         <div className={styles.vinContainer}>
+            {/* Sidebar component */}
             <Sidebar />
 
+            {/* Show form only if the data is loaded */}
             {showForm && (
                 <div className={styles.formContainer}>
+                    {/* Display logo and vehicle details */}
                     <div className={styles.logoAndDetails}>
                         {logoUrl && <img src={logoUrl} alt={`${fields.Make} logo`} className={styles.carLogo} />}
                         <div className={styles.detailsText}>
                             {fields.Year} {fields.Make} {fields.Model}
                         </div>
                     </div>
+                    {/* Form for editing vehicle details */}
                     <form onSubmit={handleFormSubmit}>
                         <div className={styles.formGroup}>
                             <label className={styles.formLabels}>Year:</label>
@@ -347,6 +356,7 @@ const EditForm = () => {
                             />
                         </div>
                         <hr />
+                        {/* PhotoUpload component to handle photo uploads */}
                         <PhotoUpload onPhotosChange={handlePhotosChange} />
                         <button type="submit" className={styles.button6}>Submit Vehicle Data</button>
                     </form>

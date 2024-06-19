@@ -4,30 +4,19 @@ import './PhotoUpload.css';
 const PhotoUpload = ({ onPhotosChange }) => {
     const [photos, setPhotos] = useState([]);
 
+    // Handle the addition of new photos
     const handlePhotoChange = (event) => {
-        const files = Array.from(event.target.files);
-        const newPhotos = [...photos, ...files];
+        const files = Array.from(event.target.files); // Convert file list to array
+        const newPhotos = [...photos, ...files]; // Combine existing and new photos
         setPhotos(newPhotos);
         onPhotosChange(newPhotos);
     };
 
+    // Remove a photo by its index
     const removePhoto = (index) => {
-        const newPhotos = photos.filter((_, i) => i !== index);
-        setPhotos(newPhotos);
+        const newPhotos = photos.filter((_, i) => i !== index); // Filter out the photo to be removed
+        setPhotos(newPhotos); 
         onPhotosChange(newPhotos);
-    };
-
-    const PhotoUpload = ({ onPhotosChange }) => {
-        const handleFileChange = (e) => {
-            const files = Array.from(e.target.files);
-            onPhotosChange(files);
-        };
-    
-        return (
-            <div>
-                <input type="file" multiple onChange={handleFileChange} />
-            </div>
-        );
     };
 
     return (
