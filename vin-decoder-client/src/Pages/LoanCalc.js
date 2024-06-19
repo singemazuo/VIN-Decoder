@@ -4,6 +4,7 @@ import Sidebar from '../Navigation/Sidebar';
 import NavigationBar from '../Navigation/NavigationBar';
 
 const LoanCalc = () => {
+  // State for form data and result
   const [formData, setFormData] = useState({
     price: 0,
     tradeIn: 0,
@@ -16,6 +17,7 @@ const LoanCalc = () => {
 
   const [result, setResult] = useState(null);
 
+  // Handle input changes in the form
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -24,6 +26,7 @@ const LoanCalc = () => {
     });
   };
 
+  // Handle form submission to calculate the loan payment
   const handleSubmit = (e) => {
     e.preventDefault();
     const {
@@ -36,16 +39,19 @@ const LoanCalc = () => {
       interestRate,
     } = formData;
 
+    // Calculate total cost and total cost with tax
     const totalCost = price - tradeIn - loanBalance - downPayment;
     const totalCostWithTax = totalCost + totalCost * (salesTax / 100);
 
     let monthlyPayment, biweeklyPayment, weeklyPayment;
 
     if (interestRate === 0) {
+      // If interest rate is 0, calculate payments directly
       monthlyPayment = totalCostWithTax / loanDuration;
       biweeklyPayment = totalCostWithTax / (loanDuration * 2);
       weeklyPayment = totalCostWithTax / (loanDuration * 4);
     } else {
+      // Calculate payments with interest
       const monthlyInterestRate = interestRate / 100 / 12;
       monthlyPayment = (totalCostWithTax * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -loanDuration));
 
@@ -56,10 +62,12 @@ const LoanCalc = () => {
       weeklyPayment = (totalCostWithTax * weeklyInterestRate) / (1 - Math.pow(1 + weeklyInterestRate, -(loanDuration * 4)));
     }
 
+    // Calculate total interest
     const totalInterestMonthly = monthlyPayment * loanDuration - totalCostWithTax;
     const totalInterestBiweekly = biweeklyPayment * loanDuration * 2 - totalCostWithTax;
     const totalInterestWeekly = weeklyPayment * loanDuration * 4 - totalCostWithTax;
 
+    // Set result state with calculated values
     setResult({
       monthlyPayment: monthlyPayment.toFixed(2),
       biweeklyPayment: biweeklyPayment.toFixed(2),
@@ -70,6 +78,7 @@ const LoanCalc = () => {
     });
   };
 
+  // Handle form reset to clear the input fields and result
   const handleReset = () => {
     setFormData({
       price: 0,
@@ -94,6 +103,7 @@ const LoanCalc = () => {
       <div className={styles.container}>
         <h1 className={styles.h1}>Loan Payment Calculator</h1>
         <form className={styles.loanForm} onSubmit={handleSubmit} onReset={handleReset}>
+          {/* Input fields for loan calculation */}
           <div className={styles.formGroup}>
             <label htmlFor="price">Price of your new vehicle ($) (excluding Tax):</label>
             <input
@@ -192,11 +202,13 @@ const LoanCalc = () => {
             />
             <output>{formData.interestRate}%</output>
           </div>
+          {/* Buttons for submitting and resetting the form */}
           <div className={styles.buttons}>
             <button className={styles.button} type="submit">Calculate</button>
             <button className={styles.button} type="reset">Reset</button>
           </div>
         </form>
+        {/* Display the result of the calculation */}
         {result && (
           <>
             <h2 className={styles.h2} id="result">Calculation Result</h2>

@@ -4,6 +4,7 @@ import Sidebar from '../Navigation/Sidebar';
 import NavigationBar from '../Navigation/NavigationBar';
 
 const LeaseCalc = () => {
+  // State for form data and result
   const [formData, setFormData] = useState({
     capitalizedCost: 0,
     residualValue: 0,
@@ -16,6 +17,7 @@ const LeaseCalc = () => {
 
   const [result, setResult] = useState(null);
 
+  // Handle input changes in the form
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -24,6 +26,7 @@ const LeaseCalc = () => {
     });
   };
 
+  // Handle form submission to calculate the lease payment
   const handleSubmit = (event) => {
     event.preventDefault();
     const { capitalizedCost, residualValue, apr, term, salesTaxRate, downPayment, fees } = formData;
@@ -42,6 +45,7 @@ const LeaseCalc = () => {
     });
   };
 
+  // Handle form reset to clear the input fields and result
   const handleReset = () => {
     setFormData({
       capitalizedCost: 0,
@@ -66,6 +70,7 @@ const LeaseCalc = () => {
       <div className={styles.container}>
         <h1 className={styles.h1}>Lease Payment Calculator</h1>
         <form className={styles.leaseForm} onSubmit={handleSubmit} onReset={handleReset}>
+          {/* Input fields for lease calculation */}
           <div className={styles.formGroup}>
             <label htmlFor="capitalizedCost">Capitalized Cost ($):</label>
             <input
@@ -136,11 +141,13 @@ const LeaseCalc = () => {
               onChange={handleChange}
             />
           </div>
+          {/* Buttons for submitting and resetting the form */}
           <div className={styles.buttons}>
             <button className={styles.button} type="submit">Calculate</button>
             <button className={styles.button} type="reset">Clear</button>
           </div>
         </form>
+        {/* Display the result of the calculation */}
         {result && (
           <>
             <h2 className={styles.h2} id="result">Calculation Result</h2>

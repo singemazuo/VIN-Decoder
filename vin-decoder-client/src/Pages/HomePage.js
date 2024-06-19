@@ -16,6 +16,7 @@ const HomePage = () => {
   const [salesDifference, setSalesDifference] = useState(null);
   const [averageRevenue, setAverageRevenue] = useState(null);
 
+  // State for chart data
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
@@ -29,6 +30,7 @@ const HomePage = () => {
     ],
   });
 
+  // Colors for the pie chart
   const colors = [
     "#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a",
     "#ffee65", "#beb9db", "#fdcce5", "#8d8f97", "#D4F0F0",
@@ -37,6 +39,7 @@ const HomePage = () => {
     "#8FCACA", "#ECEAEA", "#FFCCB6", "#FF968A",
   ];
 
+  // Function to generate an array of colors
   const getColors = (count) => {
     let resultColors = [];
     for (let i = 0; i < count; i++) {
@@ -45,6 +48,7 @@ const HomePage = () => {
     return resultColors;
   };
 
+  // Fetch the average revenue data
   useEffect(() => {
     const fetchAverageRevenue = async () => {
       try {
@@ -56,14 +60,12 @@ const HomePage = () => {
     };
     fetchAverageRevenue();
   }, []);
-  
 
+  // Fetch the number of vehicles sold this month
   useEffect(() => {
     const fetchVehiclesSoldThisMonth = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/vehicles-sold-this-month"
-        );
+        const response = await axios.get("http://localhost:5000/vehicles-sold-this-month");
         setVehiclesSoldCount(response.data.count);
       } catch (error) {
         console.error("Error fetching vehicles sold this month:", error);
@@ -73,12 +75,11 @@ const HomePage = () => {
     fetchVehiclesSoldThisMonth();
   }, []);
 
+  // Fetch the sales difference data
   useEffect(() => {
     const fetchSalesDifference = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/vehicle-sales-difference"
-        );
+        const response = await axios.get("http://localhost:5000/vehicle-sales-difference");
         setSalesDifference(response.data);
       } catch (error) {
         console.error("Error fetching sales difference:", error);
@@ -88,12 +89,11 @@ const HomePage = () => {
     fetchSalesDifference();
   }, []);
 
+  // Fetch vehicle make distribution data
   useEffect(() => {
     const fetchVehicleMakeDistribution = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/vehicle-make-distribution"
-        );
+        const response = await axios.get("http://localhost:5000/vehicle-make-distribution");
         const data = response.data;
         console.log(data);
 
@@ -122,12 +122,11 @@ const HomePage = () => {
     fetchVehicleMakeDistribution();
   }, []);
 
+  // Fetch the number of vehicles sold in the past year
   useEffect(() => {
     const fetchVehiclesSold = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/vehicles_sold_past_year"
-        );
+        const response = await axios.get("http://localhost:5000/vehicles_sold_past_year");
         setVehiclesSold(response.data.count);
       } catch (error) {
         console.error("Error fetching vehicles sold in the past year:", error);
@@ -137,12 +136,11 @@ const HomePage = () => {
     fetchVehiclesSold();
   }, []);
 
+  // Fetch the average profit data
   useEffect(() => {
     const fetchAverageProfit = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/get_average_profit"
-        );
+        const response = await axios.get("http://localhost:5000/get_average_profit");
         setAverageProfit(response.data.average_profit);
       } catch (error) {
         console.error("Error fetching average profit:", error);
@@ -151,6 +149,7 @@ const HomePage = () => {
     fetchAverageProfit();
   }, []);
 
+  // Fetch the revenue data
   useEffect(() => {
     const fetchRevenueData = async () => {
       try {
@@ -164,6 +163,7 @@ const HomePage = () => {
     fetchRevenueData();
   }, []);
 
+  // Fetch the profit data
   useEffect(() => {
     const fetchProfitData = async () => {
       try {
@@ -177,6 +177,7 @@ const HomePage = () => {
     fetchProfitData();
   }, []);
 
+  // Helper function to get month name from month number
   const getMonthName = (monthNumber) => {
     const monthNames = [
       "Jan", "Feb", "Mar", "Apr", "May", "June",
@@ -185,6 +186,7 @@ const HomePage = () => {
     return monthNames[monthNumber - 1];
   };
 
+  // Prepare data for revenue chart
   const prepareRevenueChartData = (data) => {
     const labels = data.map((item) => getMonthName(item.month));
     const revenueData = data.map((item) => item.revenue);
@@ -201,6 +203,7 @@ const HomePage = () => {
     };
   };
 
+  // Prepare data for profit chart
   const prepareProfitChartData = (data) => {
     const labels = data.map((item) => getMonthName(item.month));
     const profitData = data.map((item) => item.profit);
@@ -217,6 +220,7 @@ const HomePage = () => {
     };
   };
 
+  // Chart options for revenue chart
   const revenueChartOptions = {
     maintainAspectRatio: false,
     responsive: true,
@@ -227,6 +231,7 @@ const HomePage = () => {
     },
   };
 
+  // Chart options for profit chart
   const profitChartOptions = {
     maintainAspectRatio: false,
     responsive: true,
@@ -243,6 +248,7 @@ const HomePage = () => {
     },
   };
 
+  // Chart options for pie chart
   const pieChartOptions = {
     maintainAspectRatio: false,
     responsive: true,
@@ -253,6 +259,7 @@ const HomePage = () => {
     },
   };
 
+  // Helper function to get text style based on sales difference
   const getDifferenceTextStyle = () => {
     if (salesDifference && salesDifference.percentage_difference > 0) {
       return { color: "green" };
@@ -263,6 +270,7 @@ const HomePage = () => {
     }
   };
 
+  // Helper function to format percentage difference
   const formatPercentageDifference = (difference) => {
     if (difference > 0) {
       return `+${difference.toFixed(2)}%`;
@@ -273,24 +281,28 @@ const HomePage = () => {
 
   return (
     <>
+      {/* Sidebar component */}
       <div className={styles.sideBar}>
         <Sidebar />
       </div>
+      {/* Navigation bar component */}
       <div className={styles.navBar}>
         <NavigationBar />
       </div>
+      {/* Main content area */}
       <div className={styles.content}>
         <div className={styles.mainContent}>
+          {/* Annual sales section */}
           <div className={styles.annualSales}>
             <div className={styles.reportButtons}>
-            <button className={styles.btnRefresh}>
+              <button className={styles.btnRefresh}>
                 <img className={styles.refreshIcon} src="../icons/refresh.svg" alt="refresh"></img> Refresh Reports
               </button>
               <button className={styles.btnViewYearly}>
                 View Annual Report
               </button>
-
             </div>
+            {/* Revenue chart */}
             <div className={styles.annualGraph}>
               {revenueData && (
                 <Bar
@@ -299,6 +311,7 @@ const HomePage = () => {
                 />
               )}
             </div>
+            {/* Profit chart */}
             <div className={styles.annualGraph}>
               {profitData && (
                 <Bar
@@ -308,11 +321,11 @@ const HomePage = () => {
               )}
             </div>
           </div>
+          {/* Annual numbers section */}
           <div className={styles.annualGrid}>
             <div></div>
             <div className={styles.annualNumbers}>
-            <p className={styles.title}>Sold this year</p>
-
+              <p className={styles.title}>Sold this year</p>
               <h1 className={styles.soldTotal}>
                 <strong>{vehiclesSold}&nbsp; </strong>
               </h1>
@@ -329,21 +342,23 @@ const HomePage = () => {
               </text>
             </div>
           </div>
+          {/* Monthly sales section */}
           <div className={styles.monthlySales}>
             <div className={styles.monthlyButton}>
-            <div className={styles.monthlyNumbers}>
-              <p className={styles.title}>Sold this month</p>
-              <div className={styles.centeredNumbers}>
-                <h1><strong>{vehiclesSoldCount}</strong></h1>
-                <h4 className={styles.difference} style={getDifferenceTextStyle()}>
-                  {salesDifference ? formatPercentageDifference(salesDifference.percentage_difference) : null}
-                </h4>
+              <div className={styles.monthlyNumbers}>
+                <p className={styles.title}>Sold this month</p>
+                <div className={styles.centeredNumbers}>
+                  <h1><strong>{vehiclesSoldCount}</strong></h1>
+                  <h4 className={styles.difference} style={getDifferenceTextStyle()}>
+                    {salesDifference ? formatPercentageDifference(salesDifference.percentage_difference) : null}
+                  </h4>
+                </div>
               </div>
-            </div>
-            <button className={styles.btnViewMonthly}>
+              <button className={styles.btnViewMonthly}>
                 View Monthly Report
               </button>
             </div>
+            {/* Pie chart for vehicle make distribution */}
             <div className={styles.chartContainer}>
               <Pie data={chartData} options={pieChartOptions} />
             </div>

@@ -44,7 +44,7 @@
     width: 100%;
     height: 100px;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
@@ -132,6 +132,16 @@
 .marketingIcons {
     width: 50px;
     height: 50px;
-    margin-top: 25px;
+    margin-top: 45px;
     margin-bottom: 15px;
+}
+
+.marketingButtons{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.sendButton{
+    width: 100px;
 }

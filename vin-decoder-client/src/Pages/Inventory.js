@@ -23,11 +23,12 @@ const Inventory = () => {
   const [isDescending, setIsDescending] = useState(true);
   const [activeView, setActiveView] = useState(localStorage.getItem("activeView") || "list");
   const [filter, setFilter] = useState("all"); 
-  const [sortColumn, setSortColumn] = useState("make"); // Default sorting column
-  const [sortOrder, setSortOrder] = useState("asc"); // Default sorting order
+  const [sortColumn, setSortColumn] = useState("make"); 
+  const [sortOrder, setSortOrder] = useState("asc"); 
 
   const navigate = useNavigate();
 
+  // Function to fetch vehicles based on current filter and sorting options
   const fetchVehicles = async () => {
     let endpoint = "http://localhost:5000/vehicles";
     if (filter === "sold") {
@@ -49,15 +50,18 @@ const Inventory = () => {
     }
   };
 
+  // Fetch vehicles whenever filter, sortColumn, or sortOrder changes
   useEffect(() => {
     fetchVehicles();
   }, [filter, sortColumn, sortOrder]);
 
+  // Handle view change and store the selected view in local storage
   const handleViewChange = (view) => {
     setActiveView(view);
     localStorage.setItem("activeView", view);
   };
 
+  // Handle search action based on selected filters
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
@@ -83,6 +87,7 @@ const Inventory = () => {
     }
   };
 
+  // Handle delete action for a vehicle
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/vehicle/${id}`);
@@ -92,14 +97,17 @@ const Inventory = () => {
     }
   };
 
+  // Handle edit action for a vehicle
   const handleEdit = (id) => {
     navigate(`/edit-form?id=${id}`);
   };
 
+  // Handle add vehicle action
   const handleAddVehicle = () => {
     navigate("/vin-form");
   };
 
+  // Format price to CAD currency format
   const formatPrice = (price) => {
     return new Intl.NumberFormat("en-CA", {
       style: "currency",
@@ -108,11 +116,13 @@ const Inventory = () => {
     }).format(price);
   };
 
+  // Toggle sort order between ascending and descending
   const handleToggleSort = () => {
     setSortOrder(isDescending ? "asc" : "desc");
     setIsDescending(!isDescending);
   };
 
+  // Handle change in sort column
   const handleSortChange = (e) => {
     setSortColumn(e.target.value);
   };
@@ -124,15 +134,18 @@ const Inventory = () => {
         <div className={styles.content}>
           <Sidebar />
           <div className={styles.topButtons}>
+            {/* Button to add a new vehicle */}
             <button className={styles.buttonAdd} onClick={handleAddVehicle}>
               <img src="/add.svg" alt="Add" className={styles.addIcon} />
               Add Vehicle
             </button>
+            {/* Filter buttons for all, sold, and unsold vehicles */}
             <div className={styles.soldFilter}>
               <button className={`${styles.btnAll} ${filter === 'all' ? styles.active : ''}`} onClick={() => setFilter('all')}>All</button>
               <button className={`${styles.btnSold} ${filter === 'sold' ? styles.active : ''}`} onClick={() => setFilter('sold')}>Sold</button>
               <button className={`${styles.btnUnsold} ${filter === 'unsold' ? styles.active : ''}`} onClick={() => setFilter('unsold')}>Unsold</button>
             </div>
+            {/* Dropdown to sort vehicles */}
             <div className={styles.filter}>
               <img 
                 src="../icons/filter.svg"
@@ -148,6 +161,7 @@ const Inventory = () => {
                 <option value="vin">VIN</option>
                 <option value="price">Price</option>
               </select>
+              {/* Button to toggle sort order */}
               <button className={styles.btnArrow} onClick={handleToggleSort}>
                 <img
                   src="../icons/arrow.svg"
@@ -158,8 +172,9 @@ const Inventory = () => {
                 ></img>
               </button>
             </div>
+            {/* Buttons to switch between list and grid view */}
             <div className={styles.displayToggle}>
-            <button
+              <button
                 className={`${styles.btnList} ${activeView === "list" ? styles.active : ""}`}
                 onClick={() => handleViewChange("list")}
               >
@@ -182,10 +197,12 @@ const Inventory = () => {
             </div>
           </div>
           <hr className={styles.hr}></hr>
+          {/* Form and filter section */}
           <div className={styles.addSearchSection}>
             <div className={styles.addSection}>
               <form onSubmit={handleSearch} className={styles.searchForm}>
                 <div className={styles.searchContainer}>
+                  {/* Dropdowns and filters for searching vehicles */}
                   <CarMakeDropdown
                     make={make}
                     setMake={setMake}
@@ -203,7 +220,8 @@ const Inventory = () => {
                   <MilageFilter
                     minMilage={minMilage}
                     setMinMilage={setMinMilage}
-                    maxMilage={setMaxMilage}
+                    maxMilage={maxMilage}
+                    setMaxMilage={setMaxMilage}
                   />
                 </div>
                 <button type="submit" className={styles.btnSearchFilter}>
@@ -211,6 +229,7 @@ const Inventory = () => {
                 </button>
               </form>
             </div>
+            {/* Results table */}
             <div className={styles.results}>
               <table>
                 <thead>
@@ -238,6 +257,7 @@ const Inventory = () => {
                         {formatPrice(vehicle.purchase_price)}
                       </td>
                       <td className={styles.td}>
+                        {/* Edit button */}
                         <button
                           className={styles.btnEdit}
                           onClick={() => handleEdit(vehicle.id)}
@@ -249,6 +269,7 @@ const Inventory = () => {
                             alt="edit"
                           ></img>
                         </button>
+                        {/* Delete button */}
                         <button
                           className={styles.btnDelete}
                           onClick={() => handleDelete(vehicle.id)}
