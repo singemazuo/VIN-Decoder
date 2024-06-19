@@ -5,7 +5,6 @@ import Sidebar from "../Navigation/Sidebar";
 import NavigationBar from "../Navigation/NavigationBar";
 import { useNavigate } from "react-router-dom";
 
-
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,31 +13,40 @@ const Register = () => {
 
   const navigate = useNavigate();
 
+  // Handle form submission for user registration
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission behavior
     try {
+      // Make a POST request to the server to register a new user
       await axios.post("http://localhost:5000/register", {
         email,
         password,
         firstName,
         lastName,
       });
-      navigate('/login');
+      navigate('/login'); // Redirect to login page upon successful registration
     } catch (error) {
-      console.error("Error registering user:", error);
+      console.error("Error registering user:", error); // Log any error that occurs during registration
     }
   };
 
   return (
     <>
+      {/* Sidebar component */}
       <div className={styles.sideBar}>
         <Sidebar />
       </div>
+      
+      {/* Navigation bar component */}
       <div className={styles.navBar}>
         <NavigationBar />
       </div>
+      
+      {/* Registration form container */}
       <div className={styles.registerContainer}>
         <h1>Register</h1>
+        
+        {/* Registration form */}
         <form onSubmit={handleSubmit} className={styles.registerForm}>
           <label className={styles.label}>Email</label>
           <input
@@ -48,6 +56,7 @@ const Register = () => {
             className={styles.registerInputBox}
             required
           />
+          
           <label className={styles.label}>First Name</label>
           <input
             type="text"
@@ -56,6 +65,7 @@ const Register = () => {
             className={styles.registerInputBox}
             required
           />
+          
           <label className={styles.label}>Last Name</label>
           <input
             type="text"
@@ -64,6 +74,7 @@ const Register = () => {
             className={styles.registerInputBox}
             required
           />
+          
           <label className={styles.label}>Password</label>
           <input
             type="password"
@@ -72,11 +83,14 @@ const Register = () => {
             className={styles.registerInputBox}
             required
           />
+          
+          {/* Buttons to clear the form and submit the registration */}
           <div className={styles.registerButtons}>
             <button
               type="button"
               className={styles.button}
               onClick={() => {
+                // Clear the form input fields
                 setEmail("");
                 setFirstName("");
                 setLastName("");

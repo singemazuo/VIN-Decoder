@@ -34,7 +34,6 @@ const pool = new Pool({
     port: process.env.DB_PORT,
 });
 
-
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, process.env.PHOTO_STORAGE_PATH);
@@ -48,7 +47,6 @@ const storage = multer.diskStorage({
 
 // Update multer upload initialization
 const upload = multer({ storage: storage });
-
 
 app.use(session({
     store: new pgSession({
@@ -76,6 +74,7 @@ app.get('/protected', (req, res) => {
 ///  Twilio  ///
 ////////////////
 
+// Endpoint to send SMS using Twilio
 app.post('/send-sms', async (req, res) => {
     const { to, message } = req.body;
 
@@ -97,6 +96,7 @@ app.post('/send-sms', async (req, res) => {
 ///  VIN Decoder  ///
 /////////////////////
 
+// Endpoint to decode a single VIN
 app.post('/decode_vin', async (req, res) => {
     const vin = req.body.vin;
     try {
@@ -109,6 +109,7 @@ app.post('/decode_vin', async (req, res) => {
     }
 });
 
+// Endpoint to decode a batch of VINs
 app.post('/decode_vin_batch', async (req, res) => {
     const vins = req.body.vins;
     try {
@@ -121,6 +122,7 @@ app.post('/decode_vin_batch', async (req, res) => {
     }
 });
 
+// Function to decode a single VIN using NHTSA API
 const decodeVin = async (vin) => {
     const url = `https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVin/${vin}?format=json`;
     try {
@@ -166,6 +168,7 @@ const decodeVin = async (vin) => {
     }
 };
 
+// Helper function to find value from NHTSA API results
 const findValue = (results, variable) => {
     const result = results.find(item => item.Variable === variable);
     return result ? result.Value : 'N/A';
@@ -175,6 +178,7 @@ const findValue = (results, variable) => {
 ///  Vehicle Search  ///
 ////////////////////////
 
+// Function to decode a batch of VINs using NHTSA API
 const decodeVinBatch = async (vins) => {
     const url = "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/";
     const data = {
@@ -190,6 +194,7 @@ const decodeVinBatch = async (vins) => {
 ///  Add Vehicle  ///
 /////////////////////
 
+// Endpoint to submit vehicle data along with photos
 app.post('/submit_vehicle', upload.array('photos'), async (req, res) => {
     const {
         vin, year, make, model, transmission, weight,
@@ -246,7 +251,7 @@ app.post('/submit_vehicle', upload.array('photos'), async (req, res) => {
 ///  Vehicle Search  ///
 ////////////////////////
 
-// Endpoint to search vehicles
+// Endpoint to search vehicles based on make, model, and year
 app.get('/search_vehicles', async (req, res) => {
     const { make, model, year } = req.query;
     try {
@@ -285,7 +290,7 @@ app.get('/search_vehicles', async (req, res) => {
     }
 });
 
-
+// Endpoint to get vehicle details by ID
 app.get('/vehicle/:id', async (req, res) => {
     const { id } = req.params;
     try {
@@ -306,6 +311,7 @@ app.get('/vehicle/:id', async (req, res) => {
 ///  Get All Vehicles  ///
 //////////////////////////
 
+// Endpoint to get all vehicles, with sorting options
 app.get('/vehicles', async (req, res) => {
     const { sortColumn = 'make', sortOrder = 'asc' } = req.query;
     try {
@@ -326,6 +332,7 @@ app.get('/vehicles', async (req, res) => {
 ///  Get Unsold Vehicles  ///
 /////////////////////////////
 
+// Endpoint to get all unsold vehicles
 app.get('/unsold-vehicles', async (req, res) => {
     try {
         const result = await pool.query(`
@@ -346,6 +353,7 @@ app.get('/unsold-vehicles', async (req, res) => {
 ///  Get Sold Vehicles  ///
 ///////////////////////////
 
+// Endpoint to get all sold vehicles
 app.get('/sold-vehicles', async (req, res) => {
     try {
         const result = await pool.query(`
@@ -366,6 +374,7 @@ app.get('/sold-vehicles', async (req, res) => {
 ///  Update Vehicle  ///
 ////////////////////////
 
+// Endpoint to update vehicle data
 app.put('/vehicle/:id', upload.array('photos'), async (req, res) => {
     const { id } = req.params;
     const {
@@ -415,6 +424,7 @@ app.put('/vehicle/:id', upload.array('photos'), async (req, res) => {
 ///  Delete Vehicle  ///
 ////////////////////////
 
+// Endpoint to delete a vehicle
 app.delete('/vehicle/:id', async (req, res) => {
     const { id } = req.params;
     try {
@@ -442,6 +452,7 @@ app.delete('/vehicle/:id', async (req, res) => {
 ///  Add Customer  ///
 //////////////////////
 
+// Endpoint to add a new customer
 app.post('/add-customer', async (req, res) => {
     const { firstname, lastname, email, address, phone,group } = req.body;
     try {
@@ -460,6 +471,7 @@ app.post('/add-customer', async (req, res) => {
 ///  Get Customer  ///
 //////////////////////
 
+// Endpoint to get all customers
 app.get('/customers', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM customers ORDER BY lastName ASC');
@@ -474,6 +486,7 @@ app.get('/customers', async (req, res) => {
 ///  Delete Customer  ///
 /////////////////////////
 
+// Endpoint to delete a customer
 app.delete('/customer/:id', async (req, res) => {
     const { id } = req.params;
     try {
@@ -489,6 +502,7 @@ app.delete('/customer/:id', async (req, res) => {
 ///  Edit Customer  ///
 ///////////////////////
 
+// Endpoint to update customer details
 app.put('/customer/:id', async (req, res) => {
     const { id } = req.params;
     const { firstname, lastname, email, address, phone, group } = req.body;
@@ -509,6 +523,7 @@ app.put('/customer/:id', async (req, res) => {
 ///  Login / Logout  ///
 ////////////////////////
 
+// Endpoint to login a user
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -542,7 +557,7 @@ app.post('/logout', (req, res) => {
 ///  User Registration  ///
 ///////////////////////////
 
-// Register endpoint
+// Endpoint to register a new user
 app.post('/register', async (req, res) => {
     const { email, password, firstName, lastName } = req.body;
     try {
@@ -562,6 +577,7 @@ app.post('/register', async (req, res) => {
 ///  Get Sales Data (Monthly)  ///
 //////////////////////////////////
 
+// Endpoint to get monthly revenue data
 app.get('/revenue_data', async (req, res) => {
     try {
         const result = await pool.query(`
@@ -584,6 +600,7 @@ app.get('/revenue_data', async (req, res) => {
 ///  Get Monthly Profit  ///
 ////////////////////////////
 
+// Endpoint to get monthly profit data
 app.get('/profit_data', async (req, res) => {
     try {
         const result = await pool.query(`
@@ -606,6 +623,7 @@ app.get('/profit_data', async (req, res) => {
 ///  Get Average profit  ///
 ////////////////////////////
 
+// Endpoint to get average profit over the last year
 app.get('/get_average_profit', async (req, res) => {
     try {
         const result = await pool.query(`
@@ -625,6 +643,7 @@ app.get('/get_average_profit', async (req, res) => {
 ///  Get Average profit  ///
 ////////////////////////////
 
+// Endpoint to get average sale price over the last year
 app.get('/get_average_sale', async (req, res) => {
     try {
         const result = await pool.query(`
@@ -644,6 +663,7 @@ app.get('/get_average_sale', async (req, res) => {
 ///  Get Average Revenue  ///
 /////////////////////////////
 
+// Endpoint to get average revenue over the last year
 app.get('/get_average_revenue', async (req, res) => {
     try {
         const result = await pool.query(`
@@ -663,6 +683,7 @@ app.get('/get_average_revenue', async (req, res) => {
 ///  Get Orders   ///
 /////////////////////
 
+// Endpoint to get all orders
 app.get('/get_orders', async (req, res) => {
     try {
         const result = await pool.query(`
@@ -693,6 +714,7 @@ app.get('/get_orders', async (req, res) => {
 ///  Get Sales Data (Count)  ///
 ////////////////////////////////
 
+// Endpoint to get count of vehicles sold in the past year
 app.get('/vehicles_sold_past_year', async (req, res) => {
     try {
         const result = await pool.query(`
@@ -712,6 +734,7 @@ app.get('/vehicles_sold_past_year', async (req, res) => {
 ///  Get Vehcile Make Data   ///
 ////////////////////////////////
 
+// Endpoint to get vehicle make distribution
 app.get('/vehicle-make-distribution', async (req, res) => {
     try {
         const result = await pool.query(`
@@ -730,6 +753,7 @@ app.get('/vehicle-make-distribution', async (req, res) => {
 ///  Get Vehcile Sold This Month  ///
 /////////////////////////////////////
 
+// Endpoint to get count of vehicles sold this month
 app.get('/vehicles-sold-this-month', async (req, res) => {
     try {
         const result = await pool.query(`
@@ -748,6 +772,7 @@ app.get('/vehicles-sold-this-month', async (req, res) => {
 ///  Monthly Vehicle Difference  ///
 ////////////////////////////////////
 
+// Endpoint to get the difference in vehicle sales between the current and previous month
 app.get('/vehicle-sales-difference', async (req, res) => {
     try {
         const result = await pool.query(`
@@ -788,6 +813,7 @@ app.get('/vehicle-sales-difference', async (req, res) => {
 ///  Create Order  ///
 //////////////////////
 
+// Endpoint to create a new order
 app.post('/create-order', async (req, res) => {
     const { customerId, vehicleId, salePrice } = req.body;
     const saleDate = new Date();
@@ -830,6 +856,7 @@ app.post('/create-order', async (req, res) => {
 ///  Delete Order  ///
 //////////////////////
 
+// Endpoint to delete an order
 app.delete('/delete_order/:id', async (req, res) => {
     const { id } = req.params;
 
@@ -871,7 +898,6 @@ app.delete('/delete_order/:id', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
-
 
 // Middleware to protect routes
 const authMiddleware = (req, res, next) => {
