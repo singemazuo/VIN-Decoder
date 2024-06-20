@@ -11,6 +11,7 @@ const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 const twilio = require('twilio');
+const nodemailer = require('nodemailer');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = new twilio(accountSid, authToken);
@@ -91,6 +92,34 @@ app.post('/send-sms', async (req, res) => {
     }
 });
 
+
+// Endpoint to send email
+app.post('/send-email', async (req, res) => {
+    const { emails, message } = req.body;
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail', // e.g., Gmail, Outlook, etc.
+        auth: {
+            user: process.env.EMAIL_USER, // Your email
+            pass: process.env.EMAIL_PASSWORD // Your email password or app password
+        }
+    });
+
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: emails,
+        subject: 'Marketing Message',
+        text: message
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        res.status(200).json({ message: 'Emails sent successfully' });
+    } catch (error) {
+        console.error('Error sending email:', error);
+        res.status(500).json({ error: 'Failed to send emails' });
+    }
+});
 
 /////////////////////
 ///  VIN Decoder  ///

@@ -13,6 +13,8 @@ const Marketing = () => {
   const [message, setMessage] = useState("");
   const [phoneNumbers, setPhoneNumbers] = useState(initialPhoneNumbers);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [emailAddresses, setEmailAddresses] = useState([]);
+  const [emailAddress, setEmailAddress] = useState("");
 
   // Function to send SMS to all phone numbers in the list
   const handleSendSMS = async () => {
@@ -31,6 +33,33 @@ const Marketing = () => {
       console.error("Error sending SMS:", error);
       alert("Failed to send messages");
     }
+  };
+
+  // funciton to send email
+  const handleSendEmail = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/send-email", {
+        emails: emailAddresses,
+        message: message,
+      });
+      alert(response.data.message);
+    } catch (error) {
+      console.error("Error sending email:", error);
+      alert("Failed to send emails");
+    }
+  };
+
+  // function to add email to send list
+  const handleAddEmail = () => {
+    if (emailAddress && !emailAddresses.includes(emailAddress)) {
+      setEmailAddresses([...emailAddresses, emailAddress]);
+      setEmailAddress("");
+    }
+  };
+
+  // function to remove email from list
+  const handleRemoveEmail = (emailToRemove) => {
+    setEmailAddresses(emailAddresses.filter((email) => email !== emailToRemove));
   };
 
   // Function to add a phone number to the list
@@ -132,11 +161,23 @@ const Marketing = () => {
               <button>Add</button>
             </div>
             {/* Placeholder for list of email addresses */}
-            <div className={styles.phoneNumbersList}></div>
-            {/* Buttons for sending email and clearing the list */}
+            <div className={styles.phoneNumbersList}>
+              {emailAddresses.map((email, index) => (
+                <div key={index} className={styles.phoneNumberItem}>
+                  {email}
+                  <button className={styles.closeButton} onClick={() => handleRemoveEmail(email)}>
+                    &times;
+                  </button>
+                </div>
+              ))}
+            </div>
             <div className={styles.marketingButtons}>
-              <button className={styles.sendButton}>Send</button>
-              <button className={styles.sendButton}>Clear</button>
+              <button onClick={handleSendEmail} className={styles.sendButton}>
+                Send
+              </button>
+              <button onClick={() => setEmailAddresses([])} className={styles.sendButton}>
+                Clear
+              </button>
             </div>
           </div>
         </div>
