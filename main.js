@@ -10,11 +10,11 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
-const twilio = require('twilio');
 const nodemailer = require('nodemailer');
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = new twilio(accountSid, authToken);
+//const twilio = require('twilio');
+// const accountSid = process.env.TWILIO_ACCOUNT_SID;
+// const authToken = process.env.TWILIO_AUTH_TOKEN;
+// const client = new twilio(accountSid, authToken);
 
 const app = express();
 app.use(cors({
@@ -75,22 +75,22 @@ app.get('/protected', (req, res) => {
 ///  Twilio  ///
 ////////////////
 
-// Endpoint to send SMS using Twilio
-app.post('/send-sms', async (req, res) => {
-    const { to, message } = req.body;
+// // Endpoint to send SMS using Twilio
+// app.post('/send-sms', async (req, res) => {
+//     const { to, message } = req.body;
 
-    try {
-        const smsResponse = await client.messages.create({
-            body: message,
-            to: to, 
-            from: process.env.TWILIO_PHONE_NUMBER
-        });
-        res.status(200).json({ messageSid: smsResponse.sid });
-    } catch (error) {
-        console.error('Error sending SMS:', error);
-        res.status(500).json({ error: error.message });
-    }
-});
+//     try {
+//         const smsResponse = await client.messages.create({
+//             body: message,
+//             to: to, 
+//             from: process.env.TWILIO_PHONE_NUMBER
+//         });
+//         res.status(200).json({ messageSid: smsResponse.sid });
+//     } catch (error) {
+//         console.error('Error sending SMS:', error);
+//         res.status(500).json({ error: error.message });
+//     }
+// });
 
 
 // Endpoint to send email
@@ -707,6 +707,26 @@ app.get('/get_average_revenue', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+//////////////////////////
+///  Get Cars By Make  ///
+//////////////////////////
+
+app.get('/available-cars-by-make', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT LOWER(make) AS make, COUNT(*) AS count
+            FROM vehicles
+            WHERE is_sold = false
+            GROUP BY LOWER(make);
+        `);
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error fetching available cars by make:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 /////////////////////
 ///  Get Orders   ///

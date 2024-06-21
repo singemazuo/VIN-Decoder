@@ -35,7 +35,7 @@ const Marketing = () => {
     }
   };
 
-  // funciton to send email
+  // Function to send emails to all email addresses in the list
   const handleSendEmail = async () => {
     try {
       const response = await axios.post("http://localhost:5000/send-email", {
@@ -49,7 +49,7 @@ const Marketing = () => {
     }
   };
 
-  // function to add email to send list
+  // Function to add an email address to the list
   const handleAddEmail = () => {
     if (emailAddress && !emailAddresses.includes(emailAddress)) {
       setEmailAddresses([...emailAddresses, emailAddress]);
@@ -57,7 +57,7 @@ const Marketing = () => {
     }
   };
 
-  // function to remove email from list
+  // Function to remove an email address from the list
   const handleRemoveEmail = (emailToRemove) => {
     setEmailAddresses(emailAddresses.filter((email) => email !== emailToRemove));
   };
@@ -154,13 +154,20 @@ const Marketing = () => {
             <textarea
               className={styles.textarea}
               placeholder="Enter your message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
             />
             {/* Input and button for adding email addresses */}
             <div className={styles.phoneNumberInput}>
-              <input type="text" placeholder="Add email" />
-              <button>Add</button>
+              <input
+                type="text"
+                placeholder="Add email"
+                value={emailAddress}
+                onChange={(e) => setEmailAddress(e.target.value)}
+              />
+              <button onClick={handleAddEmail}>Add</button>
             </div>
-            {/* Placeholder for list of email addresses */}
+            {/* List of email addresses with remove button */}
             <div className={styles.phoneNumbersList}>
               {emailAddresses.map((email, index) => (
                 <div key={index} className={styles.phoneNumberItem}>
@@ -171,6 +178,7 @@ const Marketing = () => {
                 </div>
               ))}
             </div>
+            {/* Buttons for sending email and clearing the list */}
             <div className={styles.marketingButtons}>
               <button onClick={handleSendEmail} className={styles.sendButton}>
                 Send
@@ -183,7 +191,6 @@ const Marketing = () => {
         </div>
       </div>
       <p className={styles.disclaimer}>*Only verified phone numbers can be messaged with twilio trial account*</p>
-
     </>
   );
 };

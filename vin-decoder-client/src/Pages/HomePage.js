@@ -15,6 +15,49 @@ const HomePage = () => {
   const [vehiclesSoldCount, setVehiclesSoldCount] = useState(0);
   const [salesDifference, setSalesDifference] = useState(null);
   const [averageRevenue, setAverageRevenue] = useState(null);
+  const [availableCarsData, setAvailableCarsData] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: "Available Cars by Make",
+        data: [],
+        backgroundColor: "rgba(75, 192, 192, 0.6)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+      },
+    ],
+  });
+
+  useEffect(() => {
+    fetchAvailableCarsData();
+  }, []);
+
+  // fetch cars by make
+  const fetchAvailableCarsData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/available-cars-by-make"
+      );
+      const data = response.data;
+      const makes = data.map((item) => item.make);
+      const counts = data.map((item) => item.count);
+
+      setAvailableCarsData({
+        labels: makes,
+        datasets: [
+          {
+            label: "Available Cars by Make",
+            data: counts,
+            backgroundColor: "rgba(75, 192, 192, 0.6)",
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+          },
+        ],
+      });
+    } catch (error) {
+      console.error("Error fetching available cars by make:", error);
+    }
+  };
 
   // State for chart data
   const [chartData, setChartData] = useState({
@@ -32,11 +75,30 @@ const HomePage = () => {
 
   // Colors for the pie chart
   const colors = [
-    "#fd7f6f", "#7eb0d5", "#b2e061", "#bd7ebe", "#ffb55a",
-    "#ffee65", "#beb9db", "#fdcce5", "#8d8f97", "#D4F0F0",
-    "#8FCACA", "#CCE2CB", "#B6CFB6", "#97C1A9", "#FCB9AA",
-    "#FFDBCC", "#ECEAEA", "#A2E1DB", "#55BCBD", "#CBAACB",
-    "#8FCACA", "#ECEAEA", "#FFCCB6", "#FF968A",
+    "#fd7f6f",
+    "#7eb0d5",
+    "#b2e061",
+    "#bd7ebe",
+    "#ffb55a",
+    "#ffee65",
+    "#beb9db",
+    "#fdcce5",
+    "#8d8f97",
+    "#D4F0F0",
+    "#8FCACA",
+    "#CCE2CB",
+    "#B6CFB6",
+    "#97C1A9",
+    "#FCB9AA",
+    "#FFDBCC",
+    "#ECEAEA",
+    "#A2E1DB",
+    "#55BCBD",
+    "#CBAACB",
+    "#8FCACA",
+    "#ECEAEA",
+    "#FFCCB6",
+    "#FF968A",
   ];
 
   // Function to generate an array of colors
@@ -52,7 +114,9 @@ const HomePage = () => {
   useEffect(() => {
     const fetchAverageRevenue = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/get_average_revenue");
+        const response = await axios.get(
+          "http://localhost:5000/get_average_revenue"
+        );
         setAverageRevenue(response.data.average_revenue);
       } catch (error) {
         console.error("Error fetching average revenue:", error);
@@ -65,7 +129,9 @@ const HomePage = () => {
   useEffect(() => {
     const fetchVehiclesSoldThisMonth = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/vehicles-sold-this-month");
+        const response = await axios.get(
+          "http://localhost:5000/vehicles-sold-this-month"
+        );
         setVehiclesSoldCount(response.data.count);
       } catch (error) {
         console.error("Error fetching vehicles sold this month:", error);
@@ -79,7 +145,9 @@ const HomePage = () => {
   useEffect(() => {
     const fetchSalesDifference = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/vehicle-sales-difference");
+        const response = await axios.get(
+          "http://localhost:5000/vehicle-sales-difference"
+        );
         setSalesDifference(response.data);
       } catch (error) {
         console.error("Error fetching sales difference:", error);
@@ -93,7 +161,9 @@ const HomePage = () => {
   useEffect(() => {
     const fetchVehicleMakeDistribution = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/vehicle-make-distribution");
+        const response = await axios.get(
+          "http://localhost:5000/vehicle-make-distribution"
+        );
         const data = response.data;
         console.log(data);
 
@@ -126,7 +196,9 @@ const HomePage = () => {
   useEffect(() => {
     const fetchVehiclesSold = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/vehicles_sold_past_year");
+        const response = await axios.get(
+          "http://localhost:5000/vehicles_sold_past_year"
+        );
         setVehiclesSold(response.data.count);
       } catch (error) {
         console.error("Error fetching vehicles sold in the past year:", error);
@@ -140,7 +212,9 @@ const HomePage = () => {
   useEffect(() => {
     const fetchAverageProfit = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/get_average_profit");
+        const response = await axios.get(
+          "http://localhost:5000/get_average_profit"
+        );
         setAverageProfit(response.data.average_profit);
       } catch (error) {
         console.error("Error fetching average profit:", error);
@@ -180,8 +254,18 @@ const HomePage = () => {
   // Helper function to get month name from month number
   const getMonthName = (monthNumber) => {
     const monthNames = [
-      "Jan", "Feb", "Mar", "Apr", "May", "June",
-      "July", "Aug", "Sept", "Oct", "Nov", "Dec",
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "June",
+      "July",
+      "Aug",
+      "Sept",
+      "Oct",
+      "Nov",
+      "Dec",
     ];
     return monthNames[monthNumber - 1];
   };
@@ -296,7 +380,12 @@ const HomePage = () => {
           <div className={styles.annualSales}>
             <div className={styles.reportButtons}>
               <button className={styles.btnRefresh}>
-                <img className={styles.refreshIcon} src="../icons/refresh.svg" alt="refresh"></img> Refresh Reports
+                <img
+                  className={styles.refreshIcon}
+                  src="../icons/refresh.svg"
+                  alt="refresh"
+                ></img>{" "}
+                Refresh Reports
               </button>
               <button className={styles.btnViewYearly}>
                 View Annual Report
@@ -341,6 +430,16 @@ const HomePage = () => {
                 <strong>${averageRevenue}</strong>
               </text>
             </div>
+            <div className={styles.annualNumbers}>
+              <text>
+                <strong>$</strong>
+              </text>
+            </div>
+            <div className={styles.annualNumbers}>
+              <text>
+                <strong>$</strong>
+              </text>
+            </div>
           </div>
           {/* Monthly sales section */}
           <div className={styles.monthlySales}>
@@ -348,9 +447,18 @@ const HomePage = () => {
               <div className={styles.monthlyNumbers}>
                 <p className={styles.title}>Sold this month</p>
                 <div className={styles.centeredNumbers}>
-                  <h1><strong>{vehiclesSoldCount}</strong></h1>
-                  <h4 className={styles.difference} style={getDifferenceTextStyle()}>
-                    {salesDifference ? formatPercentageDifference(salesDifference.percentage_difference) : null}
+                  <h1>
+                    <strong>{vehiclesSoldCount}</strong>
+                  </h1>
+                  <h4
+                    className={styles.difference}
+                    style={getDifferenceTextStyle()}
+                  >
+                    {salesDifference
+                      ? formatPercentageDifference(
+                          salesDifference.percentage_difference
+                        )
+                      : null}
                   </h4>
                 </div>
               </div>
@@ -361,6 +469,26 @@ const HomePage = () => {
             {/* Pie chart for vehicle make distribution */}
             <div className={styles.chartContainer}>
               <Pie data={chartData} options={pieChartOptions} />
+            </div>
+            {/* Bar chart for available cars by make */}
+            <div className={styles.chartContainer}>
+              <Bar
+                data={availableCarsData}
+                options={{
+                  maintainAspectRatio: false,
+                  responsive: true,
+                  plugins: {
+                    legend: {
+                      position: "top",
+                    },
+                  },
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                    },
+                  },
+                }}
+              />
             </div>
           </div>
         </div>
